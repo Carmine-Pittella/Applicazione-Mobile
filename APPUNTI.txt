@@ -1,0 +1,34 @@
+PUNTI IMPORTANTI:
+1) Mappa interattiva: fornire una mappa interattiva che consenta agli utenti di trovare la posizione delle cache e di visualizzarle sulla mappa. La mappa dovrebbe anche consentire agli utenti di zoomare e di scegliere diverse viste, come la vista satellite o la vista stradale.
+
+2) Sistema di navigazione (?): l'app dovrebbe fornire un sistema di navigazione che aiuti gli utenti a trovare le cache utilizzando le coordinate GPS e altri indizi forniti dall'app stessa. Questo sistema di navigazione dovrebbe essere preciso e affidabile.
+
+3) Descrizione della cache: l'app dovrebbe fornire una descrizione della cache, comprese le sue dimensioni, il tipo di contenitore e altre informazioni pertinenti. In questo modo gli utenti sapranno cosa cercare.
+
+4) Indizi: l'app dovrebbe fornire indizi utili che aiutino gli utenti a trovare la cache. Questi indizi potrebbero includere foto del luogo, descrizioni dettagliate dell'area circostante o suggerimenti sul tipo di contenitore in cui si trova la cache.
+
+5) Sistema di punteggio: l'app dovrebbe fornire un sistema di punteggio che premi gli utenti per la loro capacità di trovare le cache. Questo sistema di punteggio potrebbe includere punti per il numero di cache trovate o per la difficoltà delle cache trovate.
+
+6) Comunità: l'app dovrebbe fornire una comunità di geocacher dove gli utenti possono condividere le loro esperienze, consigli e suggerimenti. Questa comunità potrebbe includere un forum di discussione, una sezione di recensioni o un sistema di messaggistica.
+Pensavo tipo a una cosa come se fosse un social, vedi le persone che partecipano alla "caccia", se vuoi puoi mandargli la richiesta di amicizia e poi sarà possibile impostare "Consenti di visualizzare la mia posizione". in poche parole, puoi vedere la posizione in tempo reale dei tuoi amici (attivabile)
+
+
+
+- USER NEEDS:
+"NOMEAPP" è principalmente rivolta agli appassionati di avventura e di scoperta. È l'ideale per coloro che amano esplorare nuovi luoghi e cercare tesori nascosti utilizzando le coordinate GPS e altri indizi forniti dall'app. L'app è adatta a persone di tutte le età, che siano singoli utenti o da gruppi di amici o famiglie. È ideale per coloro che amano fare attività all'aria aperta, come escursioni, camminate o giri in bicicletta, ma anche per coloro che vogliono scoprire nuovi luoghi in modo divertente e originale.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
