@@ -7,18 +7,24 @@ PUNTI IMPORTANTI:
 
 4) Indizi: l'app dovrebbe fornire indizi utili che aiutino gli utenti a trovare la cache. Questi indizi potrebbero includere foto del luogo, descrizioni dettagliate dell'area circostante o suggerimenti sul tipo di contenitore in cui si trova la cache.
 
-5) Sistema di punteggio: l'app dovrebbe fornire un sistema di punteggio che premi gli utenti per la loro capacità di trovare le cache. Questo sistema di punteggio potrebbe includere punti per il numero di cache trovate o per la difficoltà delle cache trovate.
+5) Sistema di punteggio: l'app dovrebbe fornire un sistema di punteggio che premi gli utenti per la loro capacità di trovare le cache. Questo sistema di punteggio potrebbe includere punti per il numero di cache trovate o per la difficoltà delle cache trovate. ---> quindi fare una classifica degli utenti registrati.
 
 6) Comunità: l'app dovrebbe fornire una comunità di geocacher dove gli utenti possono condividere le loro esperienze, consigli e suggerimenti. Questa comunità potrebbe includere un forum di discussione, una sezione di recensioni o un sistema di messaggistica.
 Pensavo tipo a una cosa come se fosse un social, vedi le persone che partecipano alla "caccia", se vuoi puoi mandargli la richiesta di amicizia e poi sarà possibile impostare "Consenti di visualizzare la mia posizione". in poche parole, puoi vedere la posizione in tempo reale dei tuoi amici (attivabile)
 
+
+- PRODUCT OVERVIEW:
+"NOMEAPP" è la webapp ideale per gli amanti dell'avventura e della scoperta, offrendo una vasta gamma di cache, la possibilità di connettersi con altri geocacher e di cacciare insieme, e un sistema di punteggio e classifica per migliorare le proprie abilità di geocaching.
+GeoCacheX offre inoltre un sistema di punteggio e una classifica, consentendo agli utenti di migliorare le proprie abilità di geocaching e di competere con altri geocacher.
 
 
 - USER NEEDS:
 "NOMEAPP" è principalmente rivolta agli appassionati di avventura e di scoperta. È l'ideale per coloro che amano esplorare nuovi luoghi e cercare tesori nascosti utilizzando le coordinate GPS e altri indizi forniti dall'app. L'app è adatta a persone di tutte le età, che siano singoli utenti o da gruppi di amici o famiglie. È ideale per coloro che amano fare attività all'aria aperta, come escursioni, camminate o giri in bicicletta, ma anche per coloro che vogliono scoprire nuovi luoghi in modo divertente e originale.
 
 
-
+- BUSINESS GOALS:
+L'obiettivo prefiguratoci è quello di creare un'app che sia un misto fra un gioco e un social.
+Vogliamo che gli utenti possano avere modo di fare 
 
 
 
