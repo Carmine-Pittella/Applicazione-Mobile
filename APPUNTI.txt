@@ -12,26 +12,60 @@ PUNTI IMPORTANTI:
 6) Comunità: l'app dovrebbe fornire una comunità di geocacher dove gli utenti possono condividere le loro esperienze, consigli e suggerimenti. Questa comunità potrebbe includere un forum di discussione, una sezione di recensioni o un sistema di messaggistica.
 Pensavo tipo a una cosa come se fosse un social, vedi le persone che partecipano alla "caccia", se vuoi puoi mandargli la richiesta di amicizia e poi sarà possibile impostare "Consenti di visualizzare la mia posizione". in poche parole, puoi vedere la posizione in tempo reale dei tuoi amici (attivabile)
 
+------------------------------------------------------------------------
 
 - PRODUCT OVERVIEW:
 "NOMEAPP" è la webapp ideale per gli amanti dell'avventura e della scoperta, offrendo una vasta gamma di cache, la possibilità di connettersi con altri geocacher e di cacciare insieme, e un sistema di punteggio e classifica per migliorare le proprie abilità di geocaching.
 GeoCacheX offre inoltre un sistema di punteggio e una classifica, consentendo agli utenti di migliorare le proprie abilità di geocaching e di competere con altri geocacher.
 
+- Versione chatGPT:
+Ecco "NOMEAPP", la webapp ideale per gli amanti dell'avventura e della scoperta attraverso il geocaching, una caccia al tesoro che coinvolge gli utenti nella creazione e nella ricerca di "cache", ovvero punti specifici con una latitudine e una longitudine dove vengono nascosti oggetti di varie dimensioni e tipologie. Con l'utilizzo di un ricevitore GPS, i geocacher possono interagire fra di loro, cacciare insieme e connettersi con altri appassionati del gioco. Offriamo una vasta gamma di cache e il nostro sistema di punteggio e classifica consente agli utenti di migliorare le proprie abilità e di competere con gli altri geocacher. "NOMEAPP" è la scelta perfetta per coloro che desiderano sfidare se stessi e gli altri, creando una comunità coinvolgente e appassionante.
+
+--------------------------------------------------------------------
 
 - USER NEEDS:
 "NOMEAPP" è principalmente rivolta agli appassionati di avventura e di scoperta. È l'ideale per coloro che amano esplorare nuovi luoghi e cercare tesori nascosti utilizzando le coordinate GPS e altri indizi forniti dall'app. L'app è adatta a persone di tutte le età, che siano singoli utenti o da gruppi di amici o famiglie. È ideale per coloro che amano fare attività all'aria aperta, come escursioni, camminate o giri in bicicletta, ma anche per coloro che vogliono scoprire nuovi luoghi in modo divertente e originale.
 
+--------------------------------------------------------------------
 
 - BUSINESS GOALS:
-L'obiettivo prefiguratoci è quello di creare un'app che sia un misto fra un gioco e un social.
-Vogliamo che gli utenti possano avere modo di fare 
+L'obiettivo prefiguratoci è quello di creare un'app di Geocaching che sia una via di mezzo fra le funzionalità di un gioco e di un social network, offrendo la possibilità di tenere traccia dei progressi di Geocaching con altri appassionati e di creare una comunità coinvolgente e motivante.
+Le funzioni "social" sono volutamente limitate, ovvero condividere storie, postare foto ecc.. perché il tema principale della nostra app rimane comunque il Geocaching.
 
+- Versione cahtGPT:
+L'obiettivo prefiguratoci è quello di creare un'app completamente gratuita, finanziata volontariamente dagli utenti, con un'interfaccia minimale, accattivante e facile da usare. 
+è altrettanto importante mantenere i dati di navigazione privati, non condividendoli con applicazioni o enti terzi. Un altro obiettivo è di offrire agli utenti un'esperienza di geocaching che sia una via di mezzo tra le funzionalità di un gioco e di un social network, permettendo di tenere traccia dei progressi di geocaching con altri appassionati, creando una comunità coinvolgente e motivante. Tuttavia, le funzioni "social" saranno volutamente limitate, come la condivisione di storie o la pubblicazione di foto poiché il tema principale della nostra app rimane comunque il geocaching.
 
+-------------------------------------------------------------------
 
+PRODUCT FEATURES:
+- Visualizzazione del dettaglio di ogni cache, contenente la sua posizione (latitudine, longitudine) e suggerimenti su come trovare il contenitore, accompagnati da foto e video per facilitare l'individuazione.
+- Aggiunta di nuove cache alla posizione attuale dell'utente, con suggerimenti e foto correlate, rendendole successivamente visibili a tutti gli utenti.
+- Segnalazione della cache come "raggiunta" (disponibile solo se l'utente si trova a meno di 3 metri dalla cache) e inserimento di un commento sull'esperienza.
+- Visualizzazione dell'intero storico delle cache trovate.
 
+-------------------------------------------------------------------
 
+- COMPETITORS
+1) Geocaching
+1.1) È una delle applicazioni più conosciute del settore. L'interfaccia è minimale e di facile utilizzo. Aggiungere o selezionare una cache è veloce e intuitivo.
+1.2) Il navigatore è integrato (Google Maps, Waze, ecc.). È possibile utilizzare la bussola e si può selezionare il tipo di mappa da utilizzare (sentiero, stradale, satellitare, ecc.).
+1.3) È possibile condividere i propri obiettivi.
 
+CONTRO: Non tutti i tesori sono accessibili senza l'acquisto della versione premium.
+(link per vedere come funziona da non aggiungere alla descrizione https://www.youtube.com/watch?v=PsGwShSCe3E)
 
+2) Cachly
+2.1) Il navigatore è integrato (Apple Maps, Google Maps, Waze). È possibile utilizzare la bussola e si può selezionare il tipo di mappa da utilizzare (sentiero, stradale, satellitare, ecc.).
+2.2) È possibile condividere i propri obiettivi.
+2.3) Oltre alle coordinate di una cache, è possibile controllare/specificare il raggio dove è possibile trovare l'oggetto nascosto.
+CONTRO: L'applicazione è presente solo sull'Apple Store.
+(link per vedere come funziona da non aggiungere alla descrizione https://www.youtube.com/watch?v=3Aq7Yvp444Y)
+
+3) Randonautica
+3.1) Randonautica si differenzia dalle precedenti per il sistema di generazione di cache: tutti i waypoint non sono aggiunti dagli utenti ma sono generati automaticamente dall'applicazione. Le cache vengono differenziate in base al numero di visite.
+3.2) Navigatore integrato.
+CONTRO: Mappa basata unicamente su Google Maps. Limite giornaliero di generazione di cache sorpassabile solo attraverso l'acquisto di punti.
 
 
 
