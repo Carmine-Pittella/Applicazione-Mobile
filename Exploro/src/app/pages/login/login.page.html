@@ -3,16 +3,15 @@
     <ion-title style="text-align: center">Login</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content color="tertiary">
-  <div id="d1">
+
+<ion-content color="primary">
+  <div class="formLogin">
     <ion-card>
       <ion-card-header>
-        <div id="d2">
-          <div id="d3">
-            <ion-avatar>
-              <img alt="logo" src="../assets/icon/logo.PNG" />
-            </ion-avatar>
-          </div>
+        <div class="logo">
+          <ion-avatar>
+            <img alt="logo" src="../assets/icon/logo.PNG" />
+          </ion-avatar>
         </div>
       </ion-card-header>
       <ion-card-content>
@@ -27,13 +26,12 @@
               <ion-input type="password" color="light"></ion-input>
             </ion-item>
           </ion-list>
-          <ion-button expand="block" color="primary" type="submit"
+          <ion-button class="button-orange" expand="block" type="submit"
             >Login</ion-button
           >
         </form>
         <ion-button
-          id="b2"
-          color="primary"
+          class="button-orange"
           expand="block"
           routerLink="/registration"
           >Registrati</ion-button

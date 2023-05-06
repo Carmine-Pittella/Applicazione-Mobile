@@ -1,51 +1,35 @@
-#d1{
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-ion-card{
+ion-card {
   background-color: #1e1e1e;
+  width: 70vw;
 }
-#d2{
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 
+.logo {
+  display: flex;
+  justify-content: center;
 }
-#d3{
-  height: 75px;
-  width: 75px;
+
+.formLogin {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: #f7bd49;
-  border-radius: 25px;
 }
 
 ion-item::part(native) {
-  background-color: #595959;
+  background-color: #3c3c3c;
 }
 
-
-ion-list{
-  background-color: #1e1e1e;
+ion-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(239, 105, 16, 0.5); // aggiunge l'ombra intorno
 }
 
-form{
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  background-color:  #1e1e1e;
 }
-
-
-
-

@@ -3,18 +3,18 @@
     <ion-title style="text-align: center">Registrazione</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content color="tertiary">
-  <div id="d1">
+
+<ion-content color="primary">
+  <div class="formRegistration">
     <ion-card>
       <ion-card-header>
-        <div id="d2">
-          <div id="d3">
-            <ion-avatar>
-              <img alt="logo" src="../assets/icon/logo.PNG" />
-            </ion-avatar>
-          </div>
+        <div class="logo">
+          <ion-avatar>
+            <img alt="logo" src="../assets/icon/logo.PNG" />
+          </ion-avatar>
         </div>
       </ion-card-header>
+
       <ion-card-content>
         <form #registrazioneForm="ngForm" (ngSubmit)="Conferma()">
           <!-- nel metodo Conferma() ci va passato qualcosa -->
@@ -57,13 +57,17 @@
           </ion-list>
 
           <ion-button
+            class="button-standard"
+            color="primary"
             expand="block"
             type="submit"
-            [disabled]="!registrazioneForm.form.valid"
             >Registrati</ion-button
           >
         </form>
-        <ion-button expand="block" routerLink="">INDIETRO</ion-button>
+        <ion-button class="button-orange" expand="block" routerLink=""
+          >INDIETRO</ion-button
+        >
+        <!-- queste classi che vedi nei bottoni statto in global.scss -->
       </ion-card-content>
     </ion-card>
   </div>
