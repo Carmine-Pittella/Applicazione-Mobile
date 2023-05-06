@@ -1,0 +1,50 @@
+#d1 {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-card {
+  background-color: #1e1e1e;
+  width: 90vw;
+}
+
+#d2 {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#d3 {
+  height: 75px;
+  width: 75px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7bd49;
+  border-radius: 25px;
+}
+
+ion-item::part(native) {
+  background-color: #595959;
+}
+
+
+ion-list {
+  background-color: #1e1e1e;
+}
+
+form {
+  height: 100%;
+  background-color: #1e1e1e;
+}
