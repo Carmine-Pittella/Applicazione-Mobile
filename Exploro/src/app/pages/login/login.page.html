@@ -1,8 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title style="text-align: center">Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar>
+  <ion-title style="text-align: center">Login</ion-title>
+</ion-toolbar>
 
 <ion-content color="primary">
   <div class="formLogin">
@@ -18,14 +16,20 @@
         <form #f="ngForm">
           <ion-list>
             <ion-item>
-              <ion-label position="floating">Username</ion-label>
-              <ion-input type="text" color="light"></ion-input>
+              <ion-label position="floating">E-mail</ion-label>
+              <ion-input
+                mode="ios"
+                name="email"
+                type="text"
+                required
+              ></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Password</ion-label>
-              <ion-input type="password" color="light"></ion-input>
+              <ion-input name="password" type="password" required></ion-input>
             </ion-item>
           </ion-list>
+
           <ion-button class="button-orange" expand="block" type="submit"
             >Login</ion-button
           >

@@ -11,6 +11,7 @@ export class RegistrationPage implements OnInit {
   ngOnInit() {}
 
   async Conferma() {
+    console.log('ciao');
     // Check validazione di tutti i campi
   }
 }
