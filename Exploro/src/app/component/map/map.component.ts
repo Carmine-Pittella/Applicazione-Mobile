@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Admin } from 'src/app/classes_&_services/Admin';
+import { CacheService } from 'src/app/classes_&_services/Cache.service';
+import { Cache } from 'src/app/classes_&_services/Cache';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { Admin } from 'src/app/classes_&_services/Admin';
 export class MapComponent  implements OnInit,AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
 
-  constructor(private reneder: Renderer2) { }
+  constructor(private reneder: Renderer2,private cacheSrv: CacheService) { }
 
   ngOnInit() {}
 
@@ -28,38 +30,12 @@ export class MapComponent  implements OnInit,AfterViewInit {
       });
 
 
-      const features = [
-        {
-          position: new googleMaps.LatLng(42.349745, 13.399413),
-          type: "info",
-        },
-        {
-          position: new googleMaps.LatLng(41.349745, 13.399413),
-          type: "info",
-        },
-        {
-          position: new googleMaps.LatLng(40.349745, 13.399413),
-          type: "info",
-        }
-      ];
+      const features = this.buildFeatures(googleMaps);
+
       for(let i=0;i<features.length;i++){
-        let str;
-        if(i===0){str="yellow"};if(i===1){str="orange"};if(i===2){str="red"}
-        let svgMarker = {
-          path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
-          fillColor: str,
-          fillOpacity: 0.8,
-          strokeWeight: 0,
-          rotation: 0,
-          scale: 8,
-        }
         const marker = new googleMaps.Marker({
           position: features[i].position,
-          icon: svgMarker
-          /*{
-            path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            scale: 5,
-          }*/,
+          icon: this.buildSVGMArker(googleMaps,features[i]),
           title:"ciao",
           map: map,
         });
@@ -92,5 +68,33 @@ export class MapComponent  implements OnInit,AfterViewInit {
         }
       };
     });
+  }
+  buildFeatures(googleMaps:any):any[]{
+    let arr : Cache[]=this.cacheSrv.getAllCache();
+    let arr2: any[]=[];
+    for(let i=0;i<arr.length;i++){
+      if(arr[i].statoApprovazione){
+        arr2.push({
+          position: new googleMaps.LatLng(arr[i].latitudine, arr[i].longitudine),
+          type: arr[i].difficoltà,
+        })
+      }
+    }
+    return [...arr2];
+  }
+  buildSVGMArker(googleMaps:any,item:any):any{
+    let str : string="";
+    if(item.type===1){str="green"};
+    if(item.type===2){str="orange"};
+    if(item.type===3){str="red"};
+    let svgMarker = {
+      path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      fillColor: str,
+      fillOpacity: 0.9,
+      strokeWeight: 0,
+      rotation: 0,
+      scale: 15,
+    }
+    return svgMarker;
   }
 }
