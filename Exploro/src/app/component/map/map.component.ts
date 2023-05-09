@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { Admin } from 'src/app/classes_&_services/Admin';
+
 
 @Component({
   selector: 'app-map',
@@ -24,6 +26,36 @@ export class MapComponent  implements OnInit,AfterViewInit {
       googleMaps.event.addListenerOnce(map,'idle',()=>{
         this.reneder.addClass(mapEl,'visible');
       });
+
+
+      const features = [
+        {
+          position: new googleMaps.LatLng(42.349745, 13.399413),
+          type: "info",
+        },
+        {
+          position: new googleMaps.LatLng(41.349745, 13.399413),
+          type: "info",
+        },
+        {
+          position: new googleMaps.LatLng(40.349745, 13.399413),
+          type: "info",
+        }
+      ];
+      for(let i=0;i<features.length;i++){
+        const marker = new googleMaps.Marker({
+          position: features[i].position,
+          //icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png",
+          icon: {
+            path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 5,
+          },
+          title:"ciao",
+          map: map,
+        });
+      }
+
+
     }).catch(err=>{
       console.log(err)
     });
