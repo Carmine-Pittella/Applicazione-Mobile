@@ -1,23 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Geocacher } from '../../classes/Geocacher';
+
+import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  utentiList: Geocacher[] = [
-    {
-      id: 2,
-      nome: 'Carmine',
-      cognome: 'Pittella',
-      username: 'Carmine',
-      password: 'Carmine',
-      mail: 'scimmia@gmail.com',
-      cellulare: 365261,
-      dataDiNascita: new Date('2000/05/11'),
-      livello: 2,
-      puntiExp: 48,
-    },
-  ];
-  constructor() {}
+
+  constructor(private geocacherSrv:GeocacherService) {}
 }
