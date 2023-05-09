@@ -43,13 +43,23 @@ export class MapComponent  implements OnInit,AfterViewInit {
         }
       ];
       for(let i=0;i<features.length;i++){
+        let str;
+        if(i===0){str="yellow"};if(i===1){str="orange"};if(i===2){str="red"}
+        let svgMarker = {
+          path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          fillColor: str,
+          fillOpacity: 0.8,
+          strokeWeight: 0,
+          rotation: 0,
+          scale: 8,
+        }
         const marker = new googleMaps.Marker({
           position: features[i].position,
-          //icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png",
-          icon: {
+          icon: svgMarker
+          /*{
             path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
             scale: 5,
-          },
+          }*/,
           title:"ciao",
           map: map,
         });
