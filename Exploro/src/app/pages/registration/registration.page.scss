@@ -1,28 +1,7 @@
-ion-card {
-  background-color: #1e1e1e;
-  width: 70vw;
-}
-
-.logo {
-  display: flex;
-  justify-content: center;
-}
-
 .formRegistration {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 100vh;
-}
-
-ion-item::part(native) {
-  background-color: #3c3c3c;
-}
-
-ion-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px rgba(239, 105, 16, 0.5); // aggiunge l'ombra intorno
 }

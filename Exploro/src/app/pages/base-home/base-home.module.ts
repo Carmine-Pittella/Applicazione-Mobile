@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BaseHomePageRoutingModule } from './base-home-routing.module';
 
 import { BaseHomePage } from './base-home.page';
-import {MapComponent } from '../../component/map/map.component';
+import { MapComponent } from '../../component/map/map.component';
 
 @NgModule({
   imports: [
@@ -16,6 +16,7 @@ import {MapComponent } from '../../component/map/map.component';
     IonicModule,
     BaseHomePageRoutingModule
   ],
-  declarations: [BaseHomePage,MapComponent]
+  declarations: [BaseHomePage,] // do dovuto rimuovere la dichiarazione di MapComponent perché mi dava un errore.
+  // in pratica non può essere dichiarato in sia in questa pagina che nella Homepage che ho creato
 })
-export class BaseHomePageModule {}
+export class BaseHomePageModule { }

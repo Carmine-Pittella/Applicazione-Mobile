@@ -12,17 +12,17 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 1 bla bla',
       latitudine: 42.349745,
       longitudine: 13.399413,
-      difficoltà:1,
-      statoApprovazione:true
+      difficoltà: 1,
+      statoApprovazione: true
     },
     {
       id: 2,
       nome: 'cache2',
       descrizione: 'Questa è la descrizione della cache numero 2 bla bla',
       latitudine: 42.357346,
-      longitudine:  13.419150,
-      difficoltà:2,
-      statoApprovazione:true
+      longitudine: 13.419150,
+      difficoltà: 2,
+      statoApprovazione: true
     },
     {
       id: 3,
@@ -30,13 +30,13 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 3 bla bla',
       latitudine: 42.350626,
       longitudine: 13.416250,
-      difficoltà:3,
-      statoApprovazione:true
+      difficoltà: 3,
+      statoApprovazione: true
     }
   ];
-  getAllCache():Cache[]{
-    return[...this.CacheList];
+  getAllCache(): Cache[] {
+    return [...this.CacheList];
   }
 
-  constructor() {}
+  constructor() { }
 }

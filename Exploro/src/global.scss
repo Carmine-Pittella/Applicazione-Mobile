@@ -32,7 +32,43 @@ ion-button.button-orange {
 ion-button.button-standard {
   --ion-color-primary: #329aea;
 }
-ion-button.button-back {
-  --ion-color-primary: #1f1f1f;
-  --ion-text-color: white;
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+ion-title {
+  margin: auto;
+}
+
+ion-card {
+  background-color: #1e1e1e;
+  width: 75%;
+} // proprietà della card
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+ion-item::part(native) {
+  background-color: #3c3c3c;
+} // sarebbe il colore dei campi (nome, cognome, ecc..)
+
+ion-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(239, 105, 16, 0.5); // aggiunge l'ombra intorno
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+} // sarebbe tutto il contenuto della pagina
+// commentato perché per il momento funziona tutto correttamente anche senza

@@ -10,33 +10,33 @@ import { Cache } from 'src/app/classes_&_services/Cache';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent  implements OnInit,AfterViewInit {
+export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
 
-  constructor(private reneder: Renderer2,private cacheSrv: CacheService) { }
+  constructor(private reneder: Renderer2, private cacheSrv: CacheService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit(): void {
-    this.getGoogleMaps().then(googleMaps=>{
+    this.getGoogleMaps().then(googleMaps => {
       const mapEl = this.mapElementRef.nativeElement;
-      const map = new googleMaps.Map(mapEl,{
-        center:{lat:42.349745 , lng: 13.399413},
-        zoom:15
+      const map = new googleMaps.Map(mapEl, {
+        center: { lat: 42.349745, lng: 13.399413 },
+        zoom: 15
       });
 
-      googleMaps.event.addListenerOnce(map,'idle',()=>{
-        this.reneder.addClass(mapEl,'visible');
+      googleMaps.event.addListenerOnce(map, 'idle', () => {
+        this.reneder.addClass(mapEl, 'visible');
       });
 
 
       const features = this.buildFeatures(googleMaps);
 
-      for(let i=0;i<features.length;i++){
+      for (let i = 0; i < features.length; i++) {
         const marker = new googleMaps.Marker({
           position: features[i].position,
-          icon: this.buildSVGMArker(googleMaps,features[i]),
-          title:"ciao",
+          icon: this.buildSVGMArker(googleMaps, features[i]),
+          title: "ciao",
           map: map,
         });
 
@@ -45,10 +45,10 @@ export class MapComponent  implements OnInit,AfterViewInit {
           '<div id="content">' +
           '<div id="siteNotice">' +
           "</div>" +
-          '<h1 id="firstHeading" class="firstHeading">'+features[i].nome+"</h1>" +
+          '<h1 id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
           '<div id="bodyContent">' +
-          "<p>"+features[i].descr+"</p>" +
-          "<p>"+features[i].lat+","+features[i].long+"</p>" +
+          "<p>" + features[i].descr + "</p>" +
+          "<p>" + features[i].lat + "," + features[i].long + "</p>" +
           "</div>" +
           "</div>";
         const infowindow = new googleMaps.InfoWindow({
@@ -58,48 +58,46 @@ export class MapComponent  implements OnInit,AfterViewInit {
 
         marker.addListener("click", () => {
           map.setZoom(18);
-          map.setCenter(marker.getPosition() );
+          map.setCenter(marker.getPosition());
           infowindow.open({
-            anchor: marker,
-            map,
+            anchor: marker, map,
           });
-
         });
       }
 
 
-    }).catch(err=>{
+    }).catch(err => {
       console.log(err)
     });
 
   }
-  private getGoogleMaps() :Promise<any> {
+  private getGoogleMaps(): Promise<any> {
     const win = window as any;
     const googleModule = win.google;
-    if(googleModule && googleModule.maps){
+    if (googleModule && googleModule.maps) {
       return Promise.resolve(googleModule.maps);
     }
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBpGPMdIrPIJhD2gbDwnWKBSQscYp0EZ4E&callback=initMap';
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
-      script.onload = ()=>{
+      script.onload = () => {
         const loadedGoogleModule = win.google;
-        if(loadedGoogleModule && loadedGoogleModule.maps){
+        if (loadedGoogleModule && loadedGoogleModule.maps) {
           resolve(loadedGoogleModule.maps);
-        }else{
+        } else {
           reject('Google maps SDK not available');
         }
       };
     });
   }
-  buildFeatures(googleMaps:any):any[]{
-    let arr : Cache[]=this.cacheSrv.getAllCache();
-    let arr2: any[]=[];
-    for(let i=0;i<arr.length;i++){
-      if(arr[i].statoApprovazione){
+  buildFeatures(googleMaps: any): any[] {
+    let arr: Cache[] = this.cacheSrv.getAllCache();
+    let arr2: any[] = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].statoApprovazione) {
         arr2.push({
           position: new googleMaps.LatLng(arr[i].latitudine, arr[i].longitudine),
           type: arr[i].difficoltà,
@@ -112,11 +110,11 @@ export class MapComponent  implements OnInit,AfterViewInit {
     }
     return [...arr2];
   }
-  buildSVGMArker(googleMaps:any,item:any):any{
-    let str : string="";
-    if(item.type===1){str="green"};
-    if(item.type===2){str="orange"};
-    if(item.type===3){str="red"};
+  buildSVGMArker(googleMaps: any, item: any): any {
+    let str: string = "";
+    if (item.type === 1) { str = "green" };
+    if (item.type === 2) { str = "orange" };
+    if (item.type === 3) { str = "red" };
     let svgMarker = {
       path: googleMaps.SymbolPath.BACKWARD_CLOSED_ARROW,
       fillColor: str,
