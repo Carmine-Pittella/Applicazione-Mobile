@@ -22,7 +22,7 @@ export class MapComponent  implements OnInit,AfterViewInit {
       const mapEl = this.mapElementRef.nativeElement;
       const map = new googleMaps.Map(mapEl,{
         center:{lat:42.349745 , lng: 13.399413},
-        zoom:16
+        zoom:15
       });
 
       googleMaps.event.addListenerOnce(map,'idle',()=>{
@@ -38,6 +38,32 @@ export class MapComponent  implements OnInit,AfterViewInit {
           icon: this.buildSVGMArker(googleMaps,features[i]),
           title:"ciao",
           map: map,
+        });
+
+
+        const contentString =
+          '<div id="content">' +
+          '<div id="siteNotice">' +
+          "</div>" +
+          '<h1 id="firstHeading" class="firstHeading">'+features[i].nome+"</h1>" +
+          '<div id="bodyContent">' +
+          "<p>"+features[i].descr+"</p>" +
+          "<p>"+features[i].lat+","+features[i].long+"</p>" +
+          "</div>" +
+          "</div>";
+        const infowindow = new googleMaps.InfoWindow({
+          content: contentString,
+          ariaLabel: "Uluru",
+        });
+
+        marker.addListener("click", () => {
+          map.setZoom(18);
+          map.setCenter(marker.getPosition() );
+          infowindow.open({
+            anchor: marker,
+            map,
+          });
+
         });
       }
 
@@ -77,6 +103,10 @@ export class MapComponent  implements OnInit,AfterViewInit {
         arr2.push({
           position: new googleMaps.LatLng(arr[i].latitudine, arr[i].longitudine),
           type: arr[i].difficoltà,
+          nome: arr[i].nome,
+          descr: arr[i].descrizione,
+          lat: arr[i].latitudine,
+          long: arr[i].longitudine
         })
       }
     }
