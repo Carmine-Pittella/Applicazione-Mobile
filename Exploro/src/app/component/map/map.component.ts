@@ -45,10 +45,10 @@ export class MapComponent implements OnInit, AfterViewInit {
           '<div id="content">' +
           '<div id="siteNotice">' +
           "</div>" +
-          '<h1 id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
+          '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
           '<div id="bodyContent">' +
-          "<p>" + features[i].descr + "</p>" +
-          "<p>" + features[i].lat + "," + features[i].long + "</p>" +
+          "<p style='color:black;'>" + features[i].descr + "</p>" +
+          "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
           "</div>" +
           "</div>";
         const infowindow = new googleMaps.InfoWindow({

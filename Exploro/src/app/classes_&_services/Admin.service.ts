@@ -19,5 +19,11 @@ export class AdminService {
       puntiExp: 100,
     },
   ];
+
+  findAdminByUsrPsw(usr:string,psw:string) :Admin {
+    let g: Admin[]= this.adminList.filter(u=>u.username===usr);
+    let g2: Admin[]= g.filter(u=>u.password===psw);
+    return g2[0];
+  }
   constructor() {}
 }

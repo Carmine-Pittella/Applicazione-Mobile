@@ -9,4 +9,6 @@ export class Geocacher{
   dataDiNascita :Date;
   livello : number;
   puntiExp : number;
+  amiciList: number[];
+  cachePref: number[];
 }
