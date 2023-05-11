@@ -56,5 +56,27 @@ export class GeocacherService {
     let g2: Geocacher[]= g.filter(u=>u.password===psw);
     return g2[0];
   }
+
+  findTop3Utenti():Geocacher[]{
+    let cont:number=3;
+    let arr: number[]=[];
+    let arrU: Geocacher[]=this.utentiList;
+    let toRet:Geocacher[]=[];
+    for(let i=0;i< arrU.length;i++){
+      arr.push((arrU[i].livello)*100+arrU[i].puntiExp);
+    }
+    for(let i=0;i<3;i++){
+      let u : Geocacher = this.findUtenteByExpTot(Math.max(...arr));
+      toRet.push(u);
+      arrU = arrU.filter(a=>a.id!==u.id);
+    }
+    return [...arrU];
+
+  }
+
+  findUtenteByExpTot(n:number):Geocacher{
+    let g: Geocacher[]=this.utentiList.filter(u=>u.livello*100+u.puntiExp===n);
+    return g[0];
+  }
   constructor() {}
 }
