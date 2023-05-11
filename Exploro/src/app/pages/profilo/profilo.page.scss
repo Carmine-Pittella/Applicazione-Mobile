@@ -1,0 +1,17 @@
+p {
+  margin: 10px;
+}
+
+ion-label {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.dati-personali {
+  font-size: 2em;
+  margin: 30px;
+}
+
+ion-item::part(native) {
+  background-color: #2f2f2f;
+} // sarebbe il colore dei campi (nome, cognome, ecc..)
