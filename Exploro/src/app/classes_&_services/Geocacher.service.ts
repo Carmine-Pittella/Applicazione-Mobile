@@ -7,6 +7,20 @@ import { Geocacher } from './Geocacher';
 export class GeocacherService {
   utentiList: Geocacher[] = [
     {
+      id: 1,
+      nome: 'Fabrizio',
+      cognome: 'Paglia',
+      username: 'fabri',
+      password: 'fabri',
+      mail: 'fabrizio.paglia@gmail.com',
+      cellulare: 3665904021,
+      dataDiNascita: new Date('2000/03/09'),
+      livello: 9,
+      puntiExp: 48,
+      amiciList:[],
+      cachePref:[2,3]
+    },
+    {
       id: 2,
       nome: 'Carmine',
       cognome: 'Pittella',
@@ -18,7 +32,7 @@ export class GeocacherService {
       livello: 2,
       puntiExp: 48,
       amiciList:[],
-      cachePref:[]
+      cachePref:[1,2,3]
     },
     {
       id: 3,
@@ -32,7 +46,7 @@ export class GeocacherService {
       livello: 1,
       puntiExp: 0,
       amiciList:[],
-      cachePref:[1,2,3]
+      cachePref:[]
     },
   ];
 

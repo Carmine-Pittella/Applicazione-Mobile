@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
+import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
 import { Router } from '@angular/router';
+import { Geocacher } from 'src/app/classes_&_services/Geocacher';
+import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
+import { AdminService } from 'src/app/classes_&_services/Admin.service';
 
 
 // const users = {
@@ -44,15 +47,32 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  email: string
-  password: string
+  userName: string ='';
+  password: string='';
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private geocacherSrv : GeocacherService,
+              private router: Router,
+              private s: SessioneService,
+              private adminSrv: AdminService) { }
 
   ngOnInit() { }
 
   Login() {
-    console.log("Email: " + this.email + "  Password: " + this.password)
-    this.router.navigate(['/homepage']);
+    let g:Geocacher;
+    if (this.geocacherSrv.findUtenteByUsrPsw(this.userName,this.password)===undefined){
+      if (this.adminSrv.findAdminByUsrPsw(this.userName,this.password)===undefined){
+        //utente non trovato, stampa messaggio di errore
+      }else{
+        this.s.setIdUtente(this.adminSrv.findAdminByUsrPsw(this.userName,this.password).id);
+        this.router.navigate(['/homepage']);
+      }
+    }else{
+      g=this.geocacherSrv.findUtenteByUsrPsw(this.userName,this.password);
+      this.s.setIdUtente(g.id);
+      this.s.setListaAmiciPerID(g.amiciList);
+      this.s.setCachePrefPerID(g.cachePref);
+      this.router.navigate(['/homepage']);
+    }
+
   }
 }

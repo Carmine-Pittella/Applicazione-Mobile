@@ -16,11 +16,11 @@
         <form #formLogin="ngForm">
           <ion-list>
             <ion-item>
-              <ion-label position="floating">E-mail</ion-label>
+              <ion-label position="floating">username</ion-label>
               <ion-input
-                name="email"
+                name="username"
                 type="text"
-                [(ngModel)]="email"
+                [(ngModel)]="userName"
                 required
               ></ion-input>
             </ion-item>
@@ -49,9 +49,6 @@
           expand="block"
           routerLink="/registration"
           >Registrati</ion-button
-        >
-        <ion-button class="button-orange" expand="block" routerLink="/base-home"
-          >Mappa</ion-button
         >
       </ion-card-content>
     </ion-card>

@@ -7,16 +7,16 @@ import { Admin } from './Admin';
 export class AdminService {
   adminList: Admin[] = [
     {
-      id: 1,
+      id: -1,
       nome: 'Fabrizio',
       cognome: 'Paglia',
-      username: 'fabri',
-      password: 'fabri',
+      username: 'fabri314',
+      password: 'fabri314',
       mail: 'fabriPaglia@gmail.com',
       cellulare: 3665905874,
       dataDiNascita: new Date('2000/03/09'),
       livello: 10,
-      puntiExp: 100,
+      puntiExp: 99,
     },
   ];
 
