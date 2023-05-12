@@ -18,9 +18,11 @@ ion-item::part(native) {
 } // sarebbe il colore dei campi (nome, cognome, ecc..)
 
 ion-button.button-orange {
-  --ion-color-primary: #eaa932;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  margin-bottom: 20px;
-  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 15px;
 }

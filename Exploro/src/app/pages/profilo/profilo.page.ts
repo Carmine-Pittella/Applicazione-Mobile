@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Geocacher } from 'src/app/classes_&_services/Geocacher';
 import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
-import { Sessione } from 'src/app/classes_&_services/Sessione';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
+import { Utils } from 'src/app/classes_&_services/Utils';
 
 @Component({
   selector: 'app-profilo',
@@ -12,6 +12,7 @@ import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 export class ProfiloPage implements OnInit {
   geocacher: Geocacher = new Geocacher();
   nome: string
+  util: Utils
 
   constructor(private geocacherSrv: GeocacherService, private s: SessioneService) { }
 

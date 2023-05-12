@@ -26,6 +26,8 @@
             <ion-label>Classifica</ion-label>
           </ion-item>
           <!-- al momento ho impostato il logout così perché non ho idea di come verranno gestiti gli accessi -->
+          <!-- il logout necessita di un metodo che azzera i parametri di Session per una questione di sicurezza
+          altrimenti basta cambiare l'URL per accedere alla sezione personale dell'utente che aveva fatto l'accesso -->
           <ion-item routerLink="/login">
             <ion-icon name="log-out"></ion-icon>
             <ion-label>Logout</ion-label>

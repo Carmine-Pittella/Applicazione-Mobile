@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: ProfiloPage
+  },
+  {
+    path: 'modifica-dati',
+    loadChildren: () => import('./modifica-dati/modifica-dati.module').then( m => m.ModificaDatiPageModule)
   }
 ];
 

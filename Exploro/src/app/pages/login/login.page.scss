@@ -3,7 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 ion-avatar {
@@ -14,7 +14,6 @@ ion-avatar {
 .errore {
   color: #ff4242;
   position: absolute;
-  bottom: -10px; /* controlla la distanza tra la card e la label */
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 50px; /* controlla la distanza tra la card e la label */
+  font-size: 1.1em;
 }
