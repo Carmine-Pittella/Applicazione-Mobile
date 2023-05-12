@@ -115,11 +115,10 @@
     </ion-card>
   </div>
   <ion-alert
-    class="lallero"
-    [isOpen]="isAlertOpen"
     trigger="present-alert"
+    header="Password non corretta"
+    message="la password inserita non corrisponde alla vecchia password"
     [buttons]="alertButtons"
-    header="Inserisci la vecchia password per confermare"
-    [inputs]="alertInputs"
+    isOpen="{{isAlertOpen}}"
   ></ion-alert>
 </ion-content>

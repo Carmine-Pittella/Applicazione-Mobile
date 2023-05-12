@@ -92,5 +92,19 @@ export class GeocacherService {
     let g: Geocacher[] = this.utentiList.filter(u => u.livello * 100 + u.puntiExp === n);
     return g[0];
   }
+
+  updateGeocacherByIdUtente(idUtente: number, nuoviDati: Geocacher) {
+    console.log(idUtente)
+    console.log(nuoviDati)
+    this.utentiList[idUtente].nome = nuoviDati.nome;
+    this.utentiList[idUtente].cognome = nuoviDati.cognome;
+    this.utentiList[idUtente].username = nuoviDati.username;
+    this.utentiList[idUtente].mail = nuoviDati.mail;
+    this.utentiList[idUtente].cellulare = nuoviDati.cellulare;
+    this.utentiList[idUtente].dataDiNascita = nuoviDati.dataDiNascita;
+    this.utentiList[idUtente].password = nuoviDati.password;
+    // ovviamente ho dovuto fare uno ad uno perché altre variabili come livello, xp, lista ecc
+    // sono tutti NULL nell'oggetto nuoviDati. non essendo modificabili dalla pagina.
+  }
   constructor() { }
 }

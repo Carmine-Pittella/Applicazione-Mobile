@@ -18,5 +18,4 @@ export class ProfiloPage implements OnInit {
   ngOnInit() {
     this.geocacher = this.geocacherSrv.findGeocacherById(this.s.getIdUtente())
   }
-
 }
