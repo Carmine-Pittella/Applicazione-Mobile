@@ -4,7 +4,6 @@ import { Admin } from 'src/app/classes_&_services/Admin';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { Geolocation } from '@capacitor/geolocation';
-import { IonButton } from '@ionic/angular';
 
 
 
@@ -19,80 +18,82 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   constructor(private reneder: Renderer2, private cacheSrv: CacheService) { }
-  currentCoordLat : number;
-  currentCoordLng : number;
+  currentCoordLat = 45.0;
+  currentCoordLng = 13.0;
   ngOnInit() {
     this.position();
-    console.log("oninit");
+    console.log("puttana la madonna");
+
+    Geolocation.getCurrentPosition().then(p=>{throw p.coords.latitude}).catch(p=>{console.log(p)});
   }
 
   ngAfterViewInit(): void {
-    console.log("ngafterview");
-    console.log(this.currentCoordLat);
-    console.log(this.currentCoordLng);
-    this.getGoogleMaps().then(googleMaps => {
-      const mapEl = this.mapElementRef.nativeElement;
-      this.position();
-      const map = new googleMaps.Map(mapEl, {
-        center: { lat:this.currentCoordLat, lng: this.currentCoordLng},
-        zoom: 15
-      });
-      googleMaps.event.addListenerOnce(map, 'idle', () => {
-        this.reneder.addClass(mapEl, 'visible');
-      });
-      let directionsRenderer = new googleMaps.DirectionsRenderer();
-      directionsRenderer.setMap(map);
-      //markers
-      const features = this.buildFeatures(googleMaps);
-      for (let i = 0; i < features.length; i++) {
-        const marker = new googleMaps.Marker({
-          position: features[i].position,
-          icon: this.buildSVGMArker(googleMaps, features[i]),
-          title: "ciao",
+    Geolocation.getCurrentPosition().then(p=>{
+      this.getGoogleMaps().then(googleMaps => {
+        const mapEl = this.mapElementRef.nativeElement;
+        const map = new googleMaps.Map(mapEl, {
+          center: { lat:p.coords.latitude, lng: p.coords.longitude},
+          zoom: 15
+        });
+
+        googleMaps.event.addListenerOnce(map, 'idle', () => {
+          this.reneder.addClass(mapEl, 'visible');
+        });
+        let directionsRenderer = new googleMaps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+        //markers
+        const features = this.buildFeatures(googleMaps);
+        for (let i = 0; i < features.length; i++) {
+          const marker = new googleMaps.Marker({
+            position: features[i].position,
+            icon: this.buildSVGMArker(googleMaps, features[i]),
+            title: "ciao",
+            map: map,
+          });
+          const contentString =
+            '<div id="content">' +
+            '<div id="siteNotice">' +
+            "</div>" +
+            '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
+            '<div id="bodyContent">' +
+            "<p style='color:black;'>" + features[i].descr + "</p>" +
+            "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
+            "</div>"
+            "</div>";
+          const infowindow = new googleMaps.InfoWindow({
+            content: contentString,
+            ariaLabel: "Uluru",
+          });
+
+          marker.addListener("click", () => {
+            map.setZoom(18);
+            map.setCenter(marker.getPosition());
+            infowindow.open({
+              anchor: marker, map,
+            });
+            this.calculateAndDisplayRoute(map,googleMaps,features[i].lat,features[i].long,directionsRenderer);
+
+          });
+        }
+         //marker di prova per la posizione attuale
+         let markerPosition = new googleMaps.Marker({
+          position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
+          title: "position",
           map: map,
         });
-        const contentString =
-          '<div id="content">' +
-          '<div id="siteNotice">' +
-          "</div>" +
-          '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
-          '<div id="bodyContent">' +
-          "<p style='color:black;'>" + features[i].descr + "</p>" +
-          "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
-          "</div>"
-          "</div>";
-        const infowindow = new googleMaps.InfoWindow({
-          content: contentString,
-          ariaLabel: "Uluru",
-        });
-
-        marker.addListener("click", () => {
-          map.setZoom(18);
-          map.setCenter(marker.getPosition());
-          infowindow.open({
-            anchor: marker, map,
-          });
-          this.calculateAndDisplayRoute(map,googleMaps,features[i].lat,features[i].long,directionsRenderer);
-
-        });
-      }
-       //marker di prova per la posizione attuale
-       let markerPosition = new googleMaps.Marker({
-        position: new googleMaps.LatLng(this. currentCoordLat, this.currentCoordLng),
-        title: "position",
-        map: map,
+        //
+      }).catch(err => {
+        console.log(err)
       });
-      //
-    }).catch(err => {
-      console.log(err)
     });
-
   }
+
+
   position(){
     Geolocation.getCurrentPosition().then(position=>{
       this.currentCoordLat=position.coords.latitude;
       this.currentCoordLng=position.coords.longitude;
-    });
+    })
   }
   private getGoogleMaps(): Promise<any> {
     this.position();
