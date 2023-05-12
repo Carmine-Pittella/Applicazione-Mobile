@@ -56,6 +56,14 @@ export class MapComponent implements OnInit, AfterViewInit {
           ariaLabel: "Uluru",
         });
 
+        //marker di prova per la posizione attuale
+        const markerPosition = new googleMaps.Marker({
+          position: new googleMaps.LatLng(42.349745, 13.399413),
+          title: "position",
+          map: map,
+        });
+        //
+
         marker.addListener("click", () => {
           map.setZoom(18);
           map.setCenter(marker.getPosition());

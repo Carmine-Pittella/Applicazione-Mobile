@@ -10,7 +10,7 @@ export class CacheService {
       id: 1,
       nome: 'cache1',
       descrizione: 'Questa è la descrizione della cache numero 1 bla bla',
-      latitudine: 42.349745,
+      latitudine: 42.351985,
       longitudine: 13.399413,
       difficoltà: 1,
       statoApprovazione: true,
