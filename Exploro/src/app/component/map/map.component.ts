@@ -8,6 +8,7 @@ import { IonButton } from '@ionic/angular';
 
 
 
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -18,16 +19,22 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   constructor(private reneder: Renderer2, private cacheSrv: CacheService) { }
-  currentCoord = {latitude: 0,longitude: 0};
-  ngOnInit() { }
+  currentCoordLat : number;
+  currentCoordLng : number;
+  ngOnInit() {
+    this.position();
+    console.log("oninit");
+  }
 
   ngAfterViewInit(): void {
-
+    console.log("ngafterview");
+    console.log(this.currentCoordLat);
+    console.log(this.currentCoordLng);
     this.getGoogleMaps().then(googleMaps => {
       const mapEl = this.mapElementRef.nativeElement;
       this.position();
       const map = new googleMaps.Map(mapEl, {
-        center: { lat:this.currentCoord.latitude, lng: this.currentCoord.longitude },
+        center: { lat:this.currentCoordLat, lng: this.currentCoordLng},
         zoom: 15
       });
       googleMaps.event.addListenerOnce(map, 'idle', () => {
@@ -71,7 +78,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       }
        //marker di prova per la posizione attuale
        let markerPosition = new googleMaps.Marker({
-        position: new googleMaps.LatLng(this.currentCoord.latitude, this.currentCoord.longitude),
+        position: new googleMaps.LatLng(this. currentCoordLat, this.currentCoordLng),
         title: "position",
         map: map,
       });
@@ -80,6 +87,12 @@ export class MapComponent implements OnInit, AfterViewInit {
       console.log(err)
     });
 
+  }
+  position(){
+    Geolocation.getCurrentPosition().then(position=>{
+      this.currentCoordLat=position.coords.latitude;
+      this.currentCoordLng=position.coords.longitude;
+    });
   }
   private getGoogleMaps(): Promise<any> {
     this.position();
@@ -104,11 +117,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       };
     });
   }
-  position(){
-    Geolocation.getCurrentPosition().then(position=>{
-      this.currentCoord = {latitude:position.coords.latitude,longitude:position.coords.longitude};
-    });
-  }
+
   buildFeatures(googleMaps: any): any[] {
     let arr: Cache[] = this.cacheSrv.getAllCache();
     let arr2: any[] = [];
@@ -147,7 +156,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     let directionsService = new googleMaps.DirectionsService();
     directionsService
       .route({
-        origin: { lat: this.currentCoord.latitude,lng: this.currentCoord.longitude},
+        origin: { lat: this.currentCoordLat,lng: this.currentCoordLng},
         destination:{lat: lt,lng: lg},
         travelMode: googleMaps.TravelMode.DRIVING,
       })
