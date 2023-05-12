@@ -4,8 +4,7 @@ import { Admin } from 'src/app/classes_&_services/Admin';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { Geolocation } from '@capacitor/geolocation';
-import { Plugins } from '@capacitor/core';
-
+import { IonButton } from '@ionic/angular';
 
 
 
@@ -16,6 +15,7 @@ import { Plugins } from '@capacitor/core';
 })
 export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
+
 
   constructor(private reneder: Renderer2, private cacheSrv: CacheService) { }
   currentCoord = {latitude: 0,longitude: 0};
@@ -31,30 +31,6 @@ export class MapComponent implements OnInit, AfterViewInit {
       googleMaps.event.addListenerOnce(map, 'idle', () => {
         this.reneder.addClass(mapEl, 'visible');
       });
-      let directionsRenderer = new googleMaps.DirectionsRenderer();
-      directionsRenderer.setMap(map);
-      let directionsService = new googleMaps.DirectionsService();
-
-
-        function calculateAndDisplayRoute() {
-          directionsService
-            .route({
-              origin: {
-                query:{ latitudine: 42.351985,longitudine: 13.399413},
-              },
-              destination: {
-                query:  {latitudine: 42.450626,longitudine: 13.416250},
-              },
-              travelMode: googleMaps.TravelMode.DRIVING,
-            })
-            .then((response:any) => {
-              directionsRenderer.setDirections(response);
-            })
-            .catch(() => window.alert("Directions request failed due to " ));
-        }
-
-
-
 
       //markers
       const features = this.buildFeatures(googleMaps);
@@ -73,30 +49,32 @@ export class MapComponent implements OnInit, AfterViewInit {
           '<div id="bodyContent">' +
           "<p style='color:black;'>" + features[i].descr + "</p>" +
           "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
-          "</div>" + "<button '>Percorso</button>"
+          "</div>"
           "</div>";
         const infowindow = new googleMaps.InfoWindow({
           content: contentString,
           ariaLabel: "Uluru",
         });
-        //marker di prova per la posizione attuale
-        let markerPosition = new googleMaps.Marker({
-          position: new googleMaps.LatLng(this.currentCoord.latitude, this.currentCoord.longitude),
-          title: "position",
-          map: map,
-        });
-        //
+
         marker.addListener("click", () => {
           map.setZoom(18);
           map.setCenter(marker.getPosition());
           infowindow.open({
             anchor: marker, map,
           });
+          console.log("porca troia");
+          this.calculateAndDisplayRoute(map,googleMaps);
+          console.log("porca troia2");
+
         });
       }
-
-
-
+       //marker di prova per la posizione attuale
+       let markerPosition = new googleMaps.Marker({
+        position: new googleMaps.LatLng(this.currentCoord.latitude, this.currentCoord.longitude),
+        title: "position",
+        map: map,
+      });
+      //
     }).catch(err => {
       console.log(err)
     });
@@ -159,5 +137,28 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
     return svgMarker;
   }
+  calculateAndDisplayRoute(map:any,googleMaps:any) {
+    console.log("dentro la funzione diocan");
+    let directionsRenderer = new googleMaps.DirectionsRenderer();
+    console.log("dentro la funzione diocan1");
+    directionsRenderer.setMap(map);
+    console.log("dentro la funzione diocan2");
+    let directionsService = new googleMaps.DirectionsService();
+    console.log("dentro la funzione diocan3");
+    directionsService
+      .route({
+        origin: { lat: 42.351985,lng: 13.399413},
+        destination:{lat: 42.450626,lng: 13.416250},
+        travelMode: googleMaps.TravelMode.DRIVING,
+      })
+      .then((response:any) => {
+        directionsRenderer.setDirections(response);
+        console.log("dentro la funzione diocan4");
+      })
+      .catch((e:any) => window.alert("Directions request failed due to "+e ));
+
+  }
+
 
 }
+
