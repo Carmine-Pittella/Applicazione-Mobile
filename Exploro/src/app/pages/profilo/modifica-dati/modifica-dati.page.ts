@@ -17,6 +17,8 @@ export class ModificaDatiPage implements OnInit {
   confermaNuovaPassword: string
   isAlertOpen = false;
   public alertButtons = ['OK'];
+  headerAlert: string
+  messageAlert: string
 
   constructor(private geocacherSrv: GeocacherService, private s: SessioneService, private alertController: AlertController, private router: Router) { }
 
@@ -28,7 +30,9 @@ export class ModificaDatiPage implements OnInit {
 
   async Conferma(form: NgForm) {
     if (form.value.password != form.value.confermaNuovaPassword) {
-      // le password non corrispondono LABEL
+      this.headerAlert = "Le password non corrispondono"
+      this.messageAlert = ""
+      this.isAlertOpen = true
       return
     }
     if (form.value.password != this.geocacher.password) {
@@ -50,9 +54,12 @@ export class ModificaDatiPage implements OnInit {
             text: 'OK',
             handler: (data) => {
               if (data.vecchiaPassword != this.geocacher.password) {
+                this.headerAlert = "Password non corretta"
+                this.messageAlert = "la password inserita non corrisponde alla vecchia password"
                 this.isAlertOpen = true
                 return
               }
+              else { this.CompletaModifiche() }
             }
           }
         ]
@@ -60,6 +67,10 @@ export class ModificaDatiPage implements OnInit {
       await alert.present();
       this.isAlertOpen = false
     }
+    else { this.CompletaModifiche() }
+  }
+
+  CompletaModifiche() {
     this.geocacherSrv.updateGeocacherByIdUtente(this.geocacher.id - 1, this.nuoviDati)
     this.router.navigate(["/profilo"])
   }

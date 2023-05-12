@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'classifica',
     loadChildren: () => import('./pages/classifica/classifica.module').then(m => m.ClassificaPageModule)
+  },  {
+    path: 'amici',
+    loadChildren: () => import('./pages/amici/amici.module').then( m => m.AmiciPageModule)
   },
+
 
 
 

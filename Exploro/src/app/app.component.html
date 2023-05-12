@@ -8,7 +8,6 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <!-- ogni pagina dovrà essere specifica per ogni utente, per il momento boh -->
           <ion-item routerLink="profilo">
             <ion-icon name="person"></ion-icon>
             <ion-label>Profilo</ion-label>
@@ -24,6 +23,10 @@
           <ion-item routerLink="classifica">
             <ion-icon name="bar-chart"></ion-icon>
             <ion-label>Classifica</ion-label>
+          </ion-item>
+          <ion-item routerLink="amici">
+            <ion-icon src="../assets/icon/amici.svg"></ion-icon>
+            <ion-label>Amici</ion-label>
           </ion-item>
           <!-- al momento ho impostato il logout così perché non ho idea di come verranno gestiti gli accessi -->
           <!-- il logout necessita di un metodo che azzera i parametri di Session per una questione di sicurezza

@@ -26,3 +26,7 @@ ion-button.button-orange {
   max-width: 200px;
   margin-bottom: 15px;
 }
+
+ion-item.ion-align-items-center::part(native) {
+  background-color: #444444;
+}
