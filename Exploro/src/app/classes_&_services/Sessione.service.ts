@@ -5,29 +5,29 @@ import { Sessione } from './Sessione';
   providedIn: 'root',
 })
 export class SessioneService {
-  s : Sessione={
-    idUtente : 0,
-    cachePrefPerID : [],
-    listaAmiciPerID : []
+  s: Sessione = {
+    idUtente: 0,
+    cachePrefPerID: [],
+    listaAmiciPerID: []
   };
-  setIdUtente(i:number):void{
-    this.s.idUtente=i;
+  setIdUtente(i: number): void {
+    this.s.idUtente = i;
   };
-  setCachePrefPerID(i:number[]):void{
-    this.s.cachePrefPerID=i;
+  setCachePrefPerID(i: number[]): void {
+    this.s.cachePrefPerID = i;
   };
-  setListaAmiciPerID(i:number[]):void{
-    this.s.listaAmiciPerID=i;
+  setListaAmiciPerID(i: number[]): void {
+    this.s.listaAmiciPerID = i;
   }
-  getIdUtente():number{
+  getIdUtente(): number {
     return this.s.idUtente;
   }
-  getCachePrefPerID():number[]{
-    return[...this.s.cachePrefPerID];
+  getCachePrefPerID(): number[] {
+    return [...this.s.cachePrefPerID];
   }
-  getListaAmiciPerID():number[]{
-    return[...this.s.listaAmiciPerID];
+  getListaAmiciPerID(): number[] {
+    return [...this.s.listaAmiciPerID];
   }
 
-  constructor() {}
+  constructor() { }
 }

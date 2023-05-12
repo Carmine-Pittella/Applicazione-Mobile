@@ -20,7 +20,7 @@
               <ion-input
                 name="username"
                 type="text"
-                [(ngModel)]="userName"
+                [(ngModel)]="username"
                 required
               ></ion-input>
             </ion-item>
@@ -40,9 +40,9 @@
             expand="block"
             type="submit"
             (click)="Login()"
+            [disabled]="!formLogin.valid"
             >Login</ion-button
           >
-          <!-- nelle proprietà del bottone Login aggiungere: [disabled]="!formLogin.valid" -->
         </form>
         <ion-button
           class="button-orange"
@@ -52,5 +52,17 @@
         >
       </ion-card-content>
     </ion-card>
+
+    <p>
+      sto fuso diocane in croce, se levi questo commento vedi la lable che
+      compare in basso, va sistemato pure questo. vaffanculo vado a dormire sto
+      CSS di merda che devo fare dioporchissimo stronzo non c'ho voglia di fare
+      sto lavoro di merda. pensi di essere figo a fare tutta la parte
+      interessante eh... COGLIONE !!!!!!!!!!!!
+    </p>
+
+    <!-- le proprietà della lable di errore stanno nel CSS -->
+
+    <ion-label class="errore">{{labelErrore}}</ion-label>
   </div>
 </ion-content>

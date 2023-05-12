@@ -60,9 +60,9 @@ export class CacheService {
   getAllCache(): Cache[] {
     return [...this.CacheList];
   }
-  findCacheById(i:number):Cache{
-    let c :Cache[] = this.CacheList.filter(c=>c.id===i);
-     return c[0];
+  findCacheById(i: number): Cache {
+    let c: Cache[] = this.CacheList.filter(c => c.id === i);
+    return c[0];
   }
 
   constructor() { }

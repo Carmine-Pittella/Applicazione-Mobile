@@ -20,30 +20,24 @@ const routes: Routes = [
       )
   },
   {
-    path: 'base-home',
-    loadChildren: () =>
-     import('./pages/base-home/base-home.module').then(
-      (m) => m.BaseHomePageModule
-    )
-  },  {
     path: 'homepage',
-    loadChildren: () => import('./pages/homepage/homepage.module').then( m => m.HomepagePageModule)
+    loadChildren: () => import('./pages/homepage/homepage.module').then(m => m.HomepagePageModule)
   },
   {
     path: 'profilo',
-    loadChildren: () => import('./pages/profilo/profilo.module').then( m => m.ProfiloPageModule)
+    loadChildren: () => import('./pages/profilo/profilo.module').then(m => m.ProfiloPageModule)
   },
   {
     path: 'cache',
-    loadChildren: () => import('./pages/cache/cache.module').then( m => m.CachePageModule)
+    loadChildren: () => import('./pages/cache/cache.module').then(m => m.CachePageModule)
   },
   {
     path: 'preferiti',
-    loadChildren: () => import('./pages/preferiti/preferiti.module').then( m => m.PreferitiPageModule)
+    loadChildren: () => import('./pages/preferiti/preferiti.module').then(m => m.PreferitiPageModule)
   },
   {
     path: 'classifica',
-    loadChildren: () => import('./pages/classifica/classifica.module').then( m => m.ClassificaPageModule)
+    loadChildren: () => import('./pages/classifica/classifica.module').then(m => m.ClassificaPageModule)
   },
 
 
@@ -57,4 +51,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
