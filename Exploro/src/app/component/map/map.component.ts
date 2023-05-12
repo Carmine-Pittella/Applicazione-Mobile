@@ -22,8 +22,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngOnInit() { }
 
   ngAfterViewInit(): void {
+
     this.getGoogleMaps().then(googleMaps => {
       const mapEl = this.mapElementRef.nativeElement;
+      this.position();
       const map = new googleMaps.Map(mapEl, {
         center: { lat:this.currentCoord.latitude, lng: this.currentCoord.longitude },
         zoom: 15
@@ -31,7 +33,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       googleMaps.event.addListenerOnce(map, 'idle', () => {
         this.reneder.addClass(mapEl, 'visible');
       });
-
+      let directionsRenderer = new googleMaps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
       //markers
       const features = this.buildFeatures(googleMaps);
       for (let i = 0; i < features.length; i++) {
@@ -62,9 +65,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           infowindow.open({
             anchor: marker, map,
           });
-          console.log("porca troia");
-          this.calculateAndDisplayRoute(map,googleMaps);
-          console.log("porca troia2");
+          this.calculateAndDisplayRoute(map,googleMaps,features[i].lat,features[i].long,directionsRenderer);
 
         });
       }
@@ -81,9 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   }
   private getGoogleMaps(): Promise<any> {
-    Geolocation.getCurrentPosition().then(position=>{
-      this.currentCoord = {latitude:position.coords.latitude,longitude:position.coords.longitude};
-    });
+    this.position();
     const win = window as any;
     const googleModule = win.google;
     if (googleModule && googleModule.maps) {
@@ -103,6 +102,11 @@ export class MapComponent implements OnInit, AfterViewInit {
           reject('Google maps SDK not available');
         }
       };
+    });
+  }
+  position(){
+    Geolocation.getCurrentPosition().then(position=>{
+      this.currentCoord = {latitude:position.coords.latitude,longitude:position.coords.longitude};
     });
   }
   buildFeatures(googleMaps: any): any[] {
@@ -137,18 +141,14 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
     return svgMarker;
   }
-  calculateAndDisplayRoute(map:any,googleMaps:any) {
-    console.log("dentro la funzione diocan");
-    let directionsRenderer = new googleMaps.DirectionsRenderer();
-    console.log("dentro la funzione diocan1");
-    directionsRenderer.setMap(map);
-    console.log("dentro la funzione diocan2");
+  calculateAndDisplayRoute(map:any,googleMaps:any,lt:number,lg:number,directionsRenderer:any):any {
+    //let directionsRenderer = new googleMaps.DirectionsRenderer();
+    //directionsRenderer.setMap(map);
     let directionsService = new googleMaps.DirectionsService();
-    console.log("dentro la funzione diocan3");
     directionsService
       .route({
-        origin: { lat: 42.351985,lng: 13.399413},
-        destination:{lat: 42.450626,lng: 13.416250},
+        origin: { lat: this.currentCoord.latitude,lng: this.currentCoord.longitude},
+        destination:{lat: lt,lng: lg},
         travelMode: googleMaps.TravelMode.DRIVING,
       })
       .then((response:any) => {
@@ -156,7 +156,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         console.log("dentro la funzione diocan4");
       })
       .catch((e:any) => window.alert("Directions request failed due to "+e ));
-
+      return directionsRenderer;
   }
 
 
