@@ -1,4 +1,4 @@
-export class Cache{
+export class Cache {
   id: number;
   nome: string;
   descrizione: string;

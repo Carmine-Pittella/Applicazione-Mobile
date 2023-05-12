@@ -1,5 +1,5 @@
-export class Sessione{
-  idUtente : number;
-  cachePrefPerID : number[];
-  listaAmiciPerID : number[];
+export class Sessione {
+  idUtente: number;
+  cachePrefPerID: number[];
+  listaAmiciPerID: number[];
 }
