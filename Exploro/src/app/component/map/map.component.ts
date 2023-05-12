@@ -31,9 +31,33 @@ export class MapComponent implements OnInit, AfterViewInit {
       googleMaps.event.addListenerOnce(map, 'idle', () => {
         this.reneder.addClass(mapEl, 'visible');
       });
+      let directionsRenderer = new googleMaps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+      let directionsService = new googleMaps.DirectionsService();
+
+
+        function calculateAndDisplayRoute() {
+          directionsService
+            .route({
+              origin: {
+                query:{ latitudine: 42.351985,longitudine: 13.399413},
+              },
+              destination: {
+                query:  {latitudine: 42.450626,longitudine: 13.416250},
+              },
+              travelMode: googleMaps.TravelMode.DRIVING,
+            })
+            .then((response:any) => {
+              directionsRenderer.setDirections(response);
+            })
+            .catch(() => window.alert("Directions request failed due to " ));
+        }
+
+
+
+
+      //markers
       const features = this.buildFeatures(googleMaps);
-
-
       for (let i = 0; i < features.length; i++) {
         const marker = new googleMaps.Marker({
           position: features[i].position,
@@ -41,8 +65,6 @@ export class MapComponent implements OnInit, AfterViewInit {
           title: "ciao",
           map: map,
         });
-
-
         const contentString =
           '<div id="content">' +
           '<div id="siteNotice">' +
@@ -51,22 +73,19 @@ export class MapComponent implements OnInit, AfterViewInit {
           '<div id="bodyContent">' +
           "<p style='color:black;'>" + features[i].descr + "</p>" +
           "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
-          "</div>" +
+          "</div>" + "<button '>Percorso</button>"
           "</div>";
         const infowindow = new googleMaps.InfoWindow({
           content: contentString,
           ariaLabel: "Uluru",
         });
-
         //marker di prova per la posizione attuale
-
         let markerPosition = new googleMaps.Marker({
           position: new googleMaps.LatLng(this.currentCoord.latitude, this.currentCoord.longitude),
           title: "position",
           map: map,
         });
         //
-
         marker.addListener("click", () => {
           map.setZoom(18);
           map.setCenter(marker.getPosition());
