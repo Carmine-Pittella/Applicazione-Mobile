@@ -11,23 +11,12 @@ import { Utils } from 'src/app/classes_&_services/Utils';
 })
 export class ProfiloPage implements OnInit {
   geocacher: Geocacher = new Geocacher();
-  nome: string
-  util: Utils
+  util: Utils = new Utils
 
   constructor(private geocacherSrv: GeocacherService, private s: SessioneService) { }
 
   ngOnInit() {
     this.geocacher = this.geocacherSrv.findGeocacherById(this.s.getIdUtente())
   }
-
-
-  formatDate(dateString: Date) {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-    return `${day}/${month}/${year}`;
-  }
-
 
 }
