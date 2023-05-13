@@ -9,25 +9,24 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
 })
 export class HomepagePage implements OnInit {
   listaCache: Cache[] = []
+  filtri: string
 
 
   constructor(private cacheSrv: CacheService) { }
 
   ngOnInit() {
     this.listaCache = this.cacheSrv.getAllCacheApprovate()
-    console.log(this.listaCache)
   }
 
-  searchBar(event: any) {
-    console.log(event)
+  Filtri(event: any) {
+    this.listaCache = this.cacheSrv.getCacheFiltered(event.target.value, 0, 0)
   }
-
 
 
 
 
   // SERVE IN UN SECONDO MOMENTO
-  // pinFormatter(value: number) {
-  //   return `${value}%`;
-  // }
+  pinFormatter(value: number) {
+    return `${value} km`;
+  }
 }

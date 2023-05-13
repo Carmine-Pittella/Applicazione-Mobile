@@ -3,7 +3,9 @@
   <ion-title>Homepage</ion-title>
 </ion-toolbar>
 
-<ion-button id="open-modal" expand="block">Open Sheet Modal</ion-button>
+<ion-button class="button-orange" id="open-modal" expand="block"
+  >Ricerca rapida</ion-button
+>
 
 <ion-modal
   #modal
@@ -14,22 +16,28 @@
   <ng-template>
     <ion-content>
       <ion-searchbar
+        style="display: inline-block"
         mode="ios"
         animated="true"
         placeholder="Cerca una cache"
         [debounce]="500"
-        (ionInput)="searchBar($event)"
+        (ionInput)="Filtri($event)"
         (click)="modal.setCurrentBreakpoint(0.75)"
       ></ion-searchbar>
-      <ion-list *ngFor="let cache of listaCache" style="padding: 2px">
-        <ion-item lines="none">
+
+      <ion-list style="padding: 2px">
+        <ion-item
+          *ngFor="let cache of listaCache"
+          lines="none"
+          (click)="modal.dismiss()"
+        >
           <ion-label>
             <h2>{{cache.nome}}</h2>
             <p>{{cache.descrizione}}</p>
             <p style="display: inline-block; margin-right: 20px">
               Difficoltà: {{cache.difficolta}}
             </p>
-            <p style="display: inline-block">Distanza: {{cache.difficolta}}</p>
+            <p style="display: inline-block">Distanza: tot KM (se possibile)</p>
           </ion-label>
         </ion-item>
       </ion-list>
