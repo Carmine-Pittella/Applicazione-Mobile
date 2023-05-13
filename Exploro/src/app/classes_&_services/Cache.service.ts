@@ -12,7 +12,7 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 1 bla bla',
       latitudine: 42.351985,
       longitudine: 13.399413,
-      difficoltà: 1,
+      difficolta: 1,
       statoApprovazione: true,
       parolaOrdine: "antani"
     },
@@ -22,7 +22,7 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 2 bla bla',
       latitudine: 42.357346,
       longitudine: 13.419150,
-      difficoltà: 2,
+      difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "antani1"
     },
@@ -32,7 +32,7 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 3 bla bla',
       latitudine: 42.350626,
       longitudine: 13.416250,
-      difficoltà: 3,
+      difficolta: 3,
       statoApprovazione: true,
       parolaOrdine: "antani2"
     },
@@ -42,7 +42,7 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 4 bla bla',
       latitudine: 42.360626,
       longitudine: 13.416750,
-      difficoltà: 1,
+      difficolta: 1,
       statoApprovazione: true,
       parolaOrdine: "antani3"
     },
@@ -52,7 +52,7 @@ export class CacheService {
       descrizione: 'Questa è la descrizione della cache numero 5 bla bla',
       latitudine: 42.450626,
       longitudine: 13.416250,
-      difficoltà: 2,
+      difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "antani4"
     }
@@ -60,6 +60,12 @@ export class CacheService {
   getAllCache(): Cache[] {
     return [...this.CacheList];
   }
+
+  getAllCacheApprovate(): Cache[] {
+    let c: Cache[] = this.CacheList.filter(c => c.statoApprovazione === true);
+    return c;
+  }
+
   findCacheById(i: number): Cache {
     let c: Cache[] = this.CacheList.filter(c => c.id === i);
     return c[0];

@@ -4,7 +4,7 @@ export class Cache {
   descrizione: string;
   latitudine: number;
   longitudine: number;
-  difficoltà: number;
+  difficolta: number;
   statoApprovazione: boolean;
   parolaOrdine: string
 }

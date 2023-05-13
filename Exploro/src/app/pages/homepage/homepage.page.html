@@ -3,9 +3,41 @@
   <ion-title>Homepage</ion-title>
 </ion-toolbar>
 
-<ion-item>
-  <ion-label position="absolute"> scrivi qualcosa </ion-label>
-</ion-item>
+<ion-button id="open-modal" expand="block">Open Sheet Modal</ion-button>
+
+<ion-modal
+  #modal
+  trigger="open-modal"
+  [initialBreakpoint]="0.50"
+  [breakpoints]="[0, 0.25, 0.5, 0.75, 1]"
+>
+  <ng-template>
+    <ion-content>
+      <ion-searchbar
+        mode="ios"
+        animated="true"
+        placeholder="Cerca una cache"
+        [debounce]="500"
+        (ionInput)="searchBar($event)"
+        (click)="modal.setCurrentBreakpoint(0.75)"
+      ></ion-searchbar>
+      <ion-list *ngFor="let cache of listaCache" style="padding: 2px">
+        <ion-item lines="none">
+          <ion-label>
+            <h2>{{cache.nome}}</h2>
+            <p>{{cache.descrizione}}</p>
+            <p style="display: inline-block; margin-right: 20px">
+              Difficoltà: {{cache.difficolta}}
+            </p>
+            <p style="display: inline-block">Distanza: {{cache.difficolta}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- ********************************************************* -->
 
 <ion-content>
   <app-map></app-map>

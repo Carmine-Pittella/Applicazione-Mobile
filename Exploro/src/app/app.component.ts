@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SessioneService } from './classes_&_services/Sessione.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private sessionSrv: SessioneService) { }
+
+  Logout() {
+    console.log("salve")
+    this.sessionSrv.setIdUtente(0)
+    this.sessionSrv.setCachePrefPerID([])
+    this.sessionSrv.setListaAmiciPerID([])
+  }
 }
