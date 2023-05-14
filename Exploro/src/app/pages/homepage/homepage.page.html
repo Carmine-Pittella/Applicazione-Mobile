@@ -3,7 +3,7 @@
   <ion-title>Homepage</ion-title>
 </ion-toolbar>
 
-<ion-button class="button-orange" id="open-modal" expand="block"
+<ion-button class="button-orange" id="open-modal" expand="block" (click)="completamentoDatiDistanze()"
   >Ricerca rapida</ion-button
 >
 
@@ -27,7 +27,7 @@
 
       <ion-list style="padding: 2px">
         <ion-item
-          *ngFor="let cache of listaCache"
+          *ngFor="let cache of listaCache;let i = index"
           lines="none"
           (click)="modal.dismiss()"
         >
@@ -37,7 +37,7 @@
             <p style="display: inline-block; margin-right: 20px">
               Difficoltà: {{cache.difficolta}}
             </p>
-            <p style="display: inline-block">Distanza: tot KM (se possibile)</p>
+            <p style="display: inline-block">Distanza: {{arrayDistanze[i]}}</p>
           </ion-label>
         </ion-item>
       </ion-list>

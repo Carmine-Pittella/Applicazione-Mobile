@@ -1,8 +1,12 @@
-import { AfterViewInit, Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Injectable, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { Admin } from 'src/app/classes_&_services/Admin';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { Geolocation } from '@capacitor/geolocation';
+import { BehaviorSubject } from 'rxjs';
+import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
+
 
 
 
@@ -15,30 +19,27 @@ import { Geolocation } from '@capacitor/geolocation';
 export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
 
-
-  constructor(private reneder: Renderer2, private cacheSrv: CacheService) { }
-  currentCoordLat = 45.0;
-  currentCoordLng = 13.0;
+  constructor(private reneder: Renderer2, private cacheSrv: CacheService,private s:SessioneService) { }
+   currentCoordLat = 45.0;
+   currentCoordLng = 13.0;
+   mappa:any;
   ngOnInit() {
-    this.position();
-    console.log("puttana la madonna");
-
-    Geolocation.getCurrentPosition().then(p => { throw p.coords.latitude }).catch(p => { console.log(p) });
   }
 
   ngAfterViewInit(): void {
-    Geolocation.getCurrentPosition().then(p => {
+    Geolocation.getCurrentPosition().then(p=>{
       this.getGoogleMaps().then(googleMaps => {
         const mapEl = this.mapElementRef.nativeElement;
         const map = new googleMaps.Map(mapEl, {
-          center: { lat: p.coords.latitude, lng: p.coords.longitude },
+          center: { lat:p.coords.latitude, lng: p.coords.longitude},
           zoom: 15
         });
-
+        this.mappa=map;
         googleMaps.event.addListenerOnce(map, 'idle', () => {
           this.reneder.addClass(mapEl, 'visible');
         });
         let directionsRenderer = new googleMaps.DirectionsRenderer();
+        this.s.setGoogle(p.coords.latitude,p.coords.longitude,map,directionsRenderer,googleMaps);
         directionsRenderer.setMap(map);
         //markers
         const features = this.buildFeatures(googleMaps);
@@ -58,7 +59,7 @@ export class MapComponent implements OnInit, AfterViewInit {
             "<p style='color:black;'>" + features[i].descr + "</p>" +
             "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
             "</div>"
-          "</div>";
+            "</div>";
           const infowindow = new googleMaps.InfoWindow({
             content: contentString,
             ariaLabel: "Uluru",
@@ -70,12 +71,12 @@ export class MapComponent implements OnInit, AfterViewInit {
             infowindow.open({
               anchor: marker, map,
             });
-            this.calculateAndDisplayRoute(map, googleMaps, features[i].lat, features[i].long, directionsRenderer);
+            this.calculateAndDisplayRoute(map,googleMaps,features[i].lat,features[i].long,directionsRenderer);
 
           });
         }
-        //marker di prova per la posizione attuale
-        let markerPosition = new googleMaps.Marker({
+         //marker  per la posizione attuale
+         let markerPosition = new googleMaps.Marker({
           position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
           title: "position",
           map: map,
@@ -88,10 +89,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
 
-  position() {
-    Geolocation.getCurrentPosition().then(position => {
-      this.currentCoordLat = position.coords.latitude;
-      this.currentCoordLng = position.coords.longitude;
+  position(){
+    Geolocation.getCurrentPosition().then(position=>{
+      this.currentCoordLat=position.coords.latitude;
+      this.currentCoordLng=position.coords.longitude;
     })
   }
   private getGoogleMaps(): Promise<any> {
@@ -150,22 +151,20 @@ export class MapComponent implements OnInit, AfterViewInit {
     }
     return svgMarker;
   }
-  calculateAndDisplayRoute(map: any, googleMaps: any, lt: number, lg: number, directionsRenderer: any): any {
-    //let directionsRenderer = new googleMaps.DirectionsRenderer();
-    //directionsRenderer.setMap(map);
+  calculateAndDisplayRoute(map:any,googleMaps:any,lt:number,lg:number,directionsRenderer:any):any {
     let directionsService = new googleMaps.DirectionsService();
     directionsService
       .route({
-        origin: { lat: this.currentCoordLat, lng: this.currentCoordLng },
-        destination: { lat: lt, lng: lg },
+        origin: { lat: this.currentCoordLat,lng: this.currentCoordLng},
+        destination:{lat: lt,lng: lg},
         travelMode: googleMaps.TravelMode.DRIVING,
       })
-      .then((response: any) => {
+      .then((response:any) => {
         directionsRenderer.setDirections(response);
-        console.log("dentro la funzione diocan4");
+        // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
       })
-      .catch((e: any) => window.alert("Directions request failed due to " + e));
-    return directionsRenderer;
+      .catch((e:any) => window.alert("Directions request failed due to "+e ));
+      return directionsRenderer;
   }
 
 
