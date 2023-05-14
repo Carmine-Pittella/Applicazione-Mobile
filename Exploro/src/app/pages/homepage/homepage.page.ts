@@ -6,6 +6,9 @@ import { MapComponent } from 'src/app/component/map/map.component';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ComponentFactoryResolver } from '@angular/core';
+import { ViewContainerRef } from '@angular/core';
+import { DataService } from 'src/app/classes_&_services/data.service';
 
 @Component({
   selector: 'app-homepage',
@@ -18,9 +21,11 @@ export class HomepagePage implements OnInit {
   arrayDistanze: string[]=[];
 
   constructor(private cacheSrv: CacheService,
-    private s:SessioneService,
     private router: Router,
-    private navController:NavController) { }
+    private navController:NavController,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private d:DataService,
+    private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
@@ -32,7 +37,7 @@ export class HomepagePage implements OnInit {
   }
   completamentoDatiDistanze(){
     for(let f=0;f<this.listaCache.length;f++){
-      this.s.calculateDistRoute(this.s.google.gmp,this.listaCache[f].latitudine,this.listaCache[f].longitudine).
+      this.d.calculateDistRoute(this.d.google.gmp,this.listaCache[f].latitudine,this.listaCache[f].longitudine).
         then((w:any)=>{
           this.arrayDistanze.push(w)});
     }
@@ -42,11 +47,11 @@ export class HomepagePage implements OnInit {
   }
   tracciaPercorso(latitude:number,longitude:number){
     console.log("sjhdbclsncdolsidc");
-    this.s.setTracciato(latitude,longitude);
+    this.d.setTracciato(latitude,longitude);
+    console.log(this.d.tracciato.lat);
+    console.log(this.d.tracciato.lng);
    // devo ricaricare il component map o l'intera pagina ma non ci riesco. BESTIAAAAAA!
   }
-
-
 
   // SERVE IN UN SECONDO MOMENTO
   pinFormatter(value: number) {
