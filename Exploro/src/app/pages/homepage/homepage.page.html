@@ -17,7 +17,6 @@
     <ion-content>
       <ion-searchbar
         style="display: inline-block"
-        mode="ios"
         animated="true"
         placeholder="Cerca una cache"
         [debounce]="500"
@@ -31,7 +30,7 @@
           lines="none"
           (click)="modal.dismiss()"
         >
-          <ion-label>
+          <ion-label (click)="tracciaPercorso(cache.latitudine,cache.longitudine)">
             <h2>{{cache.nome}}</h2>
             <p>{{cache.descrizione}}</p>
             <p style="display: inline-block; margin-right: 20px">

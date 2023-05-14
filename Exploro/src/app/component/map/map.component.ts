@@ -23,69 +23,74 @@ export class MapComponent implements OnInit, AfterViewInit {
    currentCoordLat = 45.0;
    currentCoordLng = 13.0;
    mappa:any;
+
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
-    Geolocation.getCurrentPosition().then(p=>{
-      this.getGoogleMaps().then(googleMaps => {
-        const mapEl = this.mapElementRef.nativeElement;
-        const map = new googleMaps.Map(mapEl, {
-          center: { lat:p.coords.latitude, lng: p.coords.longitude},
-          zoom: 15
-        });
-        this.mappa=map;
-        googleMaps.event.addListenerOnce(map, 'idle', () => {
-          this.reneder.addClass(mapEl, 'visible');
-        });
-        let directionsRenderer = new googleMaps.DirectionsRenderer();
-        this.s.setGoogle(p.coords.latitude,p.coords.longitude,map,directionsRenderer,googleMaps);
-        directionsRenderer.setMap(map);
-        //markers
-        const features = this.buildFeatures(googleMaps);
-        for (let i = 0; i < features.length; i++) {
-          const marker = new googleMaps.Marker({
-            position: features[i].position,
-            icon: this.buildSVGMArker(googleMaps, features[i]),
-            title: "ciao",
+      console.log("primoLogNelMapComponent");
+      Geolocation.getCurrentPosition().then(p=>{
+        this.getGoogleMaps().then(googleMaps => {
+          const mapEl = this.mapElementRef.nativeElement;
+          const map = new googleMaps.Map(mapEl, {
+            center: { lat:p.coords.latitude, lng: p.coords.longitude},
+            zoom: 15
+          });
+          this.mappa=map;
+          googleMaps.event.addListenerOnce(map, 'idle', () => {
+            this.reneder.addClass(mapEl, 'visible');
+          });
+          let directionsRenderer = new googleMaps.DirectionsRenderer();
+          this.s.setGoogle(p.coords.latitude,p.coords.longitude,map,directionsRenderer,googleMaps);
+          directionsRenderer.setMap(map);
+          //markers
+          const features = this.buildFeatures(googleMaps);
+          for (let i = 0; i < features.length; i++) {
+            const marker = new googleMaps.Marker({
+              position: features[i].position,
+              icon: this.buildSVGMArker(googleMaps, features[i]),
+              title: "ciao",
+              map: map,
+            });
+            const contentString =
+              '<div id="content">' +
+              '<div id="siteNotice">' +
+              "</div>" +
+              '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
+              '<div id="bodyContent">' +
+              "<p style='color:black;'>" + features[i].descr + "</p>" +
+              "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
+              "</div>"
+              "</div>";
+            const infowindow = new googleMaps.InfoWindow({
+              content: contentString,
+              ariaLabel: "Uluru",
+            });
+
+            marker.addListener("click", () => {
+              map.setZoom(18);
+              map.setCenter(marker.getPosition());
+              infowindow.open({
+                anchor: marker, map,
+              });
+            });
+          }
+           //marker  per la posizione attuale
+           let markerPosition = new googleMaps.Marker({
+            position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
+            title: "position",
             map: map,
           });
-          const contentString =
-            '<div id="content">' +
-            '<div id="siteNotice">' +
-            "</div>" +
-            '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
-            '<div id="bodyContent">' +
-            "<p style='color:black;'>" + features[i].descr + "</p>" +
-            "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
-            "</div>"
-            "</div>";
-          const infowindow = new googleMaps.InfoWindow({
-            content: contentString,
-            ariaLabel: "Uluru",
-          });
-
-          marker.addListener("click", () => {
-            map.setZoom(18);
-            map.setCenter(marker.getPosition());
-            infowindow.open({
-              anchor: marker, map,
-            });
-            this.calculateAndDisplayRoute(map,googleMaps,features[i].lat,features[i].long,directionsRenderer);
-
-          });
-        }
-         //marker  per la posizione attuale
-         let markerPosition = new googleMaps.Marker({
-          position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
-          title: "position",
-          map: map,
+          //
+          if(this.s.getTracciato()===undefined){}else{
+             // calcola la rotta
+          this.calculateAndDisplayRoute(map,googleMaps,this.s.tracciato.lat,this.s.tracciato.lng,directionsRenderer);
+          }
+        }).catch(err => {
+          console.log(err)
         });
-        //
-      }).catch(err => {
-        console.log(err)
       });
-    });
+
   }
 
 
@@ -166,6 +171,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       .catch((e:any) => window.alert("Directions request failed due to "+e ));
       return directionsRenderer;
   }
+
 
 
 }

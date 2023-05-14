@@ -4,6 +4,8 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { Input } from '@angular/core';
 import { MapComponent } from 'src/app/component/map/map.component';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-homepage',
@@ -15,7 +17,10 @@ export class HomepagePage implements OnInit {
   filtri: string;
   arrayDistanze: string[]=[];
 
-  constructor(private cacheSrv: CacheService,private s:SessioneService) { }
+  constructor(private cacheSrv: CacheService,
+    private s:SessioneService,
+    private router: Router,
+    private navController:NavController) { }
 
   ngOnInit() {
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
@@ -34,6 +39,11 @@ export class HomepagePage implements OnInit {
     for(let f=0;f<this.arrayDistanze.length;f++){
       console.log(this.arrayDistanze[f]);
     }
+  }
+  tracciaPercorso(latitude:number,longitude:number){
+    console.log("sjhdbclsncdolsidc");
+    this.s.setTracciato(latitude,longitude);
+   // devo ricaricare il component map o l'intera pagina ma non ci riesco. BESTIAAAAAA!
   }
 
 

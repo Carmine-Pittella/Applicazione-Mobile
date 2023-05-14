@@ -64,6 +64,19 @@ export class SessioneService {
     }
     return t;
   }
+  tracciato:any = undefined;
+  setTracciato(x:number,y:number){
+    this.tracciato ={
+      lat:x,
+      lng:y
+    };
+  }
+  delTracciato(){
+    this.tracciato= undefined;
+  }
+  getTracciato(){
+    return this.tracciato;
+  }
 
   constructor() { }
 }
