@@ -8,7 +8,7 @@ export class CacheService {
   CacheList: Cache[] = [
     {
       id: 1,
-      nome: 'cache1',
+      nome: 'cac',
       descrizione: 'Questa è la descrizione della cache numero 1 bla bla',
       latitudine: 42.351985,
       longitudine: 13.399413,
@@ -18,7 +18,7 @@ export class CacheService {
     },
     {
       id: 2,
-      nome: 'cache2',
+      nome: 'cach',
       descrizione: 'Questa è la descrizione della cache numero 2 bla bla',
       latitudine: 42.357346,
       longitudine: 13.419150,
@@ -28,7 +28,7 @@ export class CacheService {
     },
     {
       id: 3,
-      nome: 'cache3',
+      nome: 'cache',
       descrizione: 'Questa è la descrizione della cache numero 3 bla bla',
       latitudine: 42.350626,
       longitudine: 13.416250,
@@ -38,7 +38,7 @@ export class CacheService {
     },
     {
       id: 4,
-      nome: 'cache4',
+      nome: 'cache1',
       descrizione: 'Questa è la descrizione della cache numero 4 bla bla',
       latitudine: 42.360626,
       longitudine: 13.416750,
@@ -48,7 +48,7 @@ export class CacheService {
     },
     {
       id: 5,
-      nome: 'cache5',
+      nome: 'cache2',
       descrizione: 'Questa è la descrizione della cache numero 5 bla bla',
       latitudine: 42.450626,
       longitudine: 13.416250,
@@ -56,6 +56,8 @@ export class CacheService {
       statoApprovazione: true,
       parolaOrdine: "antani4"
     }
+
+
   ];
   getAllCache(): Cache[] {
     return [...this.CacheList];
@@ -72,14 +74,17 @@ export class CacheService {
   }
 
   getCacheFiltered(Fnome: string, Fdifficolta: number, Fdistanza: number): Cache[] {
-    return this.CacheList.filter(cache =>
-      cache.statoApprovazione === true &&
-      (Fnome === "" || cache.nome.toLowerCase().includes(Fnome.toLowerCase())) &&
-      (Fdifficolta === 0 || cache.difficolta === Fdifficolta) &&
-      (Fdistanza === 0 || this.CalcolaDistanza(cache.latitudine, cache.longitudine, "miaPosizione") <= Fdistanza)
-    );
+    let cacheFiltrate: Cache[] = []
+    for (let cache of this.CacheList) {
+      if (cache.statoApprovazione === true &&
+        (Fnome === "" || cache.nome.toLowerCase().includes(Fnome.toLowerCase())) &&
+        (Fdifficolta === 0 || cache.difficolta === Fdifficolta) &&
+        (Fdistanza === 0 || this.CalcolaDistanza(cache.latitudine, cache.longitudine, "miaPosizione") <= Fdistanza)) {
+        cacheFiltrate.push(cache)
+      }
+    }
+    return cacheFiltrate
   }
-
 
 
   private CalcolaDistanza(lat: number, long: number, miaPosizione: any): number {
