@@ -17,52 +17,107 @@
       </ion-card-header>
 
       <ion-card-content>
-        <form #registrazioneForm="ngForm" (ngSubmit)="Conferma()">
-          <!-- nel metodo Conferma() ci va passato qualcosa -->
+        <form
+          #registrazioneForm="ngForm"
+          (ngSubmit)="Conferma(registrazioneForm)"
+        >
           <ion-list>
             <ion-item>
               <ion-label position="floating">Nome</ion-label>
-              <ion-input name="nome" type="text" required></ion-input>
+              <ion-input
+                name="nome"
+                type="text"
+                required
+                [(ngModel)]="formValue.nome"
+              ></ion-input>
             </ion-item>
+
             <ion-item>
               <ion-label position="floating">Cognome</ion-label>
-              <ion-input name="cognome" type="text" required></ion-input>
+              <ion-input
+                name="cognome"
+                type="text"
+                required
+                [(ngModel)]="formValue.cognome"
+              ></ion-input>
             </ion-item>
+
             <ion-item>
-              <ion-input name="dataDiNascita" type="date" required></ion-input>
+              <ion-input
+                name="dataDiNascita"
+                type="date"
+                required
+                [(ngModel)]="formValue.dataDiNascita"
+              ></ion-input>
             </ion-item>
+
             <ion-item>
               <ion-label position="floating">Numero di cellulare</ion-label>
               <ion-input
-                name="numeroDiCellulare"
+                name="cellulare"
                 type="tel"
                 required
+                [(ngModel)]="formValue.cellulare"
               ></ion-input>
             </ion-item>
+
             <ion-item>
               <ion-label position="floating">E-mail</ion-label>
-              <ion-input name="email" type="email" required></ion-input>
+              <ion-input
+                name="mail"
+                type="text"
+                required
+                [(ngModel)]="formValue.mail"
+              ></ion-input>
             </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Username</ion-label>
+              <ion-input
+                name="username"
+                type="text"
+                required
+                [(ngModel)]="formValue.username"
+              ></ion-input>
+            </ion-item>
+
             <ion-item>
               <ion-label position="floating">Password</ion-label>
-              <ion-input name="password" type="password" required></ion-input>
+              <ion-input
+                name="password"
+                type="password"
+                required
+                [(ngModel)]="formValue.password"
+              ></ion-input>
             </ion-item>
+
             <ion-item>
               <ion-label position="floating">Conferma Password</ion-label>
               <ion-input
                 name="confermaPassword"
                 type="password"
+                [(ngModel)]="formValue.confermaPassword"
                 required
               ></ion-input>
             </ion-item>
           </ion-list>
 
-          <ion-button class="button-orange" expand="block" type="submit"
+          <ion-button
+            class="button-orange"
+            expand="block"
+            type="submit"
+            [disabled]="!registrazioneForm.valid"
             >Registrati</ion-button
           >
         </form>
-        <!-- queste classi che vedi nei bottoni stanno in global.scss -->
       </ion-card-content>
     </ion-card>
   </div>
+  <ion-alert
+    trigger="present-alert"
+    header="{{headerAlert}}"
+    message="{{messageAlert}}"
+    [buttons]="alertButtons"
+    isOpen="{{isAlertOpen}}"
+  ></ion-alert>
 </ion-content>

@@ -62,6 +62,11 @@ export class GeocacherService {
     return [...g.cachePref];
   };
 
+  findUtenteByUsr(username: string): Geocacher {
+    let g: Geocacher[] = this.utentiList.filter(u => u.username === username);
+    return g[0];
+  };
+
   findAmiciListByIdUtente(i: number): number[] {
     let g: Geocacher = this.findGeocacherById(i);
     return [...g.amiciList];
@@ -87,7 +92,6 @@ export class GeocacherService {
       arrU = arrU.filter(a => a.id !== u.id);
     }
     return [...arrU];
-
   }
 
   findUtenteByExpTot(n: number): Geocacher {
@@ -96,8 +100,6 @@ export class GeocacherService {
   }
 
   updateGeocacherByIdUtente(idUtente: number, nuoviDati: Geocacher) {
-    console.log(idUtente)
-    console.log(nuoviDati)
     this.utentiList[idUtente].nome = nuoviDati.nome;
     this.utentiList[idUtente].cognome = nuoviDati.cognome;
     this.utentiList[idUtente].username = nuoviDati.username;
@@ -110,6 +112,15 @@ export class GeocacherService {
   }
 
   getAllGeocacher(): Geocacher[] {
-    return this.utentiList
+    return [...this.utentiList]
+  }
+
+  addGeocacher(utente: Geocacher) {
+    utente.id = this.utentiList.length + 1
+    utente.livello = 0
+    utente.puntiExp = 0
+    utente.amiciList = []
+    utente.cachePref = []
+    this.utentiList.push(utente)
   }
 }

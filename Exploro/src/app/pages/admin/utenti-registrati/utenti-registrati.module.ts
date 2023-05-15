@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { UtentiRegistratiPageRoutingModule } from './utenti-registrati-routing.module';
 
 import { UtentiRegistratiPage } from './utenti-registrati.page';
-import { SchedautenteComponent } from 'src/app/component/schedautente/schedautente.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { SchedautenteComponent } from 'src/app/component/schedautente/schedauten
     IonicModule,
     UtentiRegistratiPageRoutingModule
   ],
-  declarations: [UtentiRegistratiPage, SchedautenteComponent]
+  declarations: [UtentiRegistratiPage]
 })
 export class UtentiRegistratiPageModule { }

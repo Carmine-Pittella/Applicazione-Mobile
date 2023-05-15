@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     component: UtentiRegistratiPage
   },
+  {
+    path: 'scheda-utente',
+    loadChildren: () => import('./scheda-utente/scheda-utente.module').then( m => m.SchedaUtentePageModule)
+  },
 ];
 
 @NgModule({
