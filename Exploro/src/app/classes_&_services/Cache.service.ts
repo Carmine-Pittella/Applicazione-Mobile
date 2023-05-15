@@ -72,17 +72,14 @@ export class CacheService {
   }
 
   getCacheFiltered(Fnome: string, Fdifficolta: number, Fdistanza: number): Cache[] {
-    let cacheFiltrate: Cache[] = []
-    for (let cache of this.CacheList) {
-      if (cache.statoApprovazione === true &&
-        (Fnome === "" || cache.nome.toLowerCase().includes(Fnome.toLowerCase())) &&
-        (Fdifficolta === 0 || cache.difficolta === Fdifficolta) &&
-        (Fdistanza === 0 || this.CalcolaDistanza(cache.latitudine, cache.longitudine, "miaPosizione") <= Fdistanza)) {
-        cacheFiltrate.push(cache)
-      }
-    }
-    return cacheFiltrate
+    return this.CacheList.filter(cache =>
+      cache.statoApprovazione === true &&
+      (Fnome === "" || cache.nome.toLowerCase().includes(Fnome.toLowerCase())) &&
+      (Fdifficolta === 0 || cache.difficolta === Fdifficolta) &&
+      (Fdistanza === 0 || this.CalcolaDistanza(cache.latitudine, cache.longitudine, "miaPosizione") <= Fdistanza)
+    );
   }
+
 
 
   private CalcolaDistanza(lat: number, long: number, miaPosizione: any): number {

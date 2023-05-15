@@ -11,7 +11,6 @@ export class HomepagePage implements OnInit {
   listaCache: Cache[] = []
   filtri: string
 
-
   constructor(private cacheSrv: CacheService) { }
 
   ngOnInit() {
@@ -20,13 +19,5 @@ export class HomepagePage implements OnInit {
 
   Filtri(event: any) {
     this.listaCache = this.cacheSrv.getCacheFiltered(event.target.value, 0, 0)
-  }
-
-
-
-
-  // SERVE IN UN SECONDO MOMENTO
-  pinFormatter(value: number) {
-    return `${value} km`;
   }
 }
