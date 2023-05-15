@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { HomepagePageRoutingModule } from './homepage-routing.module';
 
 import { HomepagePage } from './homepage.page';
-import { MapComponent } from '../../component/map/map.component';
 
 @NgModule({
   imports: [
@@ -16,6 +15,6 @@ import { MapComponent } from '../../component/map/map.component';
     IonicModule,
     HomepagePageRoutingModule
   ],
-  declarations: [HomepagePage, MapComponent]
+  declarations: [HomepagePage]
 })
 export class HomepagePageModule { }

@@ -30,7 +30,7 @@
           lines="none"
           (click)="modal.dismiss()"
         >
-          <ion-label (click)="tracciaPercorso(cache.latitudine,cache.longitudine)">
+          <ion-label (click)="calculateAndDisplayRoute(cache.latitudine,cache.longitudine)">
             <h2>{{cache.nome}}</h2>
             <p>{{cache.descrizione}}</p>
             <p style="display: inline-block; margin-right: 20px">
@@ -47,5 +47,6 @@
 <!-- ********************************************************* -->
 
 <ion-content>
-    <app-map></app-map>
+  <div class="map" #map>
+  </div>
 </ion-content>
