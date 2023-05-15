@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'amici',
     loadChildren: () => import('./pages/amici/amici.module').then( m => m.AmiciPageModule)
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
 
 
 

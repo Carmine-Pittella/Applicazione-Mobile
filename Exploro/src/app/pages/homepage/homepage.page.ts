@@ -18,13 +18,13 @@ import { DataService } from 'src/app/classes_&_services/data.service';
 export class HomepagePage implements OnInit {
   listaCache: Cache[] = [];
   filtri: string;
-  arrayDistanze: string[]=[];
+  arrayDistanze: string[] = [];
 
   constructor(private cacheSrv: CacheService,
     private router: Router,
-    private navController:NavController,
+    private navController: NavController,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private d:DataService,
+    private d: DataService,
     private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit() {
@@ -35,22 +35,23 @@ export class HomepagePage implements OnInit {
   Filtri(event: any) {
     this.listaCache = this.cacheSrv.getCacheFiltered(event.target.value, 0, 0)
   }
-  completamentoDatiDistanze(){
-    for(let f=0;f<this.listaCache.length;f++){
-      this.d.calculateDistRoute(this.d.google.gmp,this.listaCache[f].latitudine,this.listaCache[f].longitudine).
-        then((w:any)=>{
-          this.arrayDistanze.push(w)});
+  completamentoDatiDistanze() {
+    for (let f = 0; f < this.listaCache.length; f++) {
+      this.d.calculateDistRoute(this.d.google.gmp, this.listaCache[f].latitudine, this.listaCache[f].longitudine).
+        then((w: any) => {
+          this.arrayDistanze.push(w)
+        });
     }
-    for(let f=0;f<this.arrayDistanze.length;f++){
+    for (let f = 0; f < this.arrayDistanze.length; f++) {
       console.log(this.arrayDistanze[f]);
     }
   }
-  tracciaPercorso(latitude:number,longitude:number){
+  tracciaPercorso(latitude: number, longitude: number) {
     console.log("sjhdbclsncdolsidc");
-    this.d.setTracciato(latitude,longitude);
+    this.d.setTracciato(latitude, longitude);
     console.log(this.d.tracciato.lat);
     console.log(this.d.tracciato.lng);
-   // devo ricaricare il component map o l'intera pagina ma non ci riesco. BESTIAAAAAA!
+    // devo ricaricare il component map o l'intera pagina ma non ci riesco. BESTIAAAAAA!
   }
 
   // SERVE IN UN SECONDO MOMENTO

@@ -31,14 +31,15 @@ export class LoginPage implements OnInit {
         this.labelErrore = "Username o password errati !"
       } else {
         this.s.setIdUtente(this.adminSrv.findAdminByUsrPsw(this.username, this.password).id);
-        this.router.navigate(['/homepage']);
+        this.labelErrore = ""
+        this.router.navigate(['/admin']);
       }
     } else {
-      this.labelErrore = "Username o password errati !"
       g = this.geocacherSrv.findUtenteByUsrPsw(this.username, this.password);
       this.s.setIdUtente(g.id);
       this.s.setListaAmiciPerID(g.amiciList);
       this.s.setCachePrefPerID(g.cachePref);
+      this.labelErrore = ""
       this.router.navigate(['/homepage']);
     }
   }

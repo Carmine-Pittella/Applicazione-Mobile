@@ -10,7 +10,6 @@ export class AppComponent {
   constructor(private sessionSrv: SessioneService) { }
 
   Logout() {
-    console.log("salve")
     this.sessionSrv.setIdUtente(0)
     this.sessionSrv.setCachePrefPerID([])
     this.sessionSrv.setListaAmiciPerID([])

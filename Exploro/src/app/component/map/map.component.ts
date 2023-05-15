@@ -19,87 +19,87 @@ import { Observable } from 'rxjs';
 export class MapComponent implements OnInit, AfterViewInit {
   @ViewChild('map') mapElementRef: ElementRef;
 
-  constructor(private reneder: Renderer2, private cacheSrv: CacheService,private d:DataService) { }
+  constructor(private reneder: Renderer2, private cacheSrv: CacheService, private d: DataService) { }
 
-  mappa:any;
-  dirRender:any
+  mappa: any;
+  dirRender: any
 
   ngOnInit() {
   }
 
   ngAfterViewInit(): void {
-      Geolocation.getCurrentPosition().then(p=>{
-        this.getGoogleMaps().then(googleMaps => {
-          const mapEl = this.mapElementRef.nativeElement;
-          const map = new googleMaps.Map(mapEl, {
-            center: { lat:p.coords.latitude, lng: p.coords.longitude},
-            zoom: 15
-          });
-          this.mappa=new Observable((subscribe)=>{
-            subscribe.next(map);
-          });
-          console.log("primaObs");
-          console.log(this.mappa);
-          console.log("dopoObs");
-          googleMaps.event.addListenerOnce(map, 'idle', () => {
-            this.reneder.addClass(mapEl, 'visible');
-          });
+    Geolocation.getCurrentPosition().then(p => {
+      this.getGoogleMaps().then(googleMaps => {
+        const mapEl = this.mapElementRef.nativeElement;
+        const map = new googleMaps.Map(mapEl, {
+          center: { lat: p.coords.latitude, lng: p.coords.longitude },
+          zoom: 15
+        });
+        this.mappa = new Observable((subscribe) => {
+          subscribe.next(map);
+        });
+        console.log("primaObs");
+        console.log(this.mappa);
+        console.log("dopoObs");
+        googleMaps.event.addListenerOnce(map, 'idle', () => {
+          this.reneder.addClass(mapEl, 'visible');
+        });
 
 
-          let directionsRenderer = new googleMaps.DirectionsRenderer();
-          this.d.setGoogle(p.coords.latitude,p.coords.longitude,map,directionsRenderer,googleMaps);
-          directionsRenderer.setMap(map);
-          if(this.d.tracciato===undefined){
-          }else{
-            directionsRenderer=
-              this.calculateAndDisplayRoute(googleMaps,this.d.tracciato.lat,this.d.tracciato.lng,directionsRenderer,p.coords.latitude,p.coords.longitude);
-              console.log(directionsRenderer);
-          }
+        let directionsRenderer = new googleMaps.DirectionsRenderer();
+        this.d.setGoogle(p.coords.latitude, p.coords.longitude, map, directionsRenderer, googleMaps);
+        directionsRenderer.setMap(map);
+        if (this.d.tracciato === undefined) {
+        } else {
+          directionsRenderer =
+            this.calculateAndDisplayRoute(googleMaps, this.d.tracciato.lat, this.d.tracciato.lng, directionsRenderer, p.coords.latitude, p.coords.longitude);
+          console.log(directionsRenderer);
+        }
 
-          //markers
-          const features = this.buildFeatures(googleMaps);
-          for (let i = 0; i < features.length; i++) {
-            const marker = new googleMaps.Marker({
-              position: features[i].position,
-              icon: this.buildSVGMArker(googleMaps, features[i]),
-              title: "ciao",
-              map: map,
-            });
-            const contentString =
-              '<div id="content">' +
-              '<div id="siteNotice">' +
-              "</div>" +
-              '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
-              '<div id="bodyContent">' +
-              "<p style='color:black;'>" + features[i].descr + "</p>" +
-              "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
-              "</div>"
-              "</div>";
-            const infowindow = new googleMaps.InfoWindow({
-              content: contentString,
-              ariaLabel: "Uluru",
-            });
-
-            marker.addListener("click", () => {
-              map.setZoom(18);
-              map.setCenter(marker.getPosition());
-              infowindow.open({
-                anchor: marker, map,
-              });
-            });
-          }
-           //marker  per la posizione attuale
-           let markerPosition = new googleMaps.Marker({
-            position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
-            title: "position",
+        //markers
+        const features = this.buildFeatures(googleMaps);
+        for (let i = 0; i < features.length; i++) {
+          const marker = new googleMaps.Marker({
+            position: features[i].position,
+            icon: this.buildSVGMArker(googleMaps, features[i]),
+            title: "ciao",
             map: map,
           });
-          //
+          const contentString =
+            '<div id="content">' +
+            '<div id="siteNotice">' +
+            "</div>" +
+            '<h1 style="color:black;" id="firstHeading" class="firstHeading">' + features[i].nome + "</h1>" +
+            '<div id="bodyContent">' +
+            "<p style='color:black;'>" + features[i].descr + "</p>" +
+            "<p style='color:black;'>" + features[i].lat + "," + features[i].long + "</p>" +
+            "</div>"
+          "</div>";
+          const infowindow = new googleMaps.InfoWindow({
+            content: contentString,
+            ariaLabel: "Uluru",
+          });
 
-        }).catch(err => {
-          console.log(err)
+          marker.addListener("click", () => {
+            map.setZoom(18);
+            map.setCenter(marker.getPosition());
+            infowindow.open({
+              anchor: marker, map,
+            });
+          });
+        }
+        //marker  per la posizione attuale
+        let markerPosition = new googleMaps.Marker({
+          position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
+          title: "position",
+          map: map,
         });
+        //
+
+      }).catch(err => {
+        console.log(err)
       });
+    });
 
   }
 
@@ -160,29 +160,29 @@ export class MapComponent implements OnInit, AfterViewInit {
     return svgMarker;
   }
   calculateAndDisplayRoute(
-    googleMaps:any,
-    lt:number,
-    lg:number,
-    directionsRenderer:any,
-    partenzaL:number,
-    partenzaLg:number
-    ):any {
+    googleMaps: any,
+    lt: number,
+    lg: number,
+    directionsRenderer: any,
+    partenzaL: number,
+    partenzaLg: number
+  ): any {
     let directionsService = new googleMaps.DirectionsService();
-    let antani=undefined;
+    let antani = undefined;
 
     directionsService
       .route({
-        origin: { lat: partenzaL,lng: partenzaLg},
-        destination:{lat: lt,lng: lg},
+        origin: { lat: partenzaL, lng: partenzaLg },
+        destination: { lat: lt, lng: lg },
         travelMode: googleMaps.TravelMode.DRIVING,
       })
-      .then((response:any) => {
+      .then((response: any) => {
         directionsRenderer.setDirections(response);
-        antani=response;
+        antani = response;
         // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
       })
-      .catch((e:any) => window.alert("Directions request failed due to"+e ));
-      return directionsRenderer;
+      .catch((e: any) => window.alert("Directions request failed due to" + e));
+    return directionsRenderer;
   }
 
 

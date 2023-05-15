@@ -50,6 +50,8 @@ export class GeocacherService {
     },
   ];
 
+  constructor() { }
+
   findGeocacherById(i: number): Geocacher {
     let g: Geocacher[] = this.utentiList.filter(u => u.id === i);
     return g[0];
@@ -106,5 +108,8 @@ export class GeocacherService {
     // ovviamente ho dovuto fare uno ad uno perché altre variabili come livello, xp, lista ecc
     // sono tutti NULL nell'oggetto nuoviDati. non essendo modificabili dalla pagina.
   }
-  constructor() { }
+
+  getAllGeocacher(): Geocacher[] {
+    return this.utentiList
+  }
 }
