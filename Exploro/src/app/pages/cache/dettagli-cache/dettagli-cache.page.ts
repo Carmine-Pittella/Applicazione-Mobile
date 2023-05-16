@@ -18,6 +18,7 @@ export class DettagliCachePage implements OnInit {
   public alertButtons = ['OK'];
   headerAlert: string
   messageAlert: string
+  selezionato: boolean
 
   constructor(private router: Router, private cacheService: CacheService, private sessioneService: SessioneService, private utenteService: GeocacherService, private alertController: AlertController) { }
 
@@ -45,7 +46,8 @@ export class DettagliCachePage implements OnInit {
       buttons: [
         {
           text: 'Annulla',
-          role: 'cancel'
+          role: 'cancel',
+          handler: (data) => { this.selezionato = false }
         },
         {
           text: 'OK',
@@ -54,12 +56,17 @@ export class DettagliCachePage implements OnInit {
               this.headerAlert = "Parola d`ordine sbagliata"
               this.messageAlert = "la parola d`ordine inserita non corrisponde"
               this.isAlertOpen = true
+              this.selezionato = false
               return
             }
-            else { this.setCacheTrovata() }
+            else {
+              this.setCacheTrovata()
+              return
+            }
           }
         }
-      ]
+      ],
+      backdropDismiss: false // Per impedire la chiusura dell'alert facendo clic sullo sfondo
     });
     await alert.present();
     this.isAlertOpen = false
@@ -67,7 +74,9 @@ export class DettagliCachePage implements OnInit {
 
 
   setCacheTrovata() {
-    // this.utenteService.addCacheTrovata(this.sessioneService.getIdUtente(), )
+    this.utenteService.addCacheTrovata(this.sessioneService.getIdUtente(), this.cache.id)
+    this.selezionato = true
+    this.cacheTrovata = !this.cacheTrovata
   }
 
 }
