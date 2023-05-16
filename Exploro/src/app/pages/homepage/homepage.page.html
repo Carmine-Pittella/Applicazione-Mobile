@@ -3,11 +3,51 @@
   <ion-title>Homepage</ion-title>
 </ion-toolbar>
 
-<div style="width: 100%">
-  <div style="width: 100%; display: flex;flex-direction: row;justify-content: space-around;">
-    <ion-button class="button-orange" style="width: 49%;" id="open-modal"  (click)="completamentoDatiDistanze()"
-    >Ricerca rapida</ion-button>
-    <ion-button style="width: 49%;" id="buttonFilterSelector" (click)="displayCheckBox()">
+<div style="display: flex; align-items: center">
+  <ion-button
+    class="button-orange"
+    style="width: 49%"
+    id="open-modal"
+    (click)="completamentoDatiDistanze()"
+  >
+    Ricerca rapida
+  </ion-button>
+
+  <ion-button style="flex: 1 0 13%" id="apri-filtri"
+    >Filtri
+    <ion-icon name="options" style="margin-left: 5px"></ion-icon>
+    <ion-popover trigger="apri-filtri" triggerAction="click">
+      <ng-template>
+        <ion-list>
+          <ion-item>
+            <ion-label>Tutte le Cache</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 1)"
+              [checked]="difficoltaSelezionata === 1"
+            ></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Solo Cache trovate</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 2)"
+              [checked]="difficoltaSelezionata === 2"
+            ></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Solo Cache non trovate</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 3)"
+              [checked]="difficoltaSelezionata === 3"
+            ></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+  </ion-button>
+
+  <!-- <ion-button style="width: 49%;" id="buttonFilterSelector" (click)="displayCheckBox()">
       Filtro: tutte le cache
     </ion-button>
   </div>
@@ -20,10 +60,8 @@
     <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;"
       (click)="checkSelezionato(2)" id="filterCheckBox2">solo cache trovate</ion-checkbox>
     <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;"
-      (click)="checkSelezionato(3)" id="filterCheckBox3">solo cache non trovate</ion-checkbox>
-  </div>
+      (click)="checkSelezionato(3)" id="filterCheckBox3">solo cache non trovate</ion-checkbox> -->
 </div>
-
 
 <ion-modal
   #modal
@@ -48,7 +86,9 @@
           lines="none"
           (click)="modal.dismiss()"
         >
-          <ion-label (click)="calculateAndDisplayRoute(cache.latitudine,cache.longitudine)">
+          <ion-label
+            (click)="calculateAndDisplayRoute(cache.latitudine,cache.longitudine)"
+          >
             <h2>{{cache.nome}}</h2>
             <p>{{cache.descrizione}}</p>
             <p style="display: inline-block; margin-right: 20px">
@@ -65,6 +105,5 @@
 <!-- ********************************************************* -->
 
 <ion-content>
-  <div class="map" #map>
-  </div>
+  <div class="map" #map></div>
 </ion-content>
