@@ -36,6 +36,7 @@ export class CachePage implements OnInit {
   }
 
   onCheckboxChange(event: any, valore: number) {
+    console.log("cache")
     if (event.detail.checked) {
       this.difficoltaSelezionata = valore;
     } else {

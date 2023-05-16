@@ -282,6 +282,7 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   }
   // Selezione Checkbox
   onCheckboxChange(event: any, valore: number) {
+    console.log("homepage")
     if (event.detail.checked) {
       this.difficoltaSelezionata = valore;
     } else {
