@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
@@ -13,23 +14,64 @@ import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 export class DettagliCachePage implements OnInit {
   cache: Cache = new Cache
   cacheTrovata: boolean = true
+  isAlertOpen = false;
+  public alertButtons = ['OK'];
+  headerAlert: string
+  messageAlert: string
 
-
-  constructor(private router: Router, private cacheService: CacheService, private sessioneService: SessioneService, private utenteService: GeocacherService) { }
+  constructor(private router: Router, private cacheService: CacheService, private sessioneService: SessioneService, private utenteService: GeocacherService, private alertController: AlertController) { }
 
   ngOnInit() {
     let idCache = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idCache'])
     this.cache = this.cacheService.findCacheById(idCache)
 
     if (this.utenteService.findGeocacherById(this.sessioneService.getIdUtente()).cacheTrovate.includes(this.cache.id)) {
-      console.log("si")
       this.cacheTrovata = true
     } else {
-      console.log("no")
       this.cacheTrovata = false
     }
+  }
 
-    // if()
+  async VerificaParolaOrdine() {
+    const alert = await this.alertController.create({
+      header: 'Inserisci la parola d`ordine per continuare:',
+      inputs: [
+        {
+          name: 'parolaOrdine',
+          type: 'text',
+          placeholder: 'Parola d`ordine:'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annulla',
+          role: 'cancel'
+        },
+        {
+          text: 'OK',
+          handler: (data) => {
+            if (data.parolaOrdine != this.cache.parolaOrdine) {
+              this.headerAlert = "Parola d`ordine sbagliata"
+              this.messageAlert = "la parola d`ordine inserita non corrisponde"
+              this.isAlertOpen = true
+              return
+            }
+            else { this.setCacheTrovata() }
+          }
+        }
+      ]
+    });
+    await alert.present();
+    this.isAlertOpen = false
+  }
+
+
+  setCacheTrovata() {
+    // this.utenteService.addCacheTrovata(this.sessioneService.getIdUtente(), )
   }
 
 }
+
+
+
+

@@ -123,4 +123,9 @@ export class GeocacherService {
     utente.cacheTrovate = []
     this.utentiList.push(utente)
   }
+
+  addCacheTrovata(idUtente: number, idCache: number) {
+    let g = this.utentiList.filter(u => u.id === idUtente)
+    g[0].cacheTrovate.push(idCache)
+  }
 }
