@@ -7,17 +7,20 @@
   <div style="width: 100%; display: flex;flex-direction: row;justify-content: space-around;">
     <ion-button class="button-orange" style="width: 49%;" id="open-modal"  (click)="completamentoDatiDistanze()"
     >Ricerca rapida</ion-button>
-    <ion-button style="width: 49%;" (click)="displayCheckBox()">
-      Filtro
+    <ion-button style="width: 49%;" id="buttonFilterSelector" (click)="displayCheckBox()">
+      Filtro: tutte le cache
     </ion-button>
   </div>
   <div style="position: absolute;background-color:#2f2f2f;width: 50%;height: 11%;
-              display: flex;flex-direction: column; left: 50%;z-index: 3; align-items:start;
-              border-bottom-left-radius: 20px;"
+              display: none;flex-direction: column; left: 50%;z-index: 3; align-items:start;
+              border-bottom-left-radius: 20px; "
               id ="divCheckBox">
-    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;">tutte le cache</ion-checkbox>
-    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;" >solo cache trovate</ion-checkbox>
-    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;">solo cache non trovate</ion-checkbox>
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;"
+      (click)="checkSelezionato(1)" id="filterCheckBox1">tutte le cache</ion-checkbox>
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;"
+      (click)="checkSelezionato(2)" id="filterCheckBox2">solo cache trovate</ion-checkbox>
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;"
+      (click)="checkSelezionato(3)" id="filterCheckBox3">solo cache non trovate</ion-checkbox>
   </div>
 </div>
 

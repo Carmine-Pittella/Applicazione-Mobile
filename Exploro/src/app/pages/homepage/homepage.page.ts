@@ -258,7 +258,33 @@ calculateAndDisplayRoute(lt: number,lg: number) {
   }
 
   displayCheckBox(){
+    let r:any = document.getElementById("divCheckBox");
+    r.style.display="flex";
+    let w1:any = document.getElementById("filterCheckBox1");
+    let w2:any = document.getElementById("filterCheckBox2");
+    let w3:any = document.getElementById("filterCheckBox3");
+    w1.checked="false";  w2.checked="false";  w3.checked="false";
 
+  }
+  checkSelezionato(check : number){
+    if(check===1){
+      let d:any = document.getElementById("divCheckBox");
+      d.style.display="none";
+      let r:any = document.getElementById("buttonFilterSelector");
+      r.innerHTML= "Filtro: tutte le cache";
+    }
+    if(check===2){
+      let d:any = document.getElementById("divCheckBox");
+      d.style.display="none";
+      let r:any = document.getElementById("buttonFilterSelector");
+      r.innerHTML= "Filtro: solo cache trovate";
+    }
+    if(check===3){
+      let d:any = document.getElementById("divCheckBox");
+      d.style.display="none";
+      let r:any = document.getElementById("buttonFilterSelector");
+      r.innerHTML= "Filtro: solo cache non trovate";
+    }
   }
   completamentoDatiDistanze() {
     for (let f = 0; f < this.listaCache.length; f++) {
