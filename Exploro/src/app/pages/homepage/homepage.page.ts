@@ -209,7 +209,7 @@ calculateAndDisplayRoute(lt: number,lg: number) {
               arrC.push(this.cacheSrv.findCacheById(arrIdCache[y]));
             }
             this.listaCache=[...arrC];
-          }else{
+          }if(lt===-10002){
             this.listaCache=
             this.geocacherSrv.findAllCacheNonTrovateByIDUtente(this.sessioneSrv.s.idUtente,this.cacheSrv.getAllCacheApprovate())
           }
