@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geocacher } from './Geocacher';
+import { CacheService } from './Cache.service';
+import { Cache } from './Cache';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class GeocacherService {
       livello: 9,
       puntiExp: 48,
       amiciList: [],
-      cacheTrovate: [2, 3]
+      cacheTrovate: [1,2,4,5]
     },
     {
       id: 2,
@@ -50,7 +52,7 @@ export class GeocacherService {
     },
   ];
 
-  constructor() { }
+  constructor(private cS : CacheService) { }
 
   findGeocacherById(i: number): Geocacher {
     let g: Geocacher[] = this.utentiList.filter(u => u.id === i);
@@ -127,5 +129,22 @@ export class GeocacherService {
   addCacheTrovata(idUtente: number, idCache: number) {
     let g = this.utentiList.filter(u => u.id === idUtente)
     g[0].cacheTrovate.push(idCache)
+  }
+
+  findAllCacheNonTrovateByIDUtente(idU:number,AllCache:Cache[]):Cache[]{
+    let alC:number[]=[];
+    let ret:Cache[]=[];
+    for(let ct=0;ct<AllCache.length;ct++){
+      alC.push(this.cS.findIdByCache(AllCache[ct]));
+    }
+    let g:Geocacher= this.findGeocacherById(idU);
+    let toRemove = [...g.cacheTrovate];
+    let toRetN = alC.filter(function(el) {
+       return !toRemove.includes(el);
+    });
+    for(let fr=0;fr<toRetN.length;fr++){
+      ret.push(this.cS.findCacheById(toRetN[fr]));
+    }
+    return[...ret];
   }
 }

@@ -7,6 +7,8 @@ import { DataService } from 'src/app/classes_&_services/data.service';
 import { Renderer2 } from '@angular/core';
 import { BehaviorSubject, Observable, filter } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
+import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 
 @Component({
   selector: 'app-homepage',
@@ -27,6 +29,8 @@ export class HomepagePage implements OnInit, AfterViewInit,OnDestroy {
   constructor(private cacheSrv: CacheService,
     private d: DataService,
     private reneder: Renderer2, //MAP
+    private geocacherSrv : GeocacherService, //MAP
+    private sessioneSrv : SessioneService //MAP
     ) { }
 
   ngOnInit() {
@@ -127,7 +131,7 @@ private getGoogleMaps(): Promise<any> {
 }
 
 buildFeatures(googleMaps: any): any[] {
-  let arr: Cache[] = this.cacheSrv.getAllCache();
+  let arr: Cache[] = this.listaCache;
   let arr2: any[] = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].statoApprovazione) {
@@ -165,7 +169,10 @@ ngOnDestroy(): void {
     }
 }
 
-
+// utilizzato sia per tracciare la rotta sia per aggiornare i marker in base ai filtri
+// tutte le cache lt = -10000
+// solo cache trovate = -10001
+//solo cache non trovate = -10002
 calculateAndDisplayRoute(lt: number,lg: number) {
   Geolocation.getCurrentPosition().then(p => {
     this.getGoogleMaps().then(googleMaps => {
@@ -177,6 +184,7 @@ calculateAndDisplayRoute(lt: number,lg: number) {
       if(this.sub){
         this.sub.unsubscribe();
       }
+
       this.mappa =  new BehaviorSubject<any>([]);
       this.mappa.next(map);
       this.mappa.pipe().subscribe( (u:any) =>{
@@ -185,21 +193,41 @@ calculateAndDisplayRoute(lt: number,lg: number) {
         });
         let directionsRenderer = new googleMaps.DirectionsRenderer();
         directionsRenderer.setMap(u);
-        let directionsService = new googleMaps.DirectionsService();
-        console.log("eskere1")
-        directionsService
-        .route({
-          origin: { lat:  p.coords.latitude, lng:  p.coords.longitude},
-          destination: { lat: lt, lng: lg },
-          travelMode: googleMaps.TravelMode.DRIVING,
-        })
-        .then((response: any) => {
-          directionsRenderer.setDirections(response);
-          console.log("eskere2")
-          // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
-        })
-        .catch((e: any) => window.alert("Directions request failed due to" + e));
-        console.log("eskere3")
+
+        // tutte le cache lt = -10000
+        // solo cache trovate = -10001
+        //solo cache non trovate = -10002
+        if(lt===-10000||lt===-10001||lt===-10002){
+          if(lt===-10000){
+            this.listaCache=this.cacheSrv.getAllCacheApprovate();
+          }if(lt===-10001){
+            let arrIdCache = this.geocacherSrv.findcacheTrovateByIdUtente( this.sessioneSrv.s.idUtente);
+            console.log(arrIdCache);
+            let arrC:Cache[]=[];
+            for(let y=0;y<arrIdCache.length;y++){
+
+              arrC.push(this.cacheSrv.findCacheById(arrIdCache[y]));
+            }
+            this.listaCache=[...arrC];
+          }else{
+            this.listaCache=
+            this.geocacherSrv.findAllCacheNonTrovateByIDUtente(this.sessioneSrv.s.idUtente,this.cacheSrv.getAllCacheApprovate())
+          }
+        }else{
+          let directionsService = new googleMaps.DirectionsService();
+          directionsService
+          .route({
+            origin: { lat:  p.coords.latitude, lng:  p.coords.longitude},
+            destination: { lat: lt, lng: lg },
+            travelMode: googleMaps.TravelMode.DRIVING,
+          })
+          .then((response: any) => {
+            directionsRenderer.setDirections(response);
+            // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
+          })
+          .catch((e: any) => window.alert("Directions request failed due to" + e));
+        }
+
         //markers
         const features = this.buildFeatures(googleMaps);
         for (let i = 0; i < features.length; i++) {
@@ -232,14 +260,12 @@ calculateAndDisplayRoute(lt: number,lg: number) {
             });
           });
         }
-        console.log("eskere4")
         //marker  per la posizione attuale
         let markerPosition = new googleMaps.Marker({
           position: new googleMaps.LatLng(p.coords.latitude, p.coords.longitude),
           title: "position",
           map: u,
         });
-        console.log("eskere5")
       });
     }).catch(err => {
       console.log(err)
@@ -266,24 +292,31 @@ calculateAndDisplayRoute(lt: number,lg: number) {
     w1.checked="false";  w2.checked="false";  w3.checked="false";
 
   }
+
+        // tutte le cache lt = -10000
+        // solo cache trovate = -10001
+        //solo cache non trovate = -10002
   checkSelezionato(check : number){
     if(check===1){
       let d:any = document.getElementById("divCheckBox");
       d.style.display="none";
       let r:any = document.getElementById("buttonFilterSelector");
       r.innerHTML= "Filtro: tutte le cache";
+      this.calculateAndDisplayRoute(-10000,0);
     }
     if(check===2){
       let d:any = document.getElementById("divCheckBox");
       d.style.display="none";
       let r:any = document.getElementById("buttonFilterSelector");
       r.innerHTML= "Filtro: solo cache trovate";
+      this.calculateAndDisplayRoute(-10001,0);
     }
     if(check===3){
       let d:any = document.getElementById("divCheckBox");
       d.style.display="none";
       let r:any = document.getElementById("buttonFilterSelector");
       r.innerHTML= "Filtro: solo cache non trovate";
+      this.calculateAndDisplayRoute(-10002,0);
     }
   }
   completamentoDatiDistanze() {

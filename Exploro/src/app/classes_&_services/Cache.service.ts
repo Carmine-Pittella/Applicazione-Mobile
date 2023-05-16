@@ -59,13 +59,16 @@ export class CacheService {
 
 
   ];
+  findIdByCache(c:Cache){
+    return c.id;
+  }
   getAllCache(): Cache[] {
     return [...this.CacheList];
   }
 
   getAllCacheApprovate(): Cache[] {
     let c: Cache[] = this.CacheList.filter(c => c.statoApprovazione === true);
-    return c;
+    return [...c];
   }
 
   findCacheById(i: number): Cache {
@@ -83,7 +86,7 @@ export class CacheService {
         cacheFiltrate.push(cache)
       }
     }
-    return cacheFiltrate
+    return [...cacheFiltrate]
   }
 
 
