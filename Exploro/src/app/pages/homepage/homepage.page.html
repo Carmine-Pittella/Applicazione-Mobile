@@ -3,9 +3,24 @@
   <ion-title>Homepage</ion-title>
 </ion-toolbar>
 
-<ion-button class="button-orange" id="open-modal" expand="block" (click)="completamentoDatiDistanze()"
-  >Ricerca rapida</ion-button
->
+<div style="width: 100%">
+  <div style="width: 100%; display: flex;flex-direction: row;justify-content: space-around;">
+    <ion-button class="button-orange" style="width: 49%;" id="open-modal"  (click)="completamentoDatiDistanze()"
+    >Ricerca rapida</ion-button>
+    <ion-button style="width: 49%;" (click)="displayCheckBox()">
+      Filtro
+    </ion-button>
+  </div>
+  <div style="position: absolute;background-color:#2f2f2f;width: 50%;height: 11%;
+              display: flex;flex-direction: column; left: 50%;z-index: 3; align-items:start;
+              border-bottom-left-radius: 20px;"
+              id ="divCheckBox">
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;">tutte le cache</ion-checkbox>
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;" >solo cache trovate</ion-checkbox>
+    <ion-checkbox labelPlacement="end" style="font-size: 25px;margin-left: 4%;">solo cache non trovate</ion-checkbox>
+  </div>
+</div>
+
 
 <ion-modal
   #modal

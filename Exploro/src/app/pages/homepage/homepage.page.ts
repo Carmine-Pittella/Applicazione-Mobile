@@ -256,6 +256,10 @@ calculateAndDisplayRoute(lt: number,lg: number) {
   Filtri(event: any) {
     this.listaCache = this.cacheSrv.getCacheFiltered(event.target.value, 0, 0)
   }
+
+  displayCheckBox(){
+
+  }
   completamentoDatiDistanze() {
     for (let f = 0; f < this.listaCache.length; f++) {
       this.d.calculateDistRoute(this.d.google.gmp, this.listaCache[f].latitudine, this.listaCache[f].longitudine).
