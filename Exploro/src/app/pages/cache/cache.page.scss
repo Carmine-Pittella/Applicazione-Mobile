@@ -16,7 +16,7 @@ ion-searchbar {
   position: relative;
   transition: all 0.5s;
   color: rgb(255, 255, 255);
-  margin: 5%;
+  margin: 3%;
 }
 
 .card:active {
@@ -44,4 +44,8 @@ ion-searchbar {
 
 .descrizione {
   max-height: 120px;
+}
+
+ion-checkbox::before {
+  background-color: orange;
 }

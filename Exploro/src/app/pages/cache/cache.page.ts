@@ -11,6 +11,8 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
 export class CachePage implements OnInit {
   listaCache: Cache[] = []
   listaCacheFiltrate: Cache[] = []
+  difficoltaSelezionata = 0;
+  searchbarText: string = ""
 
   constructor(private cacheService: CacheService, private router: Router) { }
 
@@ -26,10 +28,24 @@ export class CachePage implements OnInit {
     else {
       this.listaCacheFiltrate = [...this.listaCache]
     }
+    this.searchbarText = event.target.value
   }
 
   ScegliCache(cache: Cache) {
     this.router.navigateByUrl("/cache/dettagli-cache?idCache=" + cache.id);
   }
 
+  onCheckboxChange(event: any, valore: number) {
+    if (event.detail.checked) {
+      this.difficoltaSelezionata = valore;
+    } else {
+      this.difficoltaSelezionata = 0;
+    }
+    if (this.difficoltaSelezionata != 0) {
+      this.listaCacheFiltrate = this.listaCacheFiltrate.filter(c => c.difficolta === this.difficoltaSelezionata);
+    }
+    else {
+      this.FiltraRisultati(this.searchbarText)
+    }
+  }
 }
