@@ -15,7 +15,7 @@
         </div>
       </ion-card-header>
       <ion-card-content>
-        <form #formLogin="ngForm">
+        <form #formLogin="ngForm" (ngSubmit)="Login(formLogin)">
           <ion-list>
             <ion-item>
               <ion-label position="floating">username</ion-label>
@@ -41,7 +41,6 @@
             class="button-orange"
             expand="block"
             type="submit"
-            (click)="Login()"
             [disabled]="!formLogin.valid"
             >Login</ion-button
           >

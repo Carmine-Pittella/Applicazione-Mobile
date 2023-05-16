@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: CachePage
+  },  {
+    path: 'dettagli-cache',
+    loadChildren: () => import('./dettagli-cache/dettagli-cache.module').then( m => m.DettagliCachePageModule)
   }
+
 ];
 
 @NgModule({

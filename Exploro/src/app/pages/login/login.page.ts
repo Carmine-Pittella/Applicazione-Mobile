@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Geocacher } from 'src/app/classes_&_services/Geocacher';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 import { AdminService } from 'src/app/classes_&_services/Admin.service';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
-  Login() {
+  Login(form: NgForm) {
     let g: Geocacher;
     if (this.geocacherSrv.findUtenteByUsrPsw(this.username, this.password) === undefined) {
       if (this.adminSrv.findAdminByUsrPsw(this.username, this.password) === undefined) {
@@ -33,6 +34,7 @@ export class LoginPage implements OnInit {
         this.s.setIdUtente(this.adminSrv.findAdminByUsrPsw(this.username, this.password).id);
         this.labelErrore = ""
         this.router.navigate(['/admin']);
+        form.reset()
       }
     } else {
       g = this.geocacherSrv.findUtenteByUsrPsw(this.username, this.password);
@@ -41,6 +43,7 @@ export class LoginPage implements OnInit {
       this.s.setCachePrefPerID(g.cachePref);
       this.labelErrore = ""
       this.router.navigate(['/homepage']);
+      form.reset()
     }
   }
 }

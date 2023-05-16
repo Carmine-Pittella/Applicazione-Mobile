@@ -8,3 +8,27 @@
     routerLink="/homepage"
   ></ion-icon>
 </ion-toolbar>
+
+<ion-content>
+  <ion-searchbar
+    mode="ios"
+    animated="true"
+    placeholder="Animated"
+    [debounce]="500"
+    (ionInput)="FiltraRisultati($event)"
+  ></ion-searchbar>
+
+  <div class="prova">
+    <div
+      class="card"
+      *ngFor="let cache of listaCacheFiltrate"
+      (click)="ScegliCache(cache)"
+    >
+      <p class="text-title">{{cache.nome}}</p>
+      <ion-item class="descrizione">
+        <p class="text-body">{{cache.descrizione}}</p>
+      </ion-item>
+      <p>Difficoltà: {{cache.difficolta}}</p>
+    </div>
+  </div>
+</ion-content>
