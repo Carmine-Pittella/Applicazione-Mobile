@@ -5,6 +5,24 @@
   <ion-title>Cache: {{cache.nome}}</ion-title>
 </ion-toolbar>
 
+<ion-content>
+  <ion-item style="margin-top: 20px" *ngIf="cacheTrovata">
+    <ion-label color="success" class="cache-trovata" style="font-size: 1.3em"
+      >Cache già trovata!</ion-label
+    >
+    <ion-icon name="checkmark-outline" color="success"></ion-icon>
+  </ion-item>
+  <ion-item style="margin-top: 20px" *ngIf="!cacheTrovata">
+    <ion-label style="display: inline-block; font-size: 1.2em"
+      >Hai trovato questa Cache?</ion-label
+    >
+    <div class="checkbox-apple">
+      <input class="yep" id="check-apple" type="checkbox" />
+      <label for="check-apple"></label>
+    </div>
+  </ion-item>
+</ion-content>
+
 <!-- bisogna fare la schermada che visualizza i dettagli delle cache -->
 <!-- da qui si può aggiungere una cache tra i preferiti -->
 <!-- devo ancora capire come visualizzare le cache preferite, se dalla schermata di tutte le cache -->

@@ -18,7 +18,7 @@ export class GeocacherService {
       livello: 9,
       puntiExp: 48,
       amiciList: [],
-      cachePref: [2, 3]
+      cacheTrovate: [2, 3]
     },
     {
       id: 2,
@@ -32,7 +32,7 @@ export class GeocacherService {
       livello: 2,
       puntiExp: 48,
       amiciList: [],
-      cachePref: [1, 2, 3]
+      cacheTrovate: [1, 2, 3]
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ export class GeocacherService {
       livello: 1,
       puntiExp: 0,
       amiciList: [],
-      cachePref: []
+      cacheTrovate: []
     },
   ];
 
@@ -57,9 +57,9 @@ export class GeocacherService {
     return g[0];
   };
 
-  findCachePrefByIdUtente(i: number): number[] {
+  findcacheTrovateByIdUtente(i: number): number[] {
     let g: Geocacher = this.findGeocacherById(i);
-    return [...g.cachePref];
+    return [...g.cacheTrovate];
   };
 
   findUtenteByUsr(username: string): Geocacher {
@@ -120,7 +120,7 @@ export class GeocacherService {
     utente.livello = 0
     utente.puntiExp = 0
     utente.amiciList = []
-    utente.cachePref = []
+    utente.cacheTrovate = []
     this.utentiList.push(utente)
   }
 }

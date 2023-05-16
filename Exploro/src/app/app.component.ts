@@ -11,7 +11,6 @@ export class AppComponent {
 
   Logout() {
     this.sessionSrv.setIdUtente(0)
-    this.sessionSrv.setCachePrefPerID([])
     this.sessionSrv.setListaAmiciPerID([])
   }
 }

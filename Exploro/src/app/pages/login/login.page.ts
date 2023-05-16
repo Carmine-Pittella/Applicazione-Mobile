@@ -40,7 +40,6 @@ export class LoginPage implements OnInit {
       g = this.geocacherSrv.findUtenteByUsrPsw(this.username, this.password);
       this.s.setIdUtente(g.id);
       this.s.setListaAmiciPerID(g.amiciList);
-      this.s.setCachePrefPerID(g.cachePref);
       this.labelErrore = ""
       this.router.navigate(['/homepage']);
       form.reset()

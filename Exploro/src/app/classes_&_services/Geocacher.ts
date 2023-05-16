@@ -10,5 +10,5 @@ export class Geocacher {
   livello: number;
   puntiExp: number;
   amiciList: number[];
-  cachePref: number[];
+  cacheTrovate: number[];
 }
