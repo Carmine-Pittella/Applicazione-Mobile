@@ -295,15 +295,7 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   /*****************************************/
 }
 
-/*
-tracciaPercorso(latitude: number, longitude: number) {
-    console.log("sjhdbclsncdolsidc");
-    this.d.setTracciato(latitude, longitude);
-    console.log(this.d.tracciato.lat);
-    console.log(this.d.tracciato.lng);
-    // devo ricaricare il component map o l'intera pagina ma non ci riesco. BESTIAAAAAA!
-  }
-*/
+
 
 
 
