@@ -147,4 +147,18 @@ export class GeocacherService {
     }
     return[...ret];
   }
+
+  aggiungiAmicizia(g1:Geocacher,g2:Geocacher){
+    this.utentiList.find(u=>{u.id===g1.id})?.amiciList.push(g2.id);
+    this.utentiList.find(u=>{u.id===g2.id})?.amiciList.push(g1.id);
+  }
+  sonoAmici(g1:Geocacher,g2:Geocacher):boolean{
+    let gtmp = this.utentiList.find(u=>{u.id===g1.id});
+    let arrtmp = gtmp?.amiciList.find(u=>{u===g2.id});
+    if(arrtmp===undefined){
+      return false;
+    }else{
+      return true;
+    }
+  }
 }
