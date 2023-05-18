@@ -25,11 +25,14 @@
     <p>100</p>
   </ion-item>
 
-  <ion-item style="margin-bottom: 20px; margin-left: 10px" lines="none">
+  <ion-item
+    style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px"
+    lines="none"
+  >
     <ion-label class="dati-personali">Dati personali:</ion-label>
   </ion-item>
 
-  <div style="margin-left: 10px">
+  <div style="margin-left: 10px; margin-right: 10px">
     <ion-item lines="none" class="ion-align-items-center">
       <ion-label style="flex: 0 0 42%">Nome:</ion-label>
       <ion-label style="flex: 1">{{geocacher.nome}}</ion-label>
@@ -66,10 +69,9 @@
         >{{ util.formatDate(geocacher.dataDiNascita) }}</ion-label
       >
     </ion-item>
+    <ion-button class="button-orange" routerLink="modifica-dati"
+      >modifica i dati
+      <ion-icon style="margin-left: 5px" name="pencil"></ion-icon>
+    </ion-button>
   </div>
-
-  <ion-button class="button-orange" routerLink="modifica-dati"
-    >modifica i dati
-    <ion-icon style="margin-left: 5px" name="pencil"></ion-icon>
-  </ion-button>
 </ion-content>

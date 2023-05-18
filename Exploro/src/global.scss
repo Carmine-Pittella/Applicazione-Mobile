@@ -44,18 +44,13 @@ ion-title {
 }
 
 ion-card {
-  // background-color: #1e1e1e;
   width: 75%;
-} // proprietà della card
+}
 
 .logo {
   display: flex;
   justify-content: center;
 }
-
-ion-item::part(native) {
-  // background-color: #3c3c3c;
-} // sarebbe il colore dei campi (nome, cognome, ecc..)
 
 ion-avatar {
   display: flex;
@@ -78,6 +73,6 @@ ion-content {
   margin-right: 15px;
 }
 .alert-wrapper.sc-ion-alert-md {
-  // background-color: #eaa932;
+  background-color: #eaa932;
   border-radius: 15px;
 }

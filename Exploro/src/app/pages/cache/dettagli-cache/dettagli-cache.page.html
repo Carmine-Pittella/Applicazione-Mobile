@@ -38,44 +38,34 @@
     ></ion-alert>
   </ion-item>
 
-  <ion-item lines="none">
-    <ion-label class="descrizione-indizi">Descrizione e indizi:</ion-label>
-  </ion-item>
-
-  <div class="container">
-    <ion-card>
-      <ion-card-content>
-        <ion-label>
-          ciao come stai io sto molto bene e tu ciao come stai io sto molto bene
-          e tuciao come stai io sto molto bene e tuciao come stai io sto molto
-          bene e tu ciao come stai io sto molto bene e tuciao come stai io sto
-          molto bene e tuciao come stai io sto molto bene e tuciao come stai io
-          sto molto bene e tu ciao come stai io sto molto bene e tuciao come
-          stai io sto molto bene e tuciao come stai io sto molto bene e tuciao
-          come stai io sto molto bene e tu ciao come stai io sto molto bene e
-          tuciao come stai io sto molto bene e tuciao come stai io sto molto
-          bene e tuciao come stai io sto molto bene e tu ciao come stai io sto
-          molto bene e tuciao come stai io sto molto bene e tuciao come stai io
-          sto molto bene e tuciao come stai io sto molto bene e tu ciao come
-          stai io sto molto bene e tuciao come stai io sto molto bene e tuciao
-          come stai io sto molto bene e tuciao come stai io sto molto bene e tu
-          ciao come stai io sto molto bene e tuciao come stai io sto molto bene
-          e tuciao come stai io sto molto bene e tuciao come stai io sto molto
-          bene e tu
-        </ion-label>
-      </ion-card-content>
-    </ion-card>
-  </div>
-
-  <!-- da qui in poi devo aggiungere la descrizione ecc -->
-  <div class="bottom-button">
-    <ion-button class="button-orange"
-      >Localizza
-      <ion-icon name="compass" style="margin-left: 5px"></ion-icon>
-    </ion-button>
-  </div>
+  <ion-card
+    color="primary"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 30px;
+    "
+  >
+    <ion-card-header>
+      <img [src]="cache.img" />
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title>Descrizione e indizi:</ion-card-title>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        Here's a small text description for the card content. Nothing more,
+        nothing less. Here's a small text description for the card content.
+        Nothing more, nothing less. Here's a small text description for the card
+        content. Nothing more, nothing less. Here's a small text description for
+        the card content. Nothing more, nothing less. Here's a small text
+        description for the card content. Nothing more, nothing less. Here's a
+        small text description for the card content. Nothing more, nothing less.
+        Here's a small text description for the card content. Nothing more,
+        nothing less. Here's a small text description for the card content.
+        Nothing more, nothing less. Here's a small text description for the card
+        content. Nothing more, nothing less.aaaaaaaaaaaaa
+      </ion-content>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
-<!-- bisogna fare la schermada che visualizza i dettagli delle cache -->
-<!-- da qui si può aggiungere una cache tra i preferiti -->
-<!-- devo ancora capire come visualizzare le cache preferite, se dalla schermata di tutte le cache -->
-<!-- oppure dalla schermata apposta "cache preferite" -->

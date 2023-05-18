@@ -56,10 +56,6 @@ cahce-trovata {
   height: 25px;
 }
 /************** CHECKBOX ************/
-
-// ion-item::part(native) {
-//   background-color: #2f2f2f;
-// }
 .bottom-button {
   position: fixed;
   bottom: 0;
@@ -68,19 +64,13 @@ cahce-trovata {
   margin-bottom: 15px;
 }
 
-.descrizione-indizi {
-  margin-top: 40px;
-  margin-left: 10px;
-  font-size: 1.3em;
+ion-card {
+  width: 80%;
+  height: 80%;
+  justify-content: center;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-ion-card {
-  /* opzionale: puoi definire larghezza e altezza */
-  width: 80%;
-  height: 350px;
+img {
+  width: auto;
+  height: auto;
 }

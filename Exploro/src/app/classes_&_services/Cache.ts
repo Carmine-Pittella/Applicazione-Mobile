@@ -7,4 +7,5 @@ export class Cache {
   difficolta: number;
   statoApprovazione: boolean;
   parolaOrdine: string
+  img: string
 }

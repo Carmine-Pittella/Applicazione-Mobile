@@ -5,6 +5,7 @@ import { Cache } from './Cache';
   providedIn: 'root',
 })
 export class CacheService {
+  percorso: string = "../../assets/foto/"
   CacheList: Cache[] = [
     {
       id: 1,
@@ -14,7 +15,8 @@ export class CacheService {
       longitudine: 13.399413,
       difficolta: 1,
       statoApprovazione: true,
-      parolaOrdine: "antani"
+      parolaOrdine: "antani",
+      img: this.percorso + "default.png"
     },
     {
       id: 2,
@@ -24,7 +26,8 @@ export class CacheService {
       longitudine: 13.419150,
       difficolta: 2,
       statoApprovazione: true,
-      parolaOrdine: "antani1"
+      parolaOrdine: "antani1",
+      img: this.percorso + "cimitero.png"
     },
     {
       id: 3,
@@ -34,7 +37,8 @@ export class CacheService {
       longitudine: 13.416250,
       difficolta: 3,
       statoApprovazione: true,
-      parolaOrdine: "antani2"
+      parolaOrdine: "antani2",
+      img: this.percorso + "cimitero.png"
     },
     {
       id: 4,
@@ -44,7 +48,8 @@ export class CacheService {
       longitudine: 13.416750,
       difficolta: 1,
       statoApprovazione: true,
-      parolaOrdine: "antani3"
+      parolaOrdine: "antani3",
+      img: this.percorso + "cimitero.png"
     },
     {
       id: 5,
@@ -54,12 +59,13 @@ export class CacheService {
       longitudine: 13.416250,
       difficolta: 2,
       statoApprovazione: true,
-      parolaOrdine: "antani4"
+      parolaOrdine: "antani4",
+      img: this.percorso + "cimitero.png"
     }
 
 
   ];
-  findIdByCache(c:Cache){
+  findIdByCache(c: Cache) {
     return c.id;
   }
   getAllCache(): Cache[] {

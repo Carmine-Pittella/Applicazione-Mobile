@@ -6,7 +6,6 @@ ion-searchbar {
   box-sizing: border-box;
   width: 150px;
   height: 230px;
-  // background: #515151;
   border: 1px solid rgb(255, 145, 0);
   box-shadow: 12px 17px 51px rgba(249, 153, 44, 0.056);
   border-radius: 17px;
@@ -15,12 +14,7 @@ ion-searchbar {
   align-items: center;
   position: relative;
   transition: all 0.5s;
-  // color: rgb(255, 255, 255);
   margin: 3%;
-}
-
-.card:active {
-  transform: scale(0.95) rotateZ(1.7deg);
 }
 
 .prova {
@@ -30,7 +24,6 @@ ion-searchbar {
 }
 
 .text-body {
-  // color: rgb(177, 177, 177);
   margin-left: 5%;
   margin-right: 5%;
   font-size: 0.8em;

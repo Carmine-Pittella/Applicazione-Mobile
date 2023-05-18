@@ -36,7 +36,7 @@ export class CachePage implements OnInit {
   }
 
   onCheckboxChange(event: any, valore: number) {
-    console.log("cache")
+    this.listaCacheFiltrate = [...this.listaCache]
     if (event.detail.checked) {
       this.difficoltaSelezionata = valore;
     } else {
