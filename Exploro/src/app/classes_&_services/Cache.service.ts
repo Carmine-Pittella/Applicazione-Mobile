@@ -55,7 +55,49 @@ export class CacheService {
       difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "antani4"
+    },
+    {
+      id: 6,
+      nome: 'aaab',
+      descrizione: 'Questa è la descrizione della cache numero 6 bla bla',
+      latitudine: 42.450626,
+      longitudine: 13.476250,
+      difficolta: 2,
+      statoApprovazione: true,
+      parolaOrdine: "aaab6"
+    },
+    {
+      id: 7,
+      nome: 'aaac',
+      descrizione: 'Questa è la descrizione della cache numero 7 bla bla',
+      latitudine: 42.450626,
+      longitudine: 13.676250,
+      difficolta: 1,
+      statoApprovazione: true,
+      parolaOrdine: "aaac7"
+    },
+    {
+      id: 8,
+      nome: 'aa7b',
+      descrizione: 'Questa è la descrizione della cache numero 8 bla bla',
+      latitudine: 42.430726,
+      longitudine: 13.476258,
+      difficolta: 2,
+      statoApprovazione: true,
+      parolaOrdine: "aawwwer"
+    },
+    {
+      id: 9,
+      nome: 'ca7b',
+      descrizione: 'Questa è la descrizione della cache numero 9 bla bla',
+      latitudine: 42.439426,
+      longitudine: 13.470258,
+      difficolta: 3,
+      statoApprovazione: true,
+      parolaOrdine: "aawqrwer"
     }
+
+
 
 
   ];
