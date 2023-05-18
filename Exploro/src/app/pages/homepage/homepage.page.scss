@@ -2,20 +2,6 @@ ion-item {
   position: "absolute";
 }
 
-ion-range {
-  --bar-background: #eaaa3253;
-  --bar-background-active: #eaa932;
-  --bar-height: 3px;
-  --bar-border-radius: 8px;
-  --knob-background: #ffffff;
-  --knob-size: 20px;
-  --pin-background: #434343;
-  --pin-color: #ffffff;
-}
-
-ion-searchbar {
-  --cancel-button-color: #fa3232;
-}
 .map {
   // position: absolute;
   height: 100%;
@@ -28,4 +14,3 @@ ion-searchbar {
 .map.visible {
   opacity: 1;
 }
-
