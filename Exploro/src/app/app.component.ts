@@ -10,7 +10,6 @@ export class AppComponent {
   constructor(private sessionSrv: SessioneService) { }
 
   Logout() {
-    this.sessionSrv.setIdUtente(0)
-    this.sessionSrv.setListaAmiciPerID([])
+    localStorage.removeItem("geocacher");
   }
 }

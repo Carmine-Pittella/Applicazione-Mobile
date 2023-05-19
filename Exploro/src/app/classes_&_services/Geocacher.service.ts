@@ -80,21 +80,6 @@ export class GeocacherService {
     return g2[0];
   }
 
-  findTop3Utenti(): Geocacher[] {
-    let cont: number = 3;
-    let arr: number[] = [];
-    let arrU: Geocacher[] = this.utentiList;
-    let toRet: Geocacher[] = [];
-    for (let i = 0; i < arrU.length; i++) {
-      arr.push((arrU[i].livello) * 100 + arrU[i].puntiExp);
-    }
-    for (let i = 0; i < 3; i++) {
-      let u: Geocacher = this.findUtenteByExpTot(Math.max(...arr));
-      toRet.push(u);
-      arrU = arrU.filter(a => a.id !== u.id);
-    }
-    return [...arrU];
-  }
 
   findUtenteByExpTot(n: number): Geocacher {
     let g: Geocacher[] = this.utentiList.filter(u => u.livello * 100 + u.puntiExp === n);
@@ -146,9 +131,14 @@ export class GeocacherService {
     return [...ret];
   }
 
-  aggiungiAmicizia(g1: Geocacher, g2: Geocacher) {
-    this.utentiList.find(u => { u.id === g1.id })?.amiciList.push(g2.id);
-    this.utentiList.find(u => { u.id === g2.id })?.amiciList.push(g1.id);
+  aggiungiAmicizia(g1:Geocacher,g2:Geocacher){
+
+    let index1 = this.utentiList.findIndex(u=>{return u.id===g1.id})
+    this.utentiList[index1].amiciList.push(g2.id);
+    let index2 = this.utentiList.findIndex(u=>{return u.id===g2.id})
+    this.utentiList[index2].amiciList.push(g1.id);
+
+
   }
 
   sonoAmici(g1: Geocacher, g2: Geocacher): boolean {
@@ -163,7 +153,7 @@ export class GeocacherService {
 
   getClassifica(): Geocacher[] {
     let sortedList = [...this.utentiList];
-    sortedList.sort((a, b) => b.cacheTrovate.length - a.cacheTrovate.length);
-    return sortedList;
+    sortedList.sort((a, b) => b.livello*100+b.puntiExp - a.livello*100+a.puntiExp);
+    return [...sortedList];
   }
 }

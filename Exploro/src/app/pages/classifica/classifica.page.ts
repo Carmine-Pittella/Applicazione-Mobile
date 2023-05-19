@@ -17,7 +17,7 @@ export class ClassificaPage implements OnInit {
 
   ngOnInit() {
     this.listaUtenti = [...this.geocacherSrv.getClassifica()]
-    this.idUtente = this.sessioneSrv.getIdUtente()
+    this.idUtente = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
   }
 
   TipoClassifica(event: any) {
