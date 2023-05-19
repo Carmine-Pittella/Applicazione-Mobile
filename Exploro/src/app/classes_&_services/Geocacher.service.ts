@@ -149,8 +149,13 @@ export class GeocacherService {
   }
 
   aggiungiAmicizia(g1:Geocacher,g2:Geocacher){
-    this.utentiList.find(u=>{u.id===g1.id})?.amiciList.push(g2.id);
-    this.utentiList.find(u=>{u.id===g2.id})?.amiciList.push(g1.id);
+
+    let index1 = this.utentiList.findIndex(u=>{return u.id===g1.id})
+    this.utentiList[index1].amiciList.push(g2.id);
+    let index2 = this.utentiList.findIndex(u=>{return u.id===g2.id})
+    this.utentiList[index2].amiciList.push(g1.id);
+
+
   }
   sonoAmici(g1:Geocacher,g2:Geocacher):boolean{
     let gtmp = this.utentiList.find(u=>{u.id===g1.id});
