@@ -32,19 +32,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cache/cache.module').then(m => m.CachePageModule)
   },
   {
-    path: 'preferiti',
-    loadChildren: () => import('./pages/preferiti/preferiti.module').then(m => m.PreferitiPageModule)
-  },
-  {
     path: 'classifica',
     loadChildren: () => import('./pages/classifica/classifica.module').then(m => m.ClassificaPageModule)
-  },  {
+  },
+  {
     path: 'amici',
-    loadChildren: () => import('./pages/amici/amici.module').then( m => m.AmiciPageModule)
+    loadChildren: () => import('./pages/amici/amici.module').then(m => m.AmiciPageModule)
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule)
   },
 
 

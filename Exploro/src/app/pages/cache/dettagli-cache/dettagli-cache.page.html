@@ -38,34 +38,16 @@
     ></ion-alert>
   </ion-item>
 
-  <ion-card
-    color="primary"
-    style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      margin-top: 30px;
-    "
-  >
-    <ion-card-header>
-      <img [src]="cache.img" />
-    </ion-card-header>
-    <ion-card-content>
-      <ion-card-title>Descrizione e indizi:</ion-card-title>
-      <ion-content [fullscreen]="true" class="ion-padding">
-        Here's a small text description for the card content. Nothing more,
-        nothing less. Here's a small text description for the card content.
-        Nothing more, nothing less. Here's a small text description for the card
-        content. Nothing more, nothing less. Here's a small text description for
-        the card content. Nothing more, nothing less. Here's a small text
-        description for the card content. Nothing more, nothing less. Here's a
-        small text description for the card content. Nothing more, nothing less.
-        Here's a small text description for the card content. Nothing more,
-        nothing less. Here's a small text description for the card content.
-        Nothing more, nothing less. Here's a small text description for the card
-        content. Nothing more, nothing less.aaaaaaaaaaaaa
-      </ion-content>
-    </ion-card-content>
-  </ion-card>
+  <!-- ----------------------------------------- -->
+  <div class="formLallero">
+    <ion-card>
+      <ion-card-header>
+        <img [src]="cache.img" />
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-title>Descrizione e indizi:</ion-card-title>
+        {{cache.descrizione}}
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

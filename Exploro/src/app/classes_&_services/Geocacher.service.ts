@@ -20,7 +20,7 @@ export class GeocacherService {
       livello: 9,
       puntiExp: 48,
       amiciList: [],
-      cacheTrovate: [1,2,4,5]
+      cacheTrovate: [1, 2, 4, 5]
     },
     {
       id: 2,
@@ -52,7 +52,7 @@ export class GeocacherService {
     },
   ];
 
-  constructor(private cS : CacheService) { }
+  constructor(private cS: CacheService) { }
 
   findGeocacherById(i: number): Geocacher {
     let g: Geocacher[] = this.utentiList.filter(u => u.id === i);
@@ -131,34 +131,41 @@ export class GeocacherService {
     g[0].cacheTrovate.push(idCache)
   }
 
-  findAllCacheNonTrovateByIDUtente(idU:number,AllCache:Cache[]):Cache[]{
-    let alC:number[]=[];
-    let ret:Cache[]=[];
-    for(let ct=0;ct<AllCache.length;ct++){
+  findAllCacheNonTrovateByIDUtente(idU: number, AllCache: Cache[]): Cache[] {
+    let alC: number[] = [];
+    let ret: Cache[] = [];
+    for (let ct = 0; ct < AllCache.length; ct++) {
       alC.push(this.cS.findIdByCache(AllCache[ct]));
     }
-    let g:Geocacher= this.findGeocacherById(idU);
+    let g: Geocacher = this.findGeocacherById(idU);
     let toRemove = [...g.cacheTrovate];
-    let toRetN = alC.filter(function(el) {
-       return !toRemove.includes(el);
+    let toRetN = alC.filter(function (el) {
+      return !toRemove.includes(el);
     });
-    for(let fr=0;fr<toRetN.length;fr++){
+    for (let fr = 0; fr < toRetN.length; fr++) {
       ret.push(this.cS.findCacheById(toRetN[fr]));
     }
-    return[...ret];
+    return [...ret];
   }
 
-  aggiungiAmicizia(g1:Geocacher,g2:Geocacher){
-    this.utentiList.find(u=>{u.id===g1.id})?.amiciList.push(g2.id);
-    this.utentiList.find(u=>{u.id===g2.id})?.amiciList.push(g1.id);
+  aggiungiAmicizia(g1: Geocacher, g2: Geocacher) {
+    this.utentiList.find(u => { u.id === g1.id })?.amiciList.push(g2.id);
+    this.utentiList.find(u => { u.id === g2.id })?.amiciList.push(g1.id);
   }
-  sonoAmici(g1:Geocacher,g2:Geocacher):boolean{
-    let gtmp = this.utentiList.find(u=>{u.id===g1.id});
-    let arrtmp = gtmp?.amiciList.find(u=>{u===g2.id});
-    if(arrtmp===undefined){
+
+  sonoAmici(g1: Geocacher, g2: Geocacher): boolean {
+    let gtmp = this.utentiList.find(u => { u.id === g1.id });
+    let arrtmp = gtmp?.amiciList.find(u => { u === g2.id });
+    if (arrtmp === undefined) {
       return false;
-    }else{
+    } else {
       return true;
     }
+  }
+
+  getClassifica(): Geocacher[] {
+    let sortedList = [...this.utentiList];
+    sortedList.sort((a, b) => b.cacheTrovate.length - a.cacheTrovate.length);
+    return sortedList;
   }
 }
