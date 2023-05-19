@@ -1,0 +1,10 @@
+.header-row {
+  font-weight: bold;
+}
+ion-item {
+  --padding-start: 10px;
+}
+.highlighted-item {
+  --ion-background-color: var(--ion-color-success);
+  color: #ffbe19;
+}
