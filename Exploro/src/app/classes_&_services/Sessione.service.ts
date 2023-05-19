@@ -6,7 +6,7 @@ import { Sessione } from './Sessione';
 })
 export class SessioneService {
   s: Sessione = {
-    idUtente: 1, //per il momento ho messo l'id di Carmine perché cosi ogni volta che salvo non devo rifare il login
+    idUtente: 0, //per il momento ho messo l'id di Carmine perché cosi ogni volta che salvo non devo rifare il login
     listaAmiciPerID: [],
   };
   setIdUtente(i: number): void {

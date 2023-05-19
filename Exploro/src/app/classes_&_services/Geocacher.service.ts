@@ -40,8 +40,8 @@ export class GeocacherService {
       id: 3,
       nome: 'Matteo',
       cognome: 'Salvatore',
-      username: 'Matteo',
-      password: 'Matteo',
+      username: 'matteo',
+      password: 'matteo',
       mail: 'MatteoSal@gmail.com',
       cellulare: 36526148,
       dataDiNascita: new Date('2000/01/01'),
@@ -109,8 +109,6 @@ export class GeocacherService {
     this.utentiList[idUtente].cellulare = nuoviDati.cellulare;
     this.utentiList[idUtente].dataDiNascita = nuoviDati.dataDiNascita;
     this.utentiList[idUtente].password = nuoviDati.password;
-    // ovviamente ho dovuto fare uno ad uno perché altre variabili come livello, xp, lista ecc
-    // sono tutti NULL nell'oggetto nuoviDati. non essendo modificabili dalla pagina.
   }
 
   getAllGeocacher(): Geocacher[] {
