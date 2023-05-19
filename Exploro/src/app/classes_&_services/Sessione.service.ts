@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Sessione } from './Sessione';
+import { Geocacher } from './Geocacher';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SessioneService {
-  s: Sessione = {
-    idUtente: 1, //per il momento ho messo l'id di Carmine perché cosi ogni volta che salvo non devo rifare il login
-    listaAmiciPerID: [],
-  };
-  setIdUtente(i: number): void {
-    this.s.idUtente = i;
-  };
-  setListaAmiciPerID(i: number[]): void {
-    this.s.listaAmiciPerID = i;
+
+  returnIdByJson(jsonString:any):number{
+    let v:any = JSON.parse(jsonString);
+    return v.id;
   }
-  getIdUtente(): number {
-    return this.s.idUtente;
-  }
-  getListaAmiciPerID(): number[] {
-    return [...this.s.listaAmiciPerID];
+  returnListaAmiciByJson(jsonString:any):number[]{
+    let v:Geocacher = JSON.parse(jsonString);
+    return [...v.amiciList];
   }
 
   google: any = {

@@ -38,8 +38,9 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    console.log(localStorage.getItem("geocacher"));
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
-    this.listaRichieste= this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.getIdUtente());
+    this.listaRichieste= this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
     this.numeroNot = this.listaRichieste.length;
     let el = document.getElementById("badgeNotifiche");
     if( el!== null){
@@ -209,7 +210,7 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
             if (lt === -10000) {
               this.listaCache = this.cacheSrv.getAllCacheApprovate();
             } if (lt === -10001) {
-              let arrIdCache = this.geocacherSrv.findcacheTrovateByIdUtente(this.sessioneSrv.s.idUtente);
+              let arrIdCache = this.geocacherSrv.findcacheTrovateByIdUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
               console.log(arrIdCache);
               let arrC: Cache[] = [];
               for (let y = 0; y < arrIdCache.length; y++) {
@@ -219,7 +220,7 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
               this.listaCache = [...arrC];
             } if (lt === -10002) {
               this.listaCache =
-                this.geocacherSrv.findAllCacheNonTrovateByIDUtente(this.sessioneSrv.s.idUtente, this.cacheSrv.getAllCacheApprovate())
+                this.geocacherSrv.findAllCacheNonTrovateByIDUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")), this.cacheSrv.getAllCacheApprovate())
             }
           } else {
             let directionsService = new googleMaps.DirectionsService();

@@ -19,7 +19,7 @@ export class AmiciPage implements OnInit {
     private gprova: GeocacherService) { }
 
   ngOnInit() {
-    let tmp = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.getIdUtente());
+    let tmp = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
     if(tmp!==undefined){
       let arrInputs=[];
       for(let c=0;c<tmp.length;c++){
@@ -48,6 +48,9 @@ export class AmiciPage implements OnInit {
               this.richiestaSrv.accettaRichiestaDiAmicizia(data[i]);
             }
           }
+          let newG = this.gprova.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
+          localStorage.removeItem("geocacher");
+          localStorage.setItem("geocacher",JSON.stringify(newG));
         }
       }]
 

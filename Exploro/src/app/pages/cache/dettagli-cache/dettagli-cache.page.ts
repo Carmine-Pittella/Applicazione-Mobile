@@ -20,13 +20,13 @@ export class DettagliCachePage implements OnInit {
   messageAlert: string
   selezionato: boolean
 
-  constructor(private router: Router, private cacheService: CacheService, private sessioneService: SessioneService, private utenteService: GeocacherService, private alertController: AlertController) { }
+  constructor(private router: Router, private cacheService: CacheService, private sessioneSrv: SessioneService, private utenteService: GeocacherService, private alertController: AlertController) { }
 
   ngOnInit() {
     let idCache = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idCache'])
     this.cache = this.cacheService.findCacheById(idCache)
 
-    if (this.utenteService.findGeocacherById(this.sessioneService.getIdUtente()).cacheTrovate.includes(this.cache.id)) {
+    if (this.utenteService.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))).cacheTrovate.includes(this.cache.id)) {
       this.cacheTrovata = true
     } else {
       this.cacheTrovata = false
@@ -74,7 +74,7 @@ export class DettagliCachePage implements OnInit {
 
 
   setCacheTrovata() {
-    this.utenteService.addCacheTrovata(this.sessioneService.getIdUtente(), this.cache.id)
+    this.utenteService.addCacheTrovata(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")), this.cache.id)
     this.selezionato = true
     this.cacheTrovata = !this.cacheTrovata
   }

@@ -13,9 +13,9 @@ export class ProfiloPage implements OnInit {
   geocacher: Geocacher = new Geocacher();
   util: Utils = new Utils
 
-  constructor(private geocacherSrv: GeocacherService, private s: SessioneService) { }
+  constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService) { }
 
   ngOnInit() {
-    this.geocacher = this.geocacherSrv.findGeocacherById(this.s.getIdUtente())
+    this.geocacher = this.geocacherSrv.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")))
   }
 }

@@ -20,10 +20,10 @@ export class ModificaDatiPage implements OnInit {
   headerAlert: string
   messageAlert: string
 
-  constructor(private geocacherSrv: GeocacherService, private s: SessioneService, private alertController: AlertController, private router: Router) { }
+  constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService, private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
-    this.geocacher = this.geocacherSrv.findGeocacherById(this.s.getIdUtente())
+    this.geocacher = this.geocacherSrv.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")))
     this.nuoviDati = { ...this.geocacher };
     this.confermaNuovaPassword = this.nuoviDati.password
   }
