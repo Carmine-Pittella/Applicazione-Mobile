@@ -17,6 +17,7 @@ export class DettagliUtentePage implements OnInit {
   utenteSel: Geocacher = new Geocacher
   util: Utils = new Utils
   richiesta: RichiestaAmicizia
+  sonoIo: boolean
 
   constructor(private router: Router, private geocacherSrv: GeocacherService, private alertController: AlertController, private amiciziaSrv: RichiestaAmiciziaService, private sessioneSrv: SessioneService) { }
 
@@ -25,6 +26,7 @@ export class DettagliUtentePage implements OnInit {
     let idUtentePrinc = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
     this.utenteSel = this.geocacherSrv.findGeocacherById(idUtenteSel)
     this.richiesta = this.amiciziaSrv.getRichiestaAmiciziaParameter(idUtentePrinc, idUtenteSel)
+    this.sonoIo = idUtenteSel === idUtentePrinc
   }
 
   async InviaRichiestaAmicizia() {
@@ -40,6 +42,7 @@ export class DettagliUtentePage implements OnInit {
           handler: (data) => {
             let geo = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
             this.amiciziaSrv.inviaRichiestaDiAmicizia(geo, this.utenteSel.id)
+            this.richiesta.conferma = false
           }
         }
       ],
