@@ -30,14 +30,14 @@ export class RichiestaAmiciziaService {
     }
   ]
 
-
-  //metodo per trovare tutte le richieste destinate all'utente con l'id specificato
+  // ora dovrebbe funzionare, restituisce solo le richieste da approvare, quelle già approvate
+  // stanno nella lista di amici del Geocacher in questione tanto.
   findRichiesteByUtente(idUtente: number): RichiestaAmicizia[] {
-    // non funziona :(
-    let arrtmp: RichiestaAmicizia[] = this.richiesteList.filter(u => { return u.Griceve === idUtente });
-    arrtmp = arrtmp.filter(u => u.conferma === false);
-    //ritorna tutte le richieste destinate a quest'utente che non sono ancora state ne accettate né declinate
-    return [...arrtmp];
+    let richiesteFiltrate: RichiestaAmicizia[] = [];
+    richiesteFiltrate = this.richiesteList.filter(richiesta =>
+      richiesta.Griceve === idUtente && !richiesta.conferma
+    );
+    return richiesteFiltrate;
   }
 
   accettaRichiestaDiAmicizia(r: RichiestaAmicizia) {
@@ -53,21 +53,20 @@ export class RichiestaAmiciziaService {
 
 
   inviaRichiestaDiAmicizia(gchiede: number, griceve: number): string {
-    if (this.isRichiestaExists(gchiede, griceve)) {//////////////////////////////////
-      return "sonogiaAmici";
+    if (this.isRichiestaExists(gchiede, griceve)) {
+      return "Richiesta di amicizia esistente";
     } else {
       let nuovaRichiesta = new RichiestaAmicizia
-      nuovaRichiesta.id = this.richiesteList.length + 1
+      nuovaRichiesta.id = this.richiesteList[this.richiesteList.length - 1].id + 1
       nuovaRichiesta.Gchiede = gchiede
       nuovaRichiesta.Griceve = griceve
       nuovaRichiesta.conferma = false
-
       this.richiesteList.push(nuovaRichiesta);
-      return "successo";
+      return "Richiesta inviata con successo";
     }
   }
 
-  isRichiestaExists(x: number, y: number): boolean {
+  private isRichiestaExists(x: number, y: number): boolean {
     return this.richiesteList.some(richiesta => richiesta.Gchiede === x && richiesta.Griceve === y);
   }
 
@@ -78,7 +77,15 @@ export class RichiestaAmiciziaService {
     return richiesta ? { ...richiesta } : new RichiestaAmicizia();
   }
 
-
+  private getIndexRichiestaById(idRichiesta: number): number {
+    const index = this.richiesteList.findIndex(r => r.id === idRichiesta);
+    if (index !== -1) {
+      return index;
+    } else {
+      throw new Error(`RichiestaAmicizia con id ${idRichiesta} non trovata.`);
+      // caso molto improbabile
+    }
+  }
 
 }
 

@@ -23,15 +23,15 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('map') mapElementRef: ElementRef; ///MAPPA
   dirRender: any ///MAPPA
   sub: Subscription ///MAPPA
-  numeroNot=0;
-  listaRichieste : RichiestaAmicizia[]=[];
+  numeroNot = 0;
+  listaRichieste: RichiestaAmicizia[] = [];
 
   listaCache: Cache[] = [];
   filtri: string;
   arrayDistanze: string[] = [];
 
   constructor(private cacheSrv: CacheService, private d: DataService,
-    private richiestaSrv : RichiestaAmiciziaService,
+    private richiestaSrv: RichiestaAmiciziaService,
     private reneder: Renderer2, //MAP
     private geocacherSrv: GeocacherService, //MAP
     private sessioneSrv: SessioneService //MAP
@@ -40,14 +40,14 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     console.log(localStorage.getItem("geocacher"));
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
-    this.listaRichieste= this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
+    this.listaRichieste = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
     this.numeroNot = this.listaRichieste.length;
     let el = document.getElementById("badgeNotifiche");
-    if( el!== null){
-      if(this.numeroNot!==0){
-        el.innerHTML =  this.numeroNot.toString()
-      }else{
-        el.style.display= "none"
+    if (el !== null) {
+      if (this.numeroNot !== 0) {
+        el.innerHTML = this.numeroNot.toString()
+      } else {
+        el.style.display = "none"
       }
     }
 

@@ -134,8 +134,9 @@ export class GeocacherService {
   aggiungiAmicizia(g1: number, g2: number) {
     let index1 = this.utentiList.findIndex(u => { return u.id === g1 })
     this.utentiList[index1].amiciList.push(g2);
-    let index2 = this.utentiList.findIndex(u => { return u.id === g2 })
-    this.utentiList[index2].amiciList.push(g1);
+    // let index2 = this.utentiList.findIndex(u => { return u.id === g2 })
+    // this.utentiList[index2].amiciList.push(g1);
+    // non è detto che se io accetto la sua richiesta allora anche lui ha accettato la mia (che non ho mandato)
   }
 
   sonoAmici(g1: number, g2: number): boolean {

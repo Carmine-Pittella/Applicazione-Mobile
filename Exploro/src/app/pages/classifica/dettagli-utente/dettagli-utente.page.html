@@ -62,13 +62,13 @@
     <ion-button
       class="button-orange"
       (click)="InviaRichiestaAmicizia()"
-      *ngIf="this.richiesta.conferma === false"
+      *ngIf="richiesta.conferma === undefined && !sonoIo"
       >Richiedi amicizia
       <ion-icon style="margin-left: 5px" name="accessibility"></ion-icon>
     </ion-button>
 
     <ion-label
-      *ngIf="richiesta.conferma === true"
+      *ngIf="richiesta.conferma === true && !sonoIo"
       color="success"
       style="
         font-size: 1.3em;
@@ -82,7 +82,7 @@
     >
 
     <ion-label
-      *ngIf="richiesta.conferma === undefined"
+      *ngIf="richiesta.conferma === false && !sonoIo"
       style="
         font-size: 1.3em;
         height: 45px;
