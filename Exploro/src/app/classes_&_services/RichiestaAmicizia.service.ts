@@ -42,32 +42,15 @@ export class RichiestaAmiciziaService {
 
   accettaRichiestaDiAmicizia(r: RichiestaAmicizia) {
     let index = this.richiesteList.findIndex(u => { return u.id === r.id });
-    console.log(index);
-    //this.richiesteList[index].conferma=true;
+    this.richiesteList[index].conferma=true;
     this.geocacherSrv.aggiungiAmicizia(r.Gchiede, r.Griceve);
   }
 
   declinaRichiestaDiAmicizia(r: RichiestaAmicizia) {
-    this.richiesteList = this.richiesteList.filter(u => { u.id !== r.id });
+    let newarr = this.richiesteList.filter(u => { return u.id !== r.id });
+    this.richiesteList=[...newarr];
   }
 
-  // inviaRichiestaDiAmicizia(gchiede: number, griceve: number): string {
-  //   if (this.geocacherSrv.sonoAmici(gchiede, griceve)) {
-  //     return "sonogiaAmici";
-  //   } else {
-  //     let arrtmp = this.richiesteList.filter(u => { u.conferma === false });
-  //     arrtmp = arrtmp.filter(u => { u.Gchiede === gchiede });
-  //     arrtmp = arrtmp.filter(u => { u.Griceve === griceve });
-  //     if (arrtmp === undefined) {
-  //       //non esiste una richiesta pendente e posso crearne una
-  //       let idq = this.richiesteList[this.richiesteList.length - 1].id + 1;
-  //       this.richiesteList.push({ id: idq, Gchiede: gchiede, Griceve: griceve, conferma: false });
-  //       return "successo";
-  //     } else {
-  //       return "unaRichiestagiastatainviata";
-  //     }
-  //   }
-  // }
 
   inviaRichiestaDiAmicizia(gchiede: number, griceve: number): string {
     if (this.isRichiestaExists(gchiede, griceve)) {//////////////////////////////////
