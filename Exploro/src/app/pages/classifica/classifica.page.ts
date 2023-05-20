@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Geocacher } from 'src/app/classes_&_services/Geocacher';
 import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
@@ -13,7 +14,7 @@ export class ClassificaPage implements OnInit {
   idUtente: number
 
 
-  constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService) { }
+  constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService, private router: Router) { }
 
   ngOnInit() {
     this.listaUtenti = [...this.geocacherSrv.getClassifica()]
@@ -29,4 +30,9 @@ export class ClassificaPage implements OnInit {
     }
   }
 
+  VisualizzaUtente(utente: Geocacher) {
+    this.router.navigateByUrl("/classifica/dettagli-utente?idUtente=" + utente.id);
+  }
 }
+
+

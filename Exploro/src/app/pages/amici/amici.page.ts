@@ -11,22 +11,22 @@ import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
   styleUrls: ['./amici.page.scss'],
 })
 export class AmiciPage implements OnInit {
-  alertButtons:any;
+  alertButtons: any;
 
-  constructor(private richiestaSrv : RichiestaAmiciziaService,
-    private sessioneSrv :SessioneService,
+  constructor(private richiestaSrv: RichiestaAmiciziaService,
+    private sessioneSrv: SessioneService,
     private alertController: AlertController,
-    private gprova: GeocacherService) { }
+    private geocacherSrv: GeocacherService) { }
 
   ngOnInit() {
     let tmp = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
-    if(tmp!==undefined){
-      let arrInputs=[];
-      for(let c=0;c<tmp.length;c++){
+    if (tmp !== undefined) {
+      let arrInputs = [];
+      for (let c = 0; c < tmp.length; c++) {
         let richiestatmp = tmp[c];
-        let str = richiestatmp.Gchiede.username;
+        let str = this.geocacherSrv.findGeocacherById(richiestatmp.Gchiede).username;
         let i = tmp[c]
-        arrInputs.push({type:"checkbox",label:str,value:i,checked:false});
+        arrInputs.push({ type: "checkbox", label: str, value: i, checked: false });
       }
       this.displayAlert([...arrInputs]);
     }
@@ -34,26 +34,24 @@ export class AmiciPage implements OnInit {
 
   }
 
-  async displayAlert(arr : any[]){
+  async displayAlert(arr: any[]) {
     const alert = await this.alertController.create({
       header: 'Richieste di amicizia',
       message: "seleziona l'username per accettare",
-      inputs:arr,
+      inputs: arr,
       buttons: [{
         text: 'Okay',
         handler: data => {
-          console.log('Checkbox data:', data);
-          if (data !== undefined){
-            for(let i=0;i<data.length;i++){
+          if (data !== undefined) {
+            for (let i = 0; i < data.length; i++) {
               this.richiestaSrv.accettaRichiestaDiAmicizia(data[i]);
             }
           }
-          let newG = this.gprova.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
+          let newG = this.geocacherSrv.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
           localStorage.removeItem("geocacher");
-          localStorage.setItem("geocacher",JSON.stringify(newG));
+          localStorage.setItem("geocacher", JSON.stringify(newG));
         }
       }]
-
     });
 
     await alert.present();

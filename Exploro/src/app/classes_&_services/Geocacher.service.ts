@@ -131,19 +131,16 @@ export class GeocacherService {
     return [...ret];
   }
 
-  aggiungiAmicizia(g1:Geocacher,g2:Geocacher){
-
-    let index1 = this.utentiList.findIndex(u=>{return u.id===g1.id})
-    this.utentiList[index1].amiciList.push(g2.id);
-    let index2 = this.utentiList.findIndex(u=>{return u.id===g2.id})
-    this.utentiList[index2].amiciList.push(g1.id);
-
-
+  aggiungiAmicizia(g1: number, g2: number) {
+    let index1 = this.utentiList.findIndex(u => { return u.id === g1 })
+    this.utentiList[index1].amiciList.push(g2);
+    let index2 = this.utentiList.findIndex(u => { return u.id === g2 })
+    this.utentiList[index2].amiciList.push(g1);
   }
 
-  sonoAmici(g1: Geocacher, g2: Geocacher): boolean {
-    let gtmp = this.utentiList.find(u => { u.id === g1.id });
-    let arrtmp = gtmp?.amiciList.find(u => { u === g2.id });
+  sonoAmici(g1: number, g2: number): boolean {
+    let gtmp = this.utentiList.find(u => { u.id === g1 });
+    let arrtmp = gtmp?.amiciList.find(u => { u === g2 });
     if (arrtmp === undefined) {
       return false;
     } else {
@@ -153,7 +150,7 @@ export class GeocacherService {
 
   getClassifica(): Geocacher[] {
     let sortedList = [...this.utentiList];
-    sortedList.sort((a, b) => b.livello*100+b.puntiExp - a.livello*100+a.puntiExp);
+    sortedList.sort((a, b) => b.livello * 100 + b.puntiExp - a.livello * 100 + a.puntiExp);
     return [...sortedList];
   }
 }

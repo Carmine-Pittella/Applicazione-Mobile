@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ClassificaPage
+  },  {
+    path: 'dettagli-utente',
+    loadChildren: () => import('./dettagli-utente/dettagli-utente.module').then( m => m.DettagliUtentePageModule)
   }
+
 ];
 
 @NgModule({

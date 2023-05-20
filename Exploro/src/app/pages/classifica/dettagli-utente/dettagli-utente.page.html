@@ -1,0 +1,97 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="classifica"></ion-back-button>
+  </ion-buttons>
+  <ion-title>utenteSel: {{utenteSel.username}}</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-item lines="none">
+    <ion-label style="float: left; font-size: 1.1em"
+      >{{utenteSel.nome}} {{utenteSel.cognome}}</ion-label
+    >
+    <ion-label style="float: right; text-align: right; font-size: 1.1em"
+      >LIV. {{utenteSel.livello}}
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <p>0</p>
+    <ion-progress-bar value=".48" color="warning"></ion-progress-bar>
+    <p>100</p>
+  </ion-item>
+
+  <ion-item
+    style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px"
+    lines="none"
+  >
+    <ion-label class="dati-personali">Dati personali:</ion-label>
+  </ion-item>
+
+  <div style="margin-left: 10px; margin-right: 10px">
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Nome:</ion-label>
+      <ion-label style="flex: 1">{{utenteSel.nome}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Cognome:</ion-label>
+      <ion-label style="flex: 1">{{utenteSel.cognome}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Username:</ion-label>
+      <ion-label style="flex: 1">{{utenteSel.username}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Cache trovate:</ion-label>
+      <ion-label style="flex: 1">{{utenteSel.cacheTrovate.length}}</ion-label>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      class="ion-align-items-center"
+      style="margin-bottom: 20px"
+    >
+      <ion-label style="flex: 0 0 42%">Data di nascita:</ion-label>
+      <ion-label style="flex: 1"
+        >{{ util.formatDate(utenteSel.dataDiNascita) }}</ion-label
+      >
+    </ion-item>
+    <ion-button
+      class="button-orange"
+      (click)="InviaRichiestaAmicizia()"
+      *ngIf="this.richiesta.conferma === false"
+      >Richiedi amicizia
+      <ion-icon style="margin-left: 5px" name="accessibility"></ion-icon>
+    </ion-button>
+
+    <ion-label
+      *ngIf="richiesta.conferma === true"
+      color="success"
+      style="
+        font-size: 1.3em;
+        height: 45px;
+        align-items: center;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+      "
+      >{{utenteSel.username}} è tuo amico!</ion-label
+    >
+
+    <ion-label
+      *ngIf="richiesta.conferma === undefined"
+      style="
+        font-size: 1.3em;
+        height: 45px;
+        align-items: center;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+      "
+      >Richiesta già inviata</ion-label
+    >
+  </div>
+</ion-content>
