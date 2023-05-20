@@ -49,4 +49,37 @@
       </ion-card-content>
     </ion-card>
   </div>
+  <!-- ----------------------------------------- -->
+  <form
+    #formFeedback="ngForm"
+    (submit)="InviaFeedback(formFeedback)"
+    *ngIf="!CheckFeedbackGiaLasciato()"
+  >
+    <ion-item [disabled]="!cacheTrovata">
+      <ion-label position="stacked" color="secondary"
+        >Inserisci il tuo feedback</ion-label
+      >
+      <ion-textarea
+        rows="6"
+        name="feedback"
+        type="text"
+        [(ngModel)]="feedback.text"
+        required
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="!cacheTrovata || !formFeedback.valid"
+      class="button-standard"
+      >Invia feedback</ion-button
+    >
+  </form>
+
+  <ion-item lines="none" *ngIf="CheckFeedbackGiaLasciato()">
+    <ion-textarea disabled="true" style="margin-top: 30px">
+      {{feedback.text}}
+    </ion-textarea>
+  </ion-item>
 </ion-content>
