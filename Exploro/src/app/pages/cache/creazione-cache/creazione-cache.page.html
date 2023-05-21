@@ -1,0 +1,23 @@
+
+
+<ion-content [fullscreen]="true">
+  <form>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nome cache</ion-label>
+        <ion-input
+          name="nome"
+          type="text"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">descrizione cache</ion-label>
+        <ion-input
+          name="descrizione"
+          type="text"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <div style="position: absolute;width: 50%;height: 50%;border-radius: 10%;" class="mapPicker" #mapPicker></div>
+  </form>
+</ion-content>

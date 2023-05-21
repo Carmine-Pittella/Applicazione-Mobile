@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminPageModule)
   },
+  {
+    path: 'creazione-cache',
+    loadChildren: () => import('./pages/cache/creazione-cache/creazione-cache.module').then( m => m.CreazioneCachePageModule)
+  },
+
 
 
 
