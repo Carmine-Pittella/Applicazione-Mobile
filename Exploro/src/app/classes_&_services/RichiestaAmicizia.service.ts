@@ -30,27 +30,16 @@ export class RichiestaAmiciziaService {
     }
   ]
 
-  // ora dovrebbe funzionare, restituisce solo le richieste da approvare, quelle già approvate
-  // stanno nella lista di amici del Geocacher in questione tanto.
-  findRichiesteByUtente(idUtente: number): RichiestaAmicizia[] {
-    let richiesteFiltrate: RichiestaAmicizia[] = [];
-    richiesteFiltrate = this.richiesteList.filter(richiesta =>
-      richiesta.Griceve === idUtente && !richiesta.conferma
-    );
-    return richiesteFiltrate;
-  }
-
   accettaRichiestaDiAmicizia(r: RichiestaAmicizia) {
     let index = this.richiesteList.findIndex(u => { return u.id === r.id });
-    this.richiesteList[index].conferma=true;
+    this.richiesteList[index].conferma = true;
     this.geocacherSrv.aggiungiAmicizia(r.Gchiede, r.Griceve);
   }
 
   declinaRichiestaDiAmicizia(r: RichiestaAmicizia) {
-    let newarr = this.richiesteList.filter(u => { return u.id !== r.id });
-    this.richiesteList=[...newarr];
+    let index = this.richiesteList.findIndex(u => { return u.id === r.id });
+    this.richiesteList.splice(index, 1)
   }
-
 
   inviaRichiestaDiAmicizia(gchiede: number, griceve: number): string {
     if (this.isRichiestaExists(gchiede, griceve)) {
@@ -77,15 +66,23 @@ export class RichiestaAmiciziaService {
     return richiesta ? { ...richiesta } : new RichiestaAmicizia();
   }
 
-  private getIndexRichiestaById(idRichiesta: number): number {
-    const index = this.richiesteList.findIndex(r => r.id === idRichiesta);
-    if (index !== -1) {
-      return index;
-    } else {
-      throw new Error(`RichiestaAmicizia con id ${idRichiesta} non trovata.`);
-      // caso molto improbabile
-    }
+  getListaRichiesteParameter(gchiede: number, griceve: number): RichiestaAmicizia[] {
+    let richiesteFiltrate = this.richiesteList.filter(u => { return u.conferma === false });
+    richiesteFiltrate = richiesteFiltrate.filter(richiesta => {
+      if (gchiede === 0 && griceve === 0) {
+        return true; // Accetta qualsiasi valore di richiesta.Gchiede e richiesta.Griceve
+      }
+      if (gchiede === 0 && richiesta.Griceve === griceve) {
+        return true; // Accetta qualsiasi valore di richiesta.Gchiede
+      }
+      if (griceve === 0 && richiesta.Gchiede === gchiede) {
+        return true; // Accetta qualsiasi valore di richiesta.Griceve
+      }
+      return richiesta.Gchiede === gchiede && richiesta.Griceve === griceve;
+    });
+    return richiesteFiltrate.map(richiesta => ({ ...richiesta }));
   }
+
 
 }
 

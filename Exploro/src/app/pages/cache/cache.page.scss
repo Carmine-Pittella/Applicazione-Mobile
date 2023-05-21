@@ -38,3 +38,12 @@ ion-searchbar {
 .descrizione {
   max-height: 120px;
 }
+
+.aggiungi-cache {
+  --ion-color-primary: #eaa932;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

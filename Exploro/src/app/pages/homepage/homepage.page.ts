@@ -40,7 +40,7 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     console.log(localStorage.getItem("geocacher"));
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
-    this.listaRichieste = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
+    this.listaRichieste = this.richiestaSrv.getListaRichiesteParameter(0, this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
     this.numeroNot = this.listaRichieste.length;
     let el = document.getElementById("badgeNotifiche");
     if (el !== null) {

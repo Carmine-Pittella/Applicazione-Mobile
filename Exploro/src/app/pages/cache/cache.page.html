@@ -66,8 +66,11 @@
       <p>Difficoltà: {{cache.difficolta}}</p>
     </div>
   </div>
-  <ion-item routerLink="creazione-cache">
-    <ion-icon name="add-circle-outline"></ion-icon>>
-    <ion-label>Nuova cache,pulsante di prova</ion-label>
-  </ion-item>
 </ion-content>
+
+<ion-footer>
+  <ion-button class="aggiungi-cache" routerLink="creazione-cache"
+    >Aggiungi una Cache
+    <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+  </ion-button>
+</ion-footer>

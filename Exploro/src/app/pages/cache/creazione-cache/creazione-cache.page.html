@@ -1,28 +1,93 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="cache"></ion-back-button>
+  </ion-buttons>
+  <ion-title>Aggiungi una Cache:</ion-title>
+</ion-toolbar>
 
-
-<ion-content [fullscreen]="true">
-  <form>
+<ion-content>
+  <form #formAggiungiCache="ngForm">
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Nome cache</ion-label>
+        <ion-label position="floating" color="warning">Nome Cache:</ion-label>
         <ion-input
           name="nome"
           type="text"
+          [(ngModel)]="cacheAggiunta.nome"
+          required
         ></ion-input>
       </ion-item>
+
       <ion-item>
-        <ion-label position="floating">descrizione cache</ion-label>
+        <ion-label position="floating" color="warning"
+          >Descrizione e indizi:</ion-label
+        >
         <ion-input
           name="descrizione"
           type="text"
+          [(ngModel)]="cacheAggiunta.descrizione"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="warning">Difficoltà: (opzionale)</ion-label>
+        <ion-item>
+          <ion-select
+            interface="popover"
+            placeholder="Scegli il livello"
+            color="warning"
+            (ionChange)="SelezionaDifficolta($event)"
+          >
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="warning"
+          >Parola d'ordine:</ion-label
+        >
+        <ion-input
+          name="parolaOrdine"
+          type="text"
+          [(ngModel)]="cacheAggiunta.parolaOrdine"
+          required
         ></ion-input>
       </ion-item>
     </ion-list>
-    <!-- elementi per la mappa-->
-    <label>latitudine:{{selectedCoords.lat}}</label>
-    <label>longitudine:{{selectedCoords.lng}}</label>
-    <div style="position: absolute;width: 50%;height: 50%;border-radius: 10%;" class="mapPicker" #mapPicker>
-    </div>
-     <!-- elementi per la mappa-->
+
+    <label style="font-size: 1.2em; margin-left: 15px"
+      >Scegli la posizione della Cache:</label
+    >
+    <div
+      style="
+        position: absolute;
+        margin-left: 15px;
+        margin-top: 15px;
+        margin-right: 15px;
+        height: 50%;
+      "
+      class="mapPicker"
+      #mapPicker
+    ></div>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-button
+    class="conferma"
+    id="invio-nuova-cache"
+    type="submit"
+    [disabled]="!formAggiungiCache.valid || !isCoordinateSelected"
+    >CONFERMA
+    <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+  </ion-button>
+  <ion-alert
+    trigger="invio-nuova-cache"
+    header="Vuoi confermare?"
+    [buttons]="alertButtons"
+  ></ion-alert>
+</ion-footer>

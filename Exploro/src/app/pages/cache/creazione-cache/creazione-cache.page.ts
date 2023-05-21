@@ -1,25 +1,63 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ElementRef,ViewChild} from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import { Renderer2 } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { Cache } from 'src/app/classes_&_services/Cache';
+import { CacheService } from 'src/app/classes_&_services/Cache.service';
 
 @Component({
   selector: 'app-creazione-cache',
   templateUrl: './creazione-cache.page.html',
   styleUrls: ['./creazione-cache.page.scss'],
 })
-export class CreazioneCachePage implements OnInit,AfterViewInit {
+export class CreazioneCachePage implements OnInit, AfterViewInit {
   @ViewChild('mapPicker') mapElementRef: ElementRef; //MAPPA
   private mappa = new BehaviorSubject<any>([]); //MAPPA
-  markerPosition:any = undefined; //MAPPA
-  selectedCoords:any = {lat:0,lng:0}; //MAPPA
+  markerPosition: any = undefined; //MAPPA
+  selectedCoords: any = { lat: 0, lng: 0 }; //MAPPA
   sub: Subscription //MAPPA
-  constructor( private reneder: Renderer2) { }
+  cacheAggiunta: Cache = new Cache
+  isCoordinateSelected: boolean = false
+
+  constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService) { }
 
   ngOnInit() {
+    this.cacheAggiunta.difficolta = 1
   }
-  ngAfterViewInit(){
+
+  Conferma() {
+    this.cacheAggiunta.latitudine = this.selectedCoords[0]
+    this.cacheAggiunta.longitudine = this.selectedCoords[1]
+    this.cacheAggiunta.statoApprovazione = true
+    this.cacheAggiunta.img = "default.png"
+    this.cacheSrv.addCache(this.cacheAggiunta)
+    this.router.navigateByUrl("cache")
+  }
+
+  SelezionaDifficolta(event: any) {
+    this.cacheAggiunta.difficolta = event.target.value
+  }
+
+  // ALERT PER CONFERMARE L'INVIO
+  public alertButtons = [
+    {
+      text: 'No',
+      cssClass: 'alert-button-cancel',
+    },
+    {
+      text: 'Yes',
+      cssClass: 'alert-button-confirm',
+      handler: () => {
+        this.Conferma();
+      },
+    },
+  ];
+
+  // METODI PER LA MAPPA
+  ngAfterViewInit() {
     this.getGoogleMaps().then(googleMaps => {
       const mapEl = this.mapElementRef.nativeElement;
       const map = new googleMaps.Map(mapEl, {
@@ -31,21 +69,21 @@ export class CreazioneCachePage implements OnInit,AfterViewInit {
         googleMaps.event.addListenerOnce(u, 'idle', () => {
           this.reneder.addClass(mapEl, 'visible');
         });
-        u.addListener("click",(event:any)=>{
+        u.addListener("click", (event: any) => {
           this.selectedCoords = {
-            lat : event.latLng.lat(),
-            lng : event.latLng.lng()
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
           }
-          console.log( this.selectedCoords);
-          this.reloadMap(this.selectedCoords.lat,this.selectedCoords.lng);
+          this.isCoordinateSelected = true
+          this.reloadMap(this.selectedCoords.lat, this.selectedCoords.lng);
         })
       })
     }).catch(err => {
       console.log(err)
     });
-
   }
-  private reloadMap(latitude:number,longitude:number){
+
+  private reloadMap(latitude: number, longitude: number) {
     if (this.sub) {
       this.sub.unsubscribe();
     }
@@ -55,28 +93,27 @@ export class CreazioneCachePage implements OnInit,AfterViewInit {
         center: { lat: latitude, lng: longitude },
         zoom: 10
       });
-      this.mappa=  new BehaviorSubject<any>([]);
+      this.mappa = new BehaviorSubject<any>([]);
       this.mappa.next(map);
       this.sub = this.mappa.pipe().subscribe((u: any) => {
         googleMaps.event.addListenerOnce(u, 'idle', () => {
           this.reneder.addClass(mapEl, 'visible');
         });
         this.markerPosition = new googleMaps.Marker({
-          position: new googleMaps.LatLng( latitude, longitude),
+          position: new googleMaps.LatLng(latitude, longitude),
           title: "position",
           map: u,
         });
-        u.addListener("click",(event:any)=>{
+        u.addListener("click", (event: any) => {
           this.selectedCoords = {
-            lat : event.latLng.lat(),
-            lng : event.latLng.lng()
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
           }
-          console.log( this.selectedCoords);
-          this.reloadMap(this.selectedCoords.lat,this.selectedCoords.lng);
+          console.log(this.selectedCoords);
+          this.reloadMap(this.selectedCoords.lat, this.selectedCoords.lng);
         })
       })
     })
-
   }
 
   private getGoogleMaps(): Promise<any> {
@@ -101,7 +138,4 @@ export class CreazioneCachePage implements OnInit,AfterViewInit {
       };
     });
   }
-
-
-
 }

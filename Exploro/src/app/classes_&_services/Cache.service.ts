@@ -106,26 +106,31 @@ export class CacheService {
       parolaOrdine: "aawqrwer",
       img: this.percorso + "cimitero.png"
     }
-
-
-
-
   ];
+
   findIdByCache(c: Cache) {
     return c.id;
   }
   getAllCache(): Cache[] {
     return [...this.CacheList];
   }
-
   getAllCacheApprovate(): Cache[] {
     let c: Cache[] = this.CacheList.filter(c => c.statoApprovazione === true);
     return [...c];
   }
-
+  getAllCacheNonApprovate(): Cache[] {
+    let c: Cache[] = this.CacheList.filter(c => c.statoApprovazione === false);
+    return [...c];
+  }
   findCacheById(i: number): Cache {
     let c: Cache[] = this.CacheList.filter(c => c.id === i);
     return c[0];
+  }
+
+  addCache(cache: Cache) {
+    cache.id = this.CacheList[this.CacheList.length - 1].id + 1
+    cache.img = this.percorso + cache.img
+    this.CacheList.push(cache)
   }
 
   getCacheFiltered(Fnome: string, Fdifficolta: number, Fdistanza: number): Cache[] {
