@@ -30,15 +30,9 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
 
 
   Conferma() {
-<<<<<<< HEAD
     this.cacheAggiunta.latitudine = this.selectedCoords.lat
     this.cacheAggiunta.longitudine = this.selectedCoords.lng
     this.cacheAggiunta.statoApprovazione = true
-=======
-    this.cacheAggiunta.latitudine = this.selectedCoords[0]
-    this.cacheAggiunta.longitudine = this.selectedCoords[1]
-    this.cacheAggiunta.statoApprovazione = false
->>>>>>> 469be0c2089c70436c4ee5b199043ab91e516bbd
     this.cacheAggiunta.img = "default.png"
     this.cacheSrv.addCache(this.cacheAggiunta)
     this.router.navigateByUrl("cache")
