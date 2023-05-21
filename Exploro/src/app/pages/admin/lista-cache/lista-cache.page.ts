@@ -27,9 +27,4 @@ export class ListaCachePage implements OnInit {
       this.listaCacheFiltrate = [...this.listaCache]
     }
   }
-
-  ScegliCache(cache: Cache) {
-
-  }
-
 }

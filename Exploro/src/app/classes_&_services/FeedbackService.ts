@@ -30,6 +30,10 @@ export class FeedbackService {
     const feedback = this.listFeedback.find(f => f.id_utente === utente && f.id_cache === cache);
     return feedback ? feedback : new Feedback();
   }
+
+  getListaFeedbackPerCache(cache: number): Feedback[] {
+    return this.listFeedback.filter(feedback => feedback.id_cache === cache);
+  }
 }
 
 

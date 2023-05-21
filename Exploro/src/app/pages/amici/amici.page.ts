@@ -51,22 +51,21 @@ export class AmiciPage implements OnInit {
           let newG = this.geocacherSrv.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
           localStorage.removeItem("geocacher");
           localStorage.setItem("geocacher", JSON.stringify(newG));
-          let tmp :RichiestaAmicizia[] = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
+          let tmp: RichiestaAmicizia[] = this.richiestaSrv.findRichiesteByUtente(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
           if (tmp !== undefined) {
-            for(let i=0;i<tmp.length;i++){
-              if(tmp[i].conferma===false){
+            for (let i = 0; i < tmp.length; i++) {
+              if (tmp[i].conferma === false) {
                 this.richiestaSrv.declinaRichiestaDiAmicizia(tmp[i]);
               }
             }
           }
           let el = document.getElementById("badgeNotifiche");
-          if( el!== null){
-            el.style.display= "none"
+          if (el !== null) {
+            el.style.display = "none"
           }
         }
       }]
     });
-
     await alert.present();
     let result = await alert.onDidDismiss();
   }

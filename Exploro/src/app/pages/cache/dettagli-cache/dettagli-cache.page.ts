@@ -23,6 +23,7 @@ export class DettagliCachePage implements OnInit {
   messageAlert: string
   selezionato: boolean
   feedback: Feedback = new Feedback
+  listaFeedbackCache: Feedback[] = []
 
   constructor(private router: Router,
     private cacheService: CacheService,
@@ -99,6 +100,10 @@ export class DettagliCachePage implements OnInit {
   CheckFeedbackGiaLasciato(): boolean {
     let id_utente_sessione = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
     return this.feedbackSrv.isFeedbackLasciato(id_utente_sessione, this.cache.id)
+  }
+
+  ApriTuttiFeedback() {
+    this.listaFeedbackCache = this.feedbackSrv.getListaFeedbackPerCache(this.cache.id)
   }
 
 }
