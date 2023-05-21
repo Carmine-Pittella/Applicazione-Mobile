@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 
+
 @Component({
   selector: 'app-cache',
   templateUrl: './cache.page.html',
@@ -20,6 +21,7 @@ export class CachePage implements OnInit {
     this.listaCache = this.cacheService.getAllCacheApprovate()
     this.listaCacheFiltrate = [...this.listaCache]
   }
+
 
   FiltraRisultati(event: any) {
     if (event.target.value != "") {
