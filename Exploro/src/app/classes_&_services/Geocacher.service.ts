@@ -111,16 +111,13 @@ export class GeocacherService {
   }
 
   addCacheTrovata(idUtente: number, idCache: number) {
+    console.log("dio carus")
     let g = this.utentiList.find(u => u.id === idUtente)
+    console.log(g)
     if (g) {
       g.cacheTrovate.push(idCache)
       // aggiorna punteggio
-      let cache = this.cacheSrv.findCacheById(idCache)
-      let xpAdd = cache.difficolta * 25 + 50
-      if (g.puntiExp + xpAdd % 100 === 1) {
-        g.livello += 1
-      }
-      g.puntiExp = (g.puntiExp + xpAdd) % 100
+      this.aumentaXP(idUtente,idCache)
     }
   }
 
@@ -170,6 +167,17 @@ export class GeocacherService {
     let utente = this.utentiList.find(u => u.id === id_utente);
     let amiciList: Geocacher[] = utente?.amiciList.map(id => this.findGeocacherById(id))!;
     return amiciList
+  }
+
+  aumentaXP(idUtente:number,puntixp:number){
+    let index = this.utentiList.findIndex(u=>u.id===idUtente)
+    let xp = this.utentiList[index].puntiExp;
+    xp = xp + puntixp;
+    if(xp>=100){
+      xp=xp-100;
+      this.utentiList[index].livello = this.utentiList[index].livello+1;
+    }
+    this.utentiList[index].puntiExp = xp;
   }
 
 }
