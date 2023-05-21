@@ -11,13 +11,14 @@ import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
 import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 import { RichiestaAmicizia } from 'src/app/classes_&_services/RichiestaAmicizia';
 import { RichiestaAmiciziaService } from 'src/app/classes_&_services/RichiestaAmicizia.service';
+import {ViewWillEnter} from '@ionic/angular';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.page.html',
   styleUrls: ['./homepage.page.scss'],
 })
-export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
+export class HomepagePage implements OnInit, AfterViewInit, OnDestroy,ViewWillEnter {
   difficoltaSelezionata: number
   private mappa = new BehaviorSubject<any>([]); ///MAPPA
   @ViewChild('map') mapElementRef: ElementRef; ///MAPPA
@@ -51,6 +52,9 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+  }
+  ionViewWillEnter(){
+    this.listaCache = this.cacheSrv.getAllCacheApprovate()
   }
 
   //////////////////////////// FOR MAP //////////////////////////

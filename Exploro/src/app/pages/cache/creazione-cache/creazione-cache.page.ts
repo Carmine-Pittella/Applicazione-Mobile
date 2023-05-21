@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
 
+
 @Component({
   selector: 'app-creazione-cache',
   templateUrl: './creazione-cache.page.html',
@@ -27,6 +28,7 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   ngOnInit() {
     this.cacheAggiunta.difficolta = 1
   }
+
 
   Conferma() {
     this.cacheAggiunta.latitudine = this.selectedCoords[0]

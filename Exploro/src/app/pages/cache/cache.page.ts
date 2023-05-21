@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
+import {ViewWillEnter} from '@ionic/angular'
 
 
 @Component({
@@ -9,7 +10,7 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
   templateUrl: './cache.page.html',
   styleUrls: ['./cache.page.scss'],
 })
-export class CachePage implements OnInit {
+export class CachePage implements OnInit,ViewWillEnter {
   listaCache: Cache[] = []
   listaCacheFiltrate: Cache[] = []
   difficoltaSelezionata = 0;
@@ -21,7 +22,10 @@ export class CachePage implements OnInit {
     this.listaCache = this.cacheService.getAllCacheApprovate()
     this.listaCacheFiltrate = [...this.listaCache]
   }
-
+  ionViewWillEnter(){
+    this.listaCache = this.cacheService.getAllCacheApprovate()
+    this.listaCacheFiltrate = [...this.listaCache]
+  }
 
   FiltraRisultati(event: any) {
     if (event.target.value != "") {
