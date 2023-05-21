@@ -20,19 +20,18 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   markerPosition: any = undefined; //MAPPA
   selectedCoords: any = { lat: 0, lng: 0 }; //MAPPA
   sub: Subscription //MAPPA
-  cacheAggiunta: Cache = new Cache
+  cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
   isCoordinateSelected: boolean = false
 
   constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService) { }
 
   ngOnInit() {
-    this.cacheAggiunta.difficolta = 1
   }
 
 
   Conferma() {
-    this.cacheAggiunta.latitudine = this.selectedCoords[0]
-    this.cacheAggiunta.longitudine = this.selectedCoords[1]
+    this.cacheAggiunta.latitudine = this.selectedCoords.lat
+    this.cacheAggiunta.longitudine = this.selectedCoords.lng
     this.cacheAggiunta.statoApprovazione = true
     this.cacheAggiunta.img = "default.png"
     this.cacheSrv.addCache(this.cacheAggiunta)
@@ -40,7 +39,7 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   }
 
   SelezionaDifficolta(event: any) {
-    this.cacheAggiunta.difficolta = event.target.value
+    this.cacheAggiunta.difficolta = parseInt(event.target.value)
   }
 
   // ALERT PER CONFERMARE L'INVIO

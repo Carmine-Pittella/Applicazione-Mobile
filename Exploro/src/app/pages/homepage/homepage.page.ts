@@ -54,11 +54,9 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy,ViewWillEn
 
   }
   ionViewWillEnter(){
+    console.log("ss");
     this.listaCache = this.cacheSrv.getAllCacheApprovate()
-  }
-
-  //////////////////////////// FOR MAP //////////////////////////
-  ngAfterViewInit(): void {
+    console.log(this.listaCache);
     Geolocation.getCurrentPosition().then(p => {
       this.getGoogleMaps().then(googleMaps => {
         const mapEl = this.mapElementRef.nativeElement;
@@ -120,6 +118,12 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy,ViewWillEn
         console.log(err)
       });
     });
+
+  }
+
+  //////////////////////////// FOR MAP //////////////////////////
+  ngAfterViewInit(): void {
+
   }
 
   /////////////////////// FOR MAP METHOD //////////////////////////
