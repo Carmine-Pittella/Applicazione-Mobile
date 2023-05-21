@@ -7,6 +7,7 @@ import { Cache } from './Cache';
   providedIn: 'root',
 })
 export class GeocacherService {
+  private cacheSrv: CacheService
   utentiList: Geocacher[] = [
     {
       id: 1,
@@ -110,9 +111,19 @@ export class GeocacherService {
   }
 
   addCacheTrovata(idUtente: number, idCache: number) {
-    let g = this.utentiList.filter(u => u.id === idUtente)
-    g[0].cacheTrovate.push(idCache)
+    let g = this.utentiList.find(u => u.id === idUtente)
+    if (g) {
+      g.cacheTrovate.push(idCache)
+      // aggiorna punteggio
+      let cache = this.cacheSrv.findCacheById(idCache)
+      let xpAdd = cache.difficolta * 25 + 50
+      if (g.puntiExp + xpAdd % 100 === 1) {
+        g.livello += 1
+      }
+      g.puntiExp = (g.puntiExp + xpAdd) % 100
+    }
   }
+
 
   findAllCacheNonTrovateByIDUtente(idU: number, AllCache: Cache[]): Cache[] {
     let alC: number[] = [];
@@ -154,4 +165,11 @@ export class GeocacherService {
     sortedList.sort((a, b) => b.livello * 100 + b.puntiExp - a.livello * 100 + a.puntiExp);
     return [...sortedList];
   }
+
+  getClassificaAmici(id_utente: number): Geocacher[] {
+    let utente = this.utentiList.find(u => u.id === id_utente);
+    let amiciList: Geocacher[] = utente?.amiciList.map(id => this.findGeocacherById(id))!;
+    return amiciList
+  }
+
 }
