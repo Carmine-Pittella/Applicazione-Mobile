@@ -111,13 +111,11 @@ export class GeocacherService {
   }
 
   addCacheTrovata(idUtente: number, idCache: number) {
-    console.log("dio carus")
     let g = this.utentiList.find(u => u.id === idUtente)
-    console.log(g)
     if (g) {
       g.cacheTrovate.push(idCache)
       // aggiorna punteggio
-      this.aumentaXP(idUtente,idCache)
+      this.aumentaXP(idUtente, idCache)
     }
   }
 
@@ -140,10 +138,10 @@ export class GeocacherService {
   }
 
   aggiungiAmicizia(g1: number, g2: number) {
-    let index1 = this.utentiList.findIndex(u => { return u.id === g1 })
-    this.utentiList[index1].amiciList.push(g2);
-    // let index2 = this.utentiList.findIndex(u => { return u.id === g2 })
-    // this.utentiList[index2].amiciList.push(g1);
+    // let index1 = this.utentiList.findIndex(u => { return u.id === g1 })
+    // this.utentiList[index1].amiciList.push(g2);
+    let index2 = this.utentiList.findIndex(u => { return u.id === g2 })
+    this.utentiList[index2].amiciList.push(g1);
     // non è detto che se io accetto la sua richiesta allora anche lui ha accettato la mia (che non ho mandato)
   }
 
@@ -169,13 +167,13 @@ export class GeocacherService {
     return amiciList
   }
 
-  aumentaXP(idUtente:number,puntixp:number){
-    let index = this.utentiList.findIndex(u=>u.id===idUtente)
+  aumentaXP(idUtente: number, puntixp: number) {
+    let index = this.utentiList.findIndex(u => u.id === idUtente)
     let xp = this.utentiList[index].puntiExp;
     xp = xp + puntixp;
-    if(xp>=100){
-      xp=xp-100;
-      this.utentiList[index].livello = this.utentiList[index].livello+1;
+    if (xp >= 100) {
+      xp = xp - 100;
+      this.utentiList[index].livello = this.utentiList[index].livello + 1;
     }
     this.utentiList[index].puntiExp = xp;
   }

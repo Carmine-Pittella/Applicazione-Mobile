@@ -13,20 +13,28 @@ import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
 export class ClassificaPage implements ViewWillEnter {
   listaUtenti: Geocacher[] = []
   idUtente: number
+  eventMemo: any
 
   constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService, private router: Router) { }
 
   ionViewWillEnter() {
-    this.listaUtenti = [...this.geocacherSrv.getClassifica()]
     this.idUtente = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
+    if (this.eventMemo) {
+      this.TipoClassifica(this.eventMemo)
+    }
+    else {
+      this.TipoClassifica({ detail: { value: "globale" } })
+    }
   }
-
+  // sono un genio.
   TipoClassifica(event: any) {
+    this.eventMemo = event
     if (event.detail.value === "globale") {
       this.listaUtenti = [...this.geocacherSrv.getClassifica()]
     }
     else {
       this.listaUtenti = [...this.geocacherSrv.getClassificaAmici(this.idUtente)]
+      console.log(this.listaUtenti)
     }
   }
 

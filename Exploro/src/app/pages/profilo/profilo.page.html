@@ -69,9 +69,15 @@
         >{{ util.formatDate(geocacher.dataDiNascita) }}</ion-label
       >
     </ion-item>
-    <ion-button class="button-orange" routerLink="modifica-dati"
-      >modifica i dati
-      <ion-icon style="margin-left: 5px" name="pencil"></ion-icon>
-    </ion-button>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-button
+    class="button-orange"
+    routerLink="modifica-dati"
+    style="display: block; width: 100%"
+    >modifica i dati
+    <ion-icon style="margin-left: 5px" name="pencil"></ion-icon>
+  </ion-button>
+</ion-footer>
