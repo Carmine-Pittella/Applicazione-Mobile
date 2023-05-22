@@ -87,6 +87,7 @@ export class DettagliCachePage implements OnInit {
     this.utenteService.addCacheTrovata(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")), this.cache.id)
     this.selezionato = true
     this.cacheTrovata = !this.cacheTrovata
+    console.log(this.utenteService.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))))
   }
 
   InviaFeedback(form: NgForm) {

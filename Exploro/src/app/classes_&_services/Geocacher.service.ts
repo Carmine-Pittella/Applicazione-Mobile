@@ -33,7 +33,7 @@ export class GeocacherService {
       cellulare: 365261,
       dataDiNascita: new Date('2000/05/11'),
       livello: 2,
-      puntiExp: 48,
+      puntiExp: 99,
       amiciList: [],
       cacheTrovate: [1, 2, 3]
     },
@@ -112,10 +112,10 @@ export class GeocacherService {
 
   addCacheTrovata(idUtente: number, idCache: number) {
     let g = this.utentiList.find(u => u.id === idUtente)
+    console.log(g)
     if (g) {
       g.cacheTrovate.push(idCache)
       // aggiorna punteggio
-      this.aumentaXP(idUtente, idCache)
       let x: Cache = this.cS.findCacheById(idCache);
       this.aumentaXP(idUtente, x.difficolta)
     }
