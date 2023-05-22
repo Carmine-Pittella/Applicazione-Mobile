@@ -18,8 +18,8 @@ export class GeocacherService {
       mail: 'fabrizio.paglia@gmail.com',
       cellulare: 3665904021,
       dataDiNascita: new Date('2000/03/09'),
-      livello: 9,
-      puntiExp: 48,
+      livello: 8,
+      puntiExp: 99,
       amiciList: [],
       cacheTrovate: [1, 2, 4, 5]
     },
@@ -116,6 +116,8 @@ export class GeocacherService {
       g.cacheTrovate.push(idCache)
       // aggiorna punteggio
       this.aumentaXP(idUtente, idCache)
+      let x: Cache = this.cS.findCacheById(idCache);
+      this.aumentaXP(idUtente, x.difficolta)
     }
   }
 
