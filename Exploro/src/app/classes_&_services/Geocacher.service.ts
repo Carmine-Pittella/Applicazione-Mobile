@@ -33,7 +33,7 @@ export class GeocacherService {
       cellulare: 365261,
       dataDiNascita: new Date('2000/05/11'),
       livello: 2,
-      puntiExp: 99,
+      puntiExp: 25,
       amiciList: [],
       cacheTrovate: [1, 2, 3]
     },
@@ -169,6 +169,7 @@ export class GeocacherService {
     return amiciList
   }
 
+<<<<<<< HEAD
   aumentaXP(idUtente: number, puntixp: number) {
     let index = this.utentiList.findIndex(u => u.id === idUtente)
     let xp = this.utentiList[index].puntiExp;
@@ -178,6 +179,17 @@ export class GeocacherService {
       this.utentiList[index].livello = this.utentiList[index].livello + 1;
     }
     this.utentiList[index].puntiExp = xp;
+=======
+  aumentaXP(idUtente: number, livello: number) {
+    const geocacher = this.findGeocacherById(idUtente);
+    const puntiExp = geocacher.puntiExp + livello * 25 + 50;
+    geocacher.livello += Math.floor(puntiExp / 100);
+    geocacher.puntiExp = puntiExp % 100;
+>>>>>>> e99be4112fde1ba940d041ce6842270ca458e7e1
   }
+  // livello 1: 75xp livello 2: 100xp livello 3:125 xp
+
+
+
 
 }
