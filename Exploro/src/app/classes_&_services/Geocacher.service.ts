@@ -169,15 +169,34 @@ export class GeocacherService {
     return amiciList
   }
 
+<<<<<<< HEAD
   aumentaXP(idUtente: number, livello: number) {
     const geocacher = this.findGeocacherById(idUtente);
     const puntiExp = geocacher.puntiExp + livello * 25 + 50;
     geocacher.livello += Math.floor(puntiExp / 100);
     geocacher.puntiExp = puntiExp % 100;
+=======
+  aumentaXP(idUtente: number, puntixp: number) {
+    let index = this.utentiList.findIndex(u => u.id === idUtente)
+    let xp = this.utentiList[index].puntiExp;
+    xp = xp + 2 * puntixp;
+    if (xp >= 100) {
+      xp = xp - 100;
+      this.utentiList[index].livello = this.utentiList[index].livello + 1;
+    }
+    this.utentiList[index].puntiExp = xp;
+
+    // aumentaXP(idUtente: number, livello: number) {
+    //   const geocacher = this.findGeocacherById(idUtente);
+    //   const puntiExp = geocacher.puntiExp + livello * 25 + 50;
+    //   geocacher.livello += Math.floor(puntiExp / 100);
+    //   geocacher.puntiExp = puntiExp % 100;
+    // }
+    // // livello 1: 75xp livello 2: 100xp livello 3:125 xp
+
+
+
+
+>>>>>>> 0a393de4dc081fb0b7137e45404e0948721dc978
   }
-  // livello 1: 75xp livello 2: 100xp livello 3:125 xp
-
-
-
-
 }
