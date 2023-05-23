@@ -39,7 +39,6 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy,ViewWillEn
   ) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem("geocacher"));
     this.listaCache = this.cacheSrv.getAllCacheApprovate();
     this.listaRichieste = this.richiestaSrv.getListaRichiesteParameter(0, this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")));
     this.numeroNot = this.listaRichieste.length;
@@ -54,9 +53,10 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy,ViewWillEn
 
   }
   ionViewWillEnter(){
-    console.log("ss");
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
     this.listaCache = this.cacheSrv.getAllCacheApprovate()
-    console.log(this.listaCache);
     Geolocation.getCurrentPosition().then(p => {
       this.getGoogleMaps().then(googleMaps => {
         const mapEl = this.mapElementRef.nativeElement;

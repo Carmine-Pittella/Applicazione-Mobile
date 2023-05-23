@@ -169,13 +169,6 @@ export class GeocacherService {
     return amiciList
   }
 
-<<<<<<< HEAD
-  aumentaXP(idUtente: number, livello: number) {
-    const geocacher = this.findGeocacherById(idUtente);
-    const puntiExp = geocacher.puntiExp + livello * 25 + 50;
-    geocacher.livello += Math.floor(puntiExp / 100);
-    geocacher.puntiExp = puntiExp % 100;
-=======
   aumentaXP(idUtente: number, puntixp: number) {
     let index = this.utentiList.findIndex(u => u.id === idUtente)
     let xp = this.utentiList[index].puntiExp;
@@ -197,6 +190,5 @@ export class GeocacherService {
 
 
 
->>>>>>> 0a393de4dc081fb0b7137e45404e0948721dc978
   }
 }

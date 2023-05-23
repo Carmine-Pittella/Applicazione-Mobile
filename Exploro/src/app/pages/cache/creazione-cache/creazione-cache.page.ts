@@ -35,13 +35,9 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   sub: Subscription //MAPPA
   selectedImage: any = undefined; //PHOTO
   provaPath = "prima della foto" //PHOTO
-<<<<<<< HEAD
   images: LocalFile[]=[]; //PHOTO
 
   cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
-=======
-  cacheAggiunta: Cache = { id: 0, nome: '', descrizione: '', latitudine: 0, longitudine: 0, difficolta: 1, statoApprovazione: true, parolaOrdine: "", img: "" }
->>>>>>> 0a393de4dc081fb0b7137e45404e0948721dc978
   isCoordinateSelected: boolean = false
 
   constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService,
@@ -59,13 +55,8 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     this.cacheAggiunta.statoApprovazione = true
     if (this.selectedImage === undefined) {
       this.cacheAggiunta.img = "../../assets/foto/default.png"
-<<<<<<< HEAD
     }else{
       this.cacheAggiunta.img = this.selectedImage.webPath
-=======
-    } else {
-      this.cacheAggiunta.img = this.selectedImage
->>>>>>> 0a393de4dc081fb0b7137e45404e0948721dc978
     }
     this.cacheSrv.addCache(this.cacheAggiunta)
     this.router.navigateByUrl("cache")
@@ -173,17 +164,12 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     });
   }
 
-<<<<<<< HEAD
 
   //////////////////////////////////////PHOTO PART //////////////////////////////////////////////////////
 
 
   isPlatformWeb():boolean{
     if(Capacitor.getPlatform()=="web") return true;
-=======
-  isPlatformWeb(): boolean {
-    if (Capacitor.getPlatform() == "web") return true;
->>>>>>> 0a393de4dc081fb0b7137e45404e0948721dc978
     return false;
   }
   scattaFoto(): Promise<Photo> {
