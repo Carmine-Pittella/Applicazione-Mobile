@@ -16,7 +16,7 @@ export class CacheService {
       difficolta: 1,
       statoApprovazione: true,
       parolaOrdine: "antani",
-      img: this.percorso + "default.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ export class CacheService {
       difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "antani1",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 3,
@@ -38,7 +38,7 @@ export class CacheService {
       difficolta: 3,
       statoApprovazione: true,
       parolaOrdine: "antani2",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 4,
@@ -49,7 +49,7 @@ export class CacheService {
       difficolta: 1,
       statoApprovazione: true,
       parolaOrdine: "antani3",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ export class CacheService {
       difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "antani4",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 6,
@@ -71,7 +71,7 @@ export class CacheService {
       difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "aaab6",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 7,
@@ -82,7 +82,7 @@ export class CacheService {
       difficolta: 1,
       statoApprovazione: true,
       parolaOrdine: "aaac7",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 8,
@@ -93,7 +93,7 @@ export class CacheService {
       difficolta: 2,
       statoApprovazione: true,
       parolaOrdine: "aawwwer",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/default.png"
     },
     {
       id: 9,
@@ -104,7 +104,7 @@ export class CacheService {
       difficolta: 3,
       statoApprovazione: true,
       parolaOrdine: "aawqrwer",
-      img: this.percorso + "cimitero.png"
+      img: "../../assets/foto/cimitero.png"
     }
   ];
 
@@ -129,7 +129,7 @@ export class CacheService {
 
   addCache(cache: Cache) {
     cache.id = this.CacheList[this.CacheList.length - 1].id + 1
-    cache.img = this.percorso + cache.img
+    //cache.img = this.percorso + cache.img
     this.CacheList.push(cache)
   }
 

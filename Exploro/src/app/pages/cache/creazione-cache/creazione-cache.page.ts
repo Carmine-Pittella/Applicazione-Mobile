@@ -7,6 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { Cache } from 'src/app/classes_&_services/Cache';
 import { CacheService } from 'src/app/classes_&_services/Cache.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Photo } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 
 
 @Component({
@@ -15,11 +18,14 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
   styleUrls: ['./creazione-cache.page.scss'],
 })
 export class CreazioneCachePage implements OnInit, AfterViewInit {
+
   @ViewChild('mapPicker') mapElementRef: ElementRef; //MAPPA
   private mappa = new BehaviorSubject<any>([]); //MAPPA
   markerPosition: any = undefined; //MAPPA
   selectedCoords: any = { lat: 0, lng: 0 }; //MAPPA
   sub: Subscription //MAPPA
+  selectedImage :any = undefined; //PHOTO
+  provaPath = "prima della foto" //PHOTO
   cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
   isCoordinateSelected: boolean = false
 
@@ -33,7 +39,11 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     this.cacheAggiunta.latitudine = this.selectedCoords.lat
     this.cacheAggiunta.longitudine = this.selectedCoords.lng
     this.cacheAggiunta.statoApprovazione = true
-    this.cacheAggiunta.img = "default.png"
+    if (this.selectedImage===undefined){
+      this.cacheAggiunta.img = "../../assets/foto/default.png"
+    }else{
+      this.cacheAggiunta.img = this.selectedImage
+    }
     this.cacheSrv.addCache(this.cacheAggiunta)
     this.router.navigateByUrl("cache")
   }
@@ -138,5 +148,33 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
         }
       };
     });
+  }
+
+  isPlatformWeb():boolean{
+    if(Capacitor.getPlatform()=="web") return true;
+    return false;
+  }
+  scattaFoto() :Promise<Photo>{
+    return new Promise((resolve,reject)=>{
+      resolve(Camera.getPhoto({
+        quality: 90,
+        //allowEditing: true,
+        source: CameraSource.Prompt,
+        resultType: this.isPlatformWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
+      }));
+      reject("non funziona :(");
+
+    })
+
+  }
+  scattaFoto1(){
+    this.scattaFoto().then(image=>{
+      this.selectedImage = image;
+      this.provaPath = this.selectedImage.webPath;
+      if(this.isPlatformWeb()){
+        this.selectedImage.webPath = image.dataUrl
+      }
+    })
+
   }
 }

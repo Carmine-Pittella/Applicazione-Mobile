@@ -172,7 +172,7 @@ export class GeocacherService {
   aumentaXP(idUtente: number, puntixp: number) {
     let index = this.utentiList.findIndex(u => u.id === idUtente)
     let xp = this.utentiList[index].puntiExp;
-    xp = xp + puntixp;
+    xp = xp + 2* puntixp;
     if (xp >= 100) {
       xp = xp - 100;
       this.utentiList[index].livello = this.utentiList[index].livello + 1;

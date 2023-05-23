@@ -6,6 +6,18 @@
 </ion-toolbar>
 
 <ion-content>
+
+
+<!-- BOTTONE DI PROVA PER LE FOTO-->
+<ion-button (click)="scattaFoto1()">
+  scatta una foto dio cane
+</ion-button>
+<ion-thumbnail>
+  <img [src]="selectedImage ? selectedImage.webPath : '../../assets/foto/cimitero.png' " />
+</ion-thumbnail>
+<label>
+  {{provaPath}}
+</label>
   <form #formAggiungiCache="ngForm">
     <ion-list>
       <ion-item>
