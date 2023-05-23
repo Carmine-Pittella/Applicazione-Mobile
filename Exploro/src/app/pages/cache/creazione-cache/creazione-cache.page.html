@@ -6,18 +6,6 @@
 </ion-toolbar>
 
 <ion-content>
-
-
-<!-- BOTTONE DI PROVA PER LE FOTO-->
-<ion-button (click)="scattaFoto1()">
-  scatta una foto dio cane
-</ion-button>
-<ion-thumbnail>
-  <img [src]="selectedImage ? selectedImage.webPath : '../../assets/foto/cimitero.png' " />
-</ion-thumbnail>
-<label>
-  {{provaPath}}
-</label>
   <form #formAggiungiCache="ngForm">
     <ion-list>
       <ion-item>
@@ -43,7 +31,19 @@
       </ion-item>
 
       <ion-item>
-        <ion-label color="warning">Difficoltà: (opzionale)</ion-label>
+        <ion-label position="floating" color="warning"
+          >Parola d'ordine:</ion-label
+        >
+        <ion-input
+          name="parolaOrdine"
+          type="text"
+          [(ngModel)]="cacheAggiunta.parolaOrdine"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="warning">Difficoltà</ion-label>
         <ion-item>
           <ion-select
             interface="popover"
@@ -58,17 +58,20 @@
         </ion-item>
       </ion-item>
 
+      <!-- BOTTONE DI PROVA PER LE FOTO-->
       <ion-item>
-        <ion-label position="floating" color="warning"
-          >Parola d'ordine:</ion-label
-        >
-        <ion-input
-          name="parolaOrdine"
-          type="text"
-          [(ngModel)]="cacheAggiunta.parolaOrdine"
-          required
-        ></ion-input>
+        <ion-label color="warning">Scatta una foto</ion-label>
+        <ion-item>
+          <ion-icon name="camera" (click)="scattaFoto1()" slot="end"></ion-icon>
+        </ion-item>
       </ion-item>
+
+      <ion-thumbnail>
+        <img
+          [src]="selectedImage ? selectedImage.webPath : '../../assets/foto/cimitero.png' "
+        />
+      </ion-thumbnail>
+      <label> {{provaPath}} - (non so dove metterli) </label>
     </ion-list>
 
     <label style="font-size: 1.2em; margin-left: 15px"
