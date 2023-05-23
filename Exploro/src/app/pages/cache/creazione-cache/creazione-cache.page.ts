@@ -10,7 +10,16 @@ import { CacheService } from 'src/app/classes_&_services/Cache.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Photo } from '@capacitor/camera';
 import { Capacitor } from '@capacitor/core';
+import { Filesystem } from '@capacitor/filesystem';
+import { LoadingController, Platform } from '@ionic/angular';
+import { Directory } from '@capacitor/filesystem/dist/esm/definitions';
 
+const IMAGE_DIR = "../../assets/foto/";
+interface LocalFile{
+  name: string,
+  path: string,
+  data: string
+}
 
 @Component({
   selector: 'app-creazione-cache',
@@ -26,10 +35,15 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   sub: Subscription //MAPPA
   selectedImage :any = undefined; //PHOTO
   provaPath = "prima della foto" //PHOTO
+  images: LocalFile[]=[]; //PHOTO
+
   cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
   isCoordinateSelected: boolean = false
 
-  constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService) { }
+  constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService,
+    private platform: Platform, //PHOTO
+    private loadingCtrl: LoadingController //PHOTO
+    ) { }
 
   ngOnInit() {
   }
@@ -42,7 +56,7 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     if (this.selectedImage===undefined){
       this.cacheAggiunta.img = "../../assets/foto/default.png"
     }else{
-      this.cacheAggiunta.img = this.selectedImage
+      this.cacheAggiunta.img = this.selectedImage.webPath
     }
     this.cacheSrv.addCache(this.cacheAggiunta)
     this.router.navigateByUrl("cache")
@@ -150,6 +164,10 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     });
   }
 
+
+  //////////////////////////////////////PHOTO PART //////////////////////////////////////////////////////
+
+
   isPlatformWeb():boolean{
     if(Capacitor.getPlatform()=="web") return true;
     return false;
@@ -160,6 +178,7 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
         quality: 90,
         //allowEditing: true,
         source: CameraSource.Prompt,
+        saveToGallery:true,
         resultType: this.isPlatformWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
       }));
       reject("non funziona :(");
@@ -174,7 +193,82 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
       if(this.isPlatformWeb()){
         this.selectedImage.webPath = image.dataUrl
       }
+      else{
+       //this.saveImage(image);
+      }
     })
-
   }
+  /*
+  async saveImage(photo:Photo){
+    const base64Data = await this.readAsBase64(photo);
+    const fileName = new Date().getTime() + ".jpeg";
+    const savedFile = await Filesystem.writeFile({
+      directory: Directory.Data,
+      path:  `${IMAGE_DIR}/${fileName}`,
+      data: base64Data
+    })
+    this.loadFiles();
+  }
+  private async readAsBase64(photo: Photo) {
+    if (this.platform.is('hybrid')&&photo.path!==undefined) {
+      const file = await Filesystem.readFile({
+        path: photo.path
+      });
+
+      return file.data;
+    }
+    else {
+      // Fetch the photo, read as a blob, then convert to base64 format
+      const response = await fetch(photo.webPath!);
+      const blob = await response.blob();
+
+      return await this.convertBlobToBase64(blob) as string;
+    }
+  }
+  convertBlobToBase64  = (blob : Blob) => new Promise((resolve,reject)=>{
+    const reader = new FileReader
+    reader.onerror = reject
+    reader.onload = ()=>{
+      resolve(reader.result);
+    }
+    reader.readAsDataURL(blob);
+  });
+
+  async loadFiles(){
+    this.images = [];
+    const loading = await this.loadingCtrl.create({
+      message: "loading data..."
+    });
+    await loading.present();
+    Filesystem.readdir({
+      directory:Directory.Data,
+      path:IMAGE_DIR
+    }).then(result =>{
+      this.loadFilesData(result.files);
+    },async err =>{
+      await Filesystem.mkdir({
+        directory:Directory.Data,
+        path:IMAGE_DIR
+      });
+    }).then(_ =>{
+      loading.dismiss()
+    })
+  }
+
+  async loadFilesData(fileName :any[]){
+    for (let f of fileName){
+      const filePath = `${IMAGE_DIR}`
+      const readFile = await Filesystem.readFile({
+          directory : Directory.Data,
+          path : filePath
+      })
+      this.images.push({
+        name: f,
+        path: filePath,
+        data: `data:image/jpeg;base64,${readFile.data}`
+      })
+    }
+  }
+  */
+
 }
