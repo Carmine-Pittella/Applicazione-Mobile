@@ -24,9 +24,9 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   markerPosition: any = undefined; //MAPPA
   selectedCoords: any = { lat: 0, lng: 0 }; //MAPPA
   sub: Subscription //MAPPA
-  selectedImage :any = undefined; //PHOTO
+  selectedImage: any = undefined; //PHOTO
   provaPath = "prima della foto" //PHOTO
-  cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
+  cacheAggiunta: Cache = { id: 0, nome: '', descrizione: '', latitudine: 0, longitudine: 0, difficolta: 1, statoApprovazione: true, parolaOrdine: "", img: "" }
   isCoordinateSelected: boolean = false
 
   constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService) { }
@@ -39,9 +39,9 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     this.cacheAggiunta.latitudine = this.selectedCoords.lat
     this.cacheAggiunta.longitudine = this.selectedCoords.lng
     this.cacheAggiunta.statoApprovazione = true
-    if (this.selectedImage===undefined){
+    if (this.selectedImage === undefined) {
       this.cacheAggiunta.img = "../../assets/foto/default.png"
-    }else{
+    } else {
       this.cacheAggiunta.img = this.selectedImage
     }
     this.cacheSrv.addCache(this.cacheAggiunta)
@@ -150,12 +150,12 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     });
   }
 
-  isPlatformWeb():boolean{
-    if(Capacitor.getPlatform()=="web") return true;
+  isPlatformWeb(): boolean {
+    if (Capacitor.getPlatform() == "web") return true;
     return false;
   }
-  scattaFoto() :Promise<Photo>{
-    return new Promise((resolve,reject)=>{
+  scattaFoto(): Promise<Photo> {
+    return new Promise((resolve, reject) => {
       resolve(Camera.getPhoto({
         quality: 90,
         //allowEditing: true,
@@ -167,11 +167,12 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     })
 
   }
-  scattaFoto1(){
-    this.scattaFoto().then(image=>{
+  scattaFoto1() {
+    console.log("scatta foto")
+    this.scattaFoto().then(image => {
       this.selectedImage = image;
       this.provaPath = this.selectedImage.webPath;
-      if(this.isPlatformWeb()){
+      if (this.isPlatformWeb()) {
         this.selectedImage.webPath = image.dataUrl
       }
     })
