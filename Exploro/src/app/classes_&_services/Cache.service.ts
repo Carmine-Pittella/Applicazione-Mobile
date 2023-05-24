@@ -91,7 +91,7 @@ export class CacheService {
       latitudine: 42.430726,
       longitudine: 13.476258,
       difficolta: 2,
-      statoApprovazione: true,
+      statoApprovazione: false,
       parolaOrdine: "aawwwer",
       img: "../../assets/foto/default.png"
     },
@@ -102,7 +102,7 @@ export class CacheService {
       latitudine: 42.439426,
       longitudine: 13.470258,
       difficolta: 3,
-      statoApprovazione: true,
+      statoApprovazione: false,
       parolaOrdine: "aawqrwer",
       img: "../../assets/foto/cimitero.png"
     }
@@ -145,6 +145,11 @@ export class CacheService {
     }
     return [...cacheFiltrate]
   }
+
+  RifiutaRichiesteCache(lista_id_cache: number[]) {
+    this.CacheList = this.CacheList.filter(cache => !lista_id_cache.includes(cache.id));
+  }
+
 
 
   private CalcolaDistanza(lat: number, long: number, miaPosizione: any): number {

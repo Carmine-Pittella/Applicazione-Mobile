@@ -15,12 +15,15 @@
   ></ion-searchbar>
 
   <ion-list>
-    <ion-item *ngFor="let cache of listaCacheFiltrate; let i = index">
+    <ion-item *ngFor="let cache of listaCacheFiltrate">
       <ion-label>
         <h2>{{cache.nome}}</h2>
         <p>{{cache.descrizione}}</p>
         <p>Difficoltà: {{cache.difficolta}}</p>
       </ion-label>
+      <ion-button (click)="Visualizza(cache.id)"
+        ><ion-icon name="eye" slot="end"></ion-icon
+      ></ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

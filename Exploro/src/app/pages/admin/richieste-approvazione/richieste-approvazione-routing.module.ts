@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: RichiesteApprovazionePage
+  },
+  {
+    path: 'dettagli-cache',
+    loadChildren: () => import('./dettagli-cache/dettagli-cache.module').then( m => m.DettagliCachePageModule)
   }
 ];
 

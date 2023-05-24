@@ -27,4 +27,8 @@ export class ListaCachePage implements OnInit {
       this.listaCacheFiltrate = [...this.listaCache]
     }
   }
+
+  Visualizza(id_cache: number) {
+    this.router.navigateByUrl("/admin/richieste-approvazione/dettagli-cache?idCache=" + id_cache);
+  }
 }

@@ -57,7 +57,7 @@
     <div
       class="card"
       *ngFor="let cache of listaCacheFiltrate"
-      (click)="ScegliCache(cache)"
+      (click)="ScegliCache(cache.id)"
     >
       <p class="text-title">{{cache.nome}}</p>
       <ion-item class="descrizione" lines="none">

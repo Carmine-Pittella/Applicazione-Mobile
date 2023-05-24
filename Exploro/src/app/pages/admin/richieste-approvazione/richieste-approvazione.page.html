@@ -4,3 +4,33 @@
   </ion-buttons>
   <ion-title>Richieste approvazione</ion-title>
 </ion-toolbar>
+
+<ion-content>
+  <div style="display: flex">
+    <ion-button
+      style="flex: 1"
+      color="success"
+      type="submit"
+      (click)="AgreeDeleteRichieste('accetta')"
+      >accetta</ion-button
+    >
+    <ion-button
+      style="flex: 1"
+      color="danger"
+      type="submit"
+      id="richieste-approvazione"
+      (click)="AgreeDeleteRichieste('rifiuta')"
+      >rifiuta</ion-button
+    >
+  </div>
+
+  <ion-list style="margin-top: 25px">
+    <ion-item *ngFor="let r of richiesteApprovazione">
+      <ion-checkbox (ionChange)="Lallero($event, r.id)"></ion-checkbox>
+      <ion-label style="margin-left: 10%">{{r.nome}}</ion-label>
+      <ion-button (click)="Visualizza(r.id)"
+        ><ion-icon name="eye" slot="end"></ion-icon
+      ></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

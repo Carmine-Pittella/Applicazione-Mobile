@@ -15,7 +15,7 @@ import { SessioneService } from 'src/app/classes_&_services/Sessione.service';
   styleUrls: ['./dettagli-cache.page.scss'],
 })
 export class DettagliCachePage implements OnInit {
-  cache: Cache = new Cache
+  cache: Cache
   cacheTrovata: boolean = true
   isAlertOpen = false;
   public alertButtons = ['OK'];
@@ -33,6 +33,7 @@ export class DettagliCachePage implements OnInit {
     private feedbackSrv: FeedbackService) { }
 
   ngOnInit() {
+    this.cache = new Cache
     let idCache = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idCache'])
     this.cache = this.cacheService.findCacheById(idCache)
     if (this.utenteService.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))).cacheTrovate.includes(this.cache.id)) {

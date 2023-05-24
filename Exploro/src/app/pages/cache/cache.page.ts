@@ -36,8 +36,8 @@ export class CachePage implements OnInit, ViewWillEnter {
     this.searchbarText = event.target.value
   }
 
-  ScegliCache(cache: Cache) {
-    this.router.navigateByUrl("/cache/dettagli-cache?idCache=" + cache.id);
+  ScegliCache(id_cache: number) {
+    this.router.navigateByUrl("/cache/dettagli-cache?idCache=" + id_cache);
   }
 
   onCheckboxChange(event: any, valore: number) {

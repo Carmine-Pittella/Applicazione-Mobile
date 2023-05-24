@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Admin } from './Admin';
+import { CacheService } from './Cache.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +21,26 @@ export class AdminService {
     },
   ];
 
+  constructor(private cacheSrv: CacheService) { }
+
   findAdminByUsrPsw(usr: string, psw: string): Admin {
     let g: Admin[] = this.adminList.filter(u => u.username === usr);
     let g2: Admin[] = g.filter(u => u.password === psw);
     return g2[0];
   }
 
-  constructor() { }
+  AccettaRichiesteCache(lista_id_cache: number[]) {
+    for (let i = 0; i < lista_id_cache.length; i++) {
+      this.cacheSrv.findCacheById(lista_id_cache[i]).statoApprovazione = true
+    }
+  }
+
+  RifiutaRichiesteCache(lista_id_cache: number[]) {
+    console.log("prima di cancellare (allCache):" + this.cacheSrv.getAllCache())
+    this.cacheSrv.RifiutaRichiesteCache(lista_id_cache)
+    console.log("dopo aver cancellato (allCache):" + this.cacheSrv.getAllCache())
+  }
+
+
+
 }

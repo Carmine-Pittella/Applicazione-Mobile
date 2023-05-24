@@ -15,7 +15,7 @@ import { LoadingController, Platform } from '@ionic/angular';
 import { Directory } from '@capacitor/filesystem/dist/esm/definitions';
 
 const IMAGE_DIR = "../../assets/foto/";
-interface LocalFile{
+interface LocalFile {
   name: string,
   path: string,
   data: string
@@ -35,15 +35,15 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   sub: Subscription //MAPPA
   selectedImage: any = undefined; //PHOTO
   provaPath = "prima della foto" //PHOTO
-  images: LocalFile[]=[]; //PHOTO
+  images: LocalFile[] = []; //PHOTO
 
-  cacheAggiunta: Cache = {id: 0,nome: '',descrizione: '',latitudine: 0,longitudine: 0,difficolta: 1,statoApprovazione: true,parolaOrdine: "",img: ""}
+  cacheAggiunta: Cache = { id: 0, nome: '', descrizione: '', latitudine: 0, longitudine: 0, difficolta: 1, statoApprovazione: true, parolaOrdine: "", img: "" }
   isCoordinateSelected: boolean = false
 
   constructor(private reneder: Renderer2, private router: Router, private cacheSrv: CacheService,
     private platform: Platform, //PHOTO
     private loadingCtrl: LoadingController //PHOTO
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
@@ -52,10 +52,10 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   Conferma() {
     this.cacheAggiunta.latitudine = this.selectedCoords.lat
     this.cacheAggiunta.longitudine = this.selectedCoords.lng
-    this.cacheAggiunta.statoApprovazione = true
+    this.cacheAggiunta.statoApprovazione = false
     if (this.selectedImage === undefined) {
       this.cacheAggiunta.img = "../../assets/foto/default.png"
-    }else{
+    } else {
       this.cacheAggiunta.img = this.selectedImage.webPath
     }
     this.cacheSrv.addCache(this.cacheAggiunta)
@@ -168,8 +168,8 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   //////////////////////////////////////PHOTO PART //////////////////////////////////////////////////////
 
 
-  isPlatformWeb():boolean{
-    if(Capacitor.getPlatform()=="web") return true;
+  isPlatformWeb(): boolean {
+    if (Capacitor.getPlatform() == "web") return true;
     return false;
   }
   scattaFoto(): Promise<Photo> {
@@ -178,7 +178,7 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
         quality: 90,
         //allowEditing: true,
         source: CameraSource.Prompt,
-        saveToGallery:true,
+        saveToGallery: true,
         resultType: this.isPlatformWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
       }));
       reject("non funziona :(");
@@ -194,8 +194,8 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
       if (this.isPlatformWeb()) {
         this.selectedImage.webPath = image.dataUrl
       }
-      else{
-       //this.saveImage(image);
+      else {
+        //this.saveImage(image);
       }
     })
   }
