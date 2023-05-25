@@ -23,8 +23,8 @@ export class DettagliUtentePage implements OnInit {
 
   ngOnInit() {
     let idUtenteSel = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idUtente'])
-    let idUtentePrinc = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
     this.utenteSel = this.geocacherSrv.findGeocacherById(idUtenteSel)
+    let idUtentePrinc = this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher"))
     this.richiesta = this.amiciziaSrv.getRichiestaAmiciziaParameter(idUtentePrinc, idUtenteSel)
     this.sonoIo = idUtenteSel === idUtentePrinc
   }

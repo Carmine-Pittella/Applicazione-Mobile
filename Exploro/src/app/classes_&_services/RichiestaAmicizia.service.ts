@@ -60,8 +60,9 @@ export class RichiestaAmiciziaService {
   }
 
   getRichiestaAmiciziaParameter(gchiede: number, griceve: number): RichiestaAmicizia {
-    const richiesta = this.richiesteList.find(richiesta =>
-      richiesta.Gchiede === gchiede && richiesta.Griceve === griceve
+    let richiesta = this.richiesteList.find(richiesta =>
+      (richiesta.Gchiede === gchiede && richiesta.Griceve === griceve) ||
+      (richiesta.Gchiede === griceve && richiesta.Griceve === gchiede)
     );
     return richiesta ? { ...richiesta } : new RichiestaAmicizia();
   }
