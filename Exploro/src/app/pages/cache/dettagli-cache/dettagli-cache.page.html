@@ -1,9 +1,11 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-back-button defaultHref="cache"></ion-back-button>
-  </ion-buttons>
-  <ion-title>Cache: {{cache.nome}}</ion-title>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cache"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cache: {{cache.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
   <ion-item style="margin-top: 20px" *ngIf="cacheTrovata" lines="none">

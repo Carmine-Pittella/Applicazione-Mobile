@@ -19,6 +19,4 @@ export class DettagliCachePage implements OnInit {
     this.cache = this.cacheSrv.findCacheById(idCache)
   }
 
-
-
 }

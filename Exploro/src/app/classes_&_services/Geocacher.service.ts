@@ -112,7 +112,6 @@ export class GeocacherService {
 
   addCacheTrovata(idUtente: number, idCache: number) {
     let g = this.utentiList.find(u => u.id === idUtente)
-    console.log(g)
     if (g) {
       g.cacheTrovate.push(idCache)
       // aggiorna punteggio
@@ -166,6 +165,7 @@ export class GeocacherService {
   getClassificaAmici(id_utente: number): Geocacher[] {
     let utente = this.utentiList.find(u => u.id === id_utente);
     let amiciList: Geocacher[] = utente?.amiciList.map(id => this.findGeocacherById(id))!;
+    amiciList.sort((a, b) => b.livello * 100 + b.puntiExp - a.livello * 100 + a.puntiExp);
     return amiciList
   }
 

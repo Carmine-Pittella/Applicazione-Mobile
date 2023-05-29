@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Aggiungi Admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="formAddAdmin">
+    <ion-card>
+      <ion-card-header>
+        <ion-label
+          >Inserisci le credenziali di un nuovo Amministratore</ion-label
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <form #formAddAdmin="ngForm" (ngSubmit)="AddAdmin(formAddAdmin)">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Username</ion-label>
+              <ion-input
+                name="username"
+                type="text"
+                [(ngModel)]="username"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input
+                name="password"
+                type="password"
+                [(ngModel)]="password"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Conferma password</ion-label>
+              <ion-input
+                name="Conferma password"
+                type="password"
+                [(ngModel)]="confermaPassword"
+                required
+              ></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-button
+            class="button-orange"
+            expand="block"
+            type="submit"
+            [disabled]="!formAddAdmin.valid"
+            >Aggiungi</ion-button
+          >
+        </form>
+      </ion-card-content>
+    </ion-card>
+    <br />
+    <ion-label class="avviso" color="danger">{{labelErrore}}</ion-label>
+    <br />
+    <ion-label class="avviso" color="success">{{labelSuccesso}}</ion-label>
+  </div>
+</ion-content>
