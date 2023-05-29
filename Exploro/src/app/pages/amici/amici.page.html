@@ -13,6 +13,7 @@
 
 <ion-content>
   <ion-list>
+    <ion-title style="margin-bottom: 20px">Richieste di amicizia</ion-title>
     <ion-item-sliding *ngFor="let richiesta of listRichieste; let i = index">
       <ion-item>
         <ion-label>{{ Gchiede[i] }}</ion-label>
@@ -28,5 +29,14 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
+  </ion-list>
+
+  <ion-list>
+    <ion-title style="margin-bottom: 20px; margin-top: 30px"
+      >Lista Amici</ion-title
+    >
+    <ion-item *ngFor="let amico of listaAmicizie">
+      {{amico.username}} - ({{amico.nome}} {{amico.cognome}})
+    </ion-item>
   </ion-list>
 </ion-content>

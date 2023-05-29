@@ -44,7 +44,6 @@ export class SessioneService {
       })
       .then((response: any) => {
         return response.routes[0].legs[0].distance.text;
-        // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
       })
     for (; t === undefined;) {
     }

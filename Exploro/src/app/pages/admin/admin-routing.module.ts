@@ -19,7 +19,11 @@ const routes: Routes = [
   {
     path: 'richieste-approvazione',
     loadChildren: () => import('./richieste-approvazione/richieste-approvazione.module').then( m => m.RichiesteApprovazionePageModule)
+  },  {
+    path: 'aggiungi-admin',
+    loadChildren: () => import('./aggiungi-admin/aggiungi-admin.module').then( m => m.AggiungiAdminPageModule)
   }
+
 ];
 
 @NgModule({
