@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ViewWillEnter } from '@ionic/angular';
 import { AdminService } from 'src/app/classes_&_services/Admin.service';
 import { Geocacher } from 'src/app/classes_&_services/Geocacher';
 import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
@@ -9,17 +10,22 @@ import { GeocacherService } from 'src/app/classes_&_services/Geocacher.service';
   templateUrl: './utenti-registrati.page.html',
   styleUrls: ['./utenti-registrati.page.scss'],
 })
-export class UtentiRegistratiPage implements OnInit {
-  listaUtenti: Geocacher[] = []
-  listaUtentiFiltrata: Geocacher[] = []
+export class UtentiRegistratiPage implements OnInit, ViewWillEnter {
+  listaUtenti: Geocacher[]
+  listaUtentiFiltrata: Geocacher[]
 
   constructor(private geocacherService: GeocacherService, private adminService: AdminService, private router: Router) { }
 
+
   ngOnInit() {
+    this.listaUtenti = []
+    this.listaUtentiFiltrata = []
+  }
+
+  ionViewWillEnter(): void {
     this.listaUtenti = this.geocacherService.getAllGeocacher()
     this.listaUtentiFiltrata = [...this.listaUtenti]
   }
-
 
   FiltraRisultati(event: any) {
     if (event.target.value != "") {

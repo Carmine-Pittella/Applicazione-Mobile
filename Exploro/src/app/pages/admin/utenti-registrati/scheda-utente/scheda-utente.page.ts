@@ -14,21 +14,13 @@ import { Utils } from 'src/app/classes_&_services/Utils';
 export class SchedaUtentePage implements OnInit {
   utente: Geocacher = new Geocacher
   util: Utils = new Utils
-  listaCacheUtente: Cache[] = []
+  listaCacheUtente: Cache[]
 
   constructor(private router: Router, private geocacherService: GeocacherService, private cacheSrv: CacheService) {
   }
 
-  // ngOnInit() {
-  //   let idUtente = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idUtente'])
-  //   this.utente = this.geocacherService.findGeocacherById(idUtente)
-  //   let listaCacheID = this.geocacherService.findGeocacherById(this.utente.id).cacheTrovate
-  //   for (let i = 0; i < listaCacheID.length; i++) {
-  //     this.listaCacheUtente[i] = this.cacheSrv.findCacheById(listaCacheID[i])
-  //   }
-  // }
-
   ngOnInit() {
+    this.listaCacheUtente = []
     const idUtente = parseInt(this.router.getCurrentNavigation()?.finalUrl?.queryParams['idUtente']);
     this.utente = this.geocacherService.findGeocacherById(idUtente);
     const listaCacheID = this.utente.cacheTrovate;
