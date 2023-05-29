@@ -34,7 +34,6 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
   selectedCoords: any = { lat: 0, lng: 0 }; //MAPPA
   sub: Subscription //MAPPA
   selectedImage: any = undefined; //PHOTO
-  provaPath = "prima della foto" //PHOTO
   images: LocalFile[] = []; //PHOTO
 
   cacheAggiunta: Cache = { id: 0, nome: '', descrizione: '', latitudine: 0, longitudine: 0, difficolta: 1, statoApprovazione: true, parolaOrdine: "", img: "" }
@@ -190,7 +189,6 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
     console.log("scatta foto")
     this.scattaFoto().then(image => {
       this.selectedImage = image;
-      this.provaPath = this.selectedImage.webPath;
       if (this.isPlatformWeb()) {
         this.selectedImage.webPath = image.dataUrl
       }
@@ -199,77 +197,6 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
       }
     })
   }
-  /*
-  async saveImage(photo:Photo){
-    const base64Data = await this.readAsBase64(photo);
-    const fileName = new Date().getTime() + ".jpeg";
-    const savedFile = await Filesystem.writeFile({
-      directory: Directory.Data,
-      path:  `${IMAGE_DIR}/${fileName}`,
-      data: base64Data
-    })
-    this.loadFiles();
-  }
-  private async readAsBase64(photo: Photo) {
-    if (this.platform.is('hybrid')&&photo.path!==undefined) {
-      const file = await Filesystem.readFile({
-        path: photo.path
-      });
 
-      return file.data;
-    }
-    else {
-      // Fetch the photo, read as a blob, then convert to base64 format
-      const response = await fetch(photo.webPath!);
-      const blob = await response.blob();
-
-      return await this.convertBlobToBase64(blob) as string;
-    }
-  }
-  convertBlobToBase64  = (blob : Blob) => new Promise((resolve,reject)=>{
-    const reader = new FileReader
-    reader.onerror = reject
-    reader.onload = ()=>{
-      resolve(reader.result);
-    }
-    reader.readAsDataURL(blob);
-  });
-
-  async loadFiles(){
-    this.images = [];
-    const loading = await this.loadingCtrl.create({
-      message: "loading data..."
-    });
-    await loading.present();
-    Filesystem.readdir({
-      directory:Directory.Data,
-      path:IMAGE_DIR
-    }).then(result =>{
-      this.loadFilesData(result.files);
-    },async err =>{
-      await Filesystem.mkdir({
-        directory:Directory.Data,
-        path:IMAGE_DIR
-      });
-    }).then(_ =>{
-      loading.dismiss()
-    })
-  }
-
-  async loadFilesData(fileName :any[]){
-    for (let f of fileName){
-      const filePath = `${IMAGE_DIR}`
-      const readFile = await Filesystem.readFile({
-          directory : Directory.Data,
-          path : filePath
-      })
-      this.images.push({
-        name: f,
-        path: filePath,
-        data: `data:image/jpeg;base64,${readFile.data}`
-      })
-    }
-  }
-  */
 
 }

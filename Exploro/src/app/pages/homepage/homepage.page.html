@@ -10,7 +10,7 @@
     id="open-modal"
     (click)="completamentoDatiDistanze()"
   >
-    Ricerca rapida
+    Traccia percorso
   </ion-button>
 
   <ion-button style="flex: 1 0 13%" id="filtri-homepage"
@@ -72,6 +72,7 @@
           lines="none"
           (click)="modal.dismiss()"
         >
+
           <ion-label
             (click)="calculateAndDisplayRoute(cache.latitudine,cache.longitudine)"
           >
