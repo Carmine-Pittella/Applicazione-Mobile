@@ -1,0 +1,12 @@
+1)User Research (togliere la parte in rosso della condivisione sui social media)
+2)functiona requirements 8f (togliere la parte del feedback dell'app, lasciare solo il feedback della cache)
+
+3)Data provenance :
+
+utilizzo delle google maps API ( google maps key: IzaSyBpGPMdIrPIJhD2gbDwnWKBSQscYp0EZ4E )
+utilizzo delle API di capacitor per l'utilizzo della geolocalizzazione e della fotocamera
+
+L'applicazione funziona interamente su RAM, quindi tutti i dati ( modifiche,foto,aggiornamenti di punteggi,ecc...) vengono salvati fintanto che
+l'app non viene chiusa. (un esempio di test potrebbe essere accedere con l'account username:fabri password:fabri, creare una nuova cache,
+eseguire il log out ed accedere con l'admin per l'approvazione username:fabri314 password:314, eseguire il log out ed accedere nuovamente 
+con l'account precedente e verificare la correttezza della nuova cache)
