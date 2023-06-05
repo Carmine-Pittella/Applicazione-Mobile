@@ -1,0 +1,13 @@
+ion-item {
+  --min-height: 75px;
+}
+
+ion-icon {
+  font-size: 1.8em;
+  color: #eaa932;
+} //colore delle icone nel menu laterale
+
+ion-item ion-icon {
+  --ion-justify-content-end: 10px;
+  margin-inline-end: 15px;
+}

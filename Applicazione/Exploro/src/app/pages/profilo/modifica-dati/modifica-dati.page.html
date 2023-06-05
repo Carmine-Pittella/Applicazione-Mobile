@@ -1,0 +1,126 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="profilo"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modifica i tuoi dati personali</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+  <div class="formModificaDati">
+    <ion-card>
+      <ion-card-content>
+        <form #formModificaDati="ngForm" (submit)="Conferma(formModificaDati)">
+          <ion-list>
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Nome:</ion-label>
+              <ion-input
+                name="nome"
+                type="text"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.nome"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Cognome:</ion-label>
+              <ion-input
+                name="cognome"
+                type="text"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.cognome"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Username:</ion-label>
+              <ion-input
+                name="username"
+                type="text"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.username"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Email:</ion-label>
+              <ion-input
+                name="email"
+                type="text"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.mail"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Cellulare:</ion-label>
+              <ion-input
+                name="cellulare"
+                type="text"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.cellulare"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Data di nascita:</ion-label>
+              <ion-input
+                name="dataDiNascita"
+                type="Date"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.dataDiNascita"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item style="margin-top: 15px">
+              <ion-label style="flex: 0 0 50%">Password:</ion-label>
+              <ion-input
+                name="password"
+                type="password"
+                style="flex: 1"
+                required
+                [(ngModel)]="nuoviDati.password"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label style="flex: 0 0 50%">Conferma password:</ion-label>
+              <ion-input
+                name="confermaNuovaPassword"
+                type="password"
+                style="flex: 1"
+                required
+                [(ngModel)]="confermaNuovaPassword"
+              ></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-button
+            class="button-standard"
+            expand="block"
+            type="submit"
+            [disabled]="!formModificaDati.valid"
+            >CONFERMA</ion-button
+          >
+        </form>
+        <ion-button color="danger" expand="block" routerLink="/profilo"
+          >ANNULLA</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-alert
+    trigger="present-alert"
+    header="{{headerAlert}}"
+    message="{{messageAlert}}"
+    [buttons]="alertButtons"
+    isOpen="{{isAlertOpen}}"
+  ></ion-alert>
+</ion-content>

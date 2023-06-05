@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-button slot="start" menu="menu-laterale"> </ion-menu-button>
+    <ion-title>Homepage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div style="display: flex; align-items: center">
+  <ion-button
+    class="button-orange"
+    style="width: 49%"
+    id="open-modal"
+    (click)="completamentoDatiDistanze()"
+  >
+    Traccia percorso
+  </ion-button>
+
+  <ion-button style="flex: 1 0 13%" id="filtri-homepage"
+    >Filtri
+    <ion-icon name="options" style="margin-left: 5px"></ion-icon>
+    <ion-popover trigger="filtri-homepage" triggerAction="click">
+      <ng-template>
+        <ion-list>
+          <ion-item>
+            <ion-label>Tutte le Cache</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 1)"
+              [checked]="difficoltaSelezionata === 1"
+            ></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Solo Cache trovate</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 2)"
+              [checked]="difficoltaSelezionata === 2"
+            ></ion-checkbox>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Solo Cache non trovate</ion-label>
+            <ion-checkbox
+              (ionChange)="onCheckboxChange($event, 3)"
+              [checked]="difficoltaSelezionata === 3"
+            ></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+  </ion-button>
+</div>
+
+<ion-modal
+  #modal
+  trigger="open-modal"
+  [initialBreakpoint]="0.50"
+  [breakpoints]="[0, 0.25, 0.5, 0.75, 1]"
+>
+  <ng-template>
+    <ion-content>
+      <ion-searchbar
+        mode="ios"
+        style="display: inline-block"
+        animated="true"
+        placeholder="Cerca una cache"
+        [debounce]="500"
+        (ionInput)="Filtri($event)"
+        (click)="modal.setCurrentBreakpoint(0.75)"
+      ></ion-searchbar>
+
+      <ion-list style="padding: 2px">
+        <ion-item
+          *ngFor="let cache of listaCache;let i = index"
+          lines="none"
+          (click)="modal.dismiss()"
+        >
+
+          <ion-label
+            (click)="calculateAndDisplayRoute(cache.latitudine,cache.longitudine)"
+          >
+            <h2>{{cache.nome}}</h2>
+            <p>{{cache.descrizione}}</p>
+            <p style="display: inline-block; margin-right: 20px">
+              Difficoltà: {{cache.difficolta}}
+            </p>
+            <p style="display: inline-block">Distanza: {{arrayDistanze[i]}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- ********************************************************* -->
+
+<ion-content>
+  <div class="map" #map></div>
+</ion-content>

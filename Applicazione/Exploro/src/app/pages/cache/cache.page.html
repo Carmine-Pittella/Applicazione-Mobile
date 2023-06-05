@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-button slot="start" menu="menu-laterale"> </ion-menu-button>
+    <ion-title>Cache</ion-title>
+    <ion-icon
+      name="home"
+      slot="end"
+      class="torna-home"
+      routerLink="/homepage"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="display: flex; align-items: center">
+    <ion-searchbar
+      mode="ios"
+      animated="true"
+      placeholder="Titolo Cache:"
+      [debounce]="500"
+      style="flex: 1 0 82%"
+      (ionInput)="FiltraRisultati($event)"
+    ></ion-searchbar>
+
+    <ion-button style="flex: 1 0 13%; margin-top: 16px" id="apri-filtri">
+      <ion-icon name="options"></ion-icon>
+      <ion-popover trigger="apri-filtri" triggerAction="click">
+        <ng-template>
+          <ion-list>
+            <ion-item>
+              <ion-label>Difficoltà 1</ion-label>
+              <ion-checkbox
+                (ionChange)="onCheckboxChange($event, 1)"
+                [checked]="difficoltaSelezionata === 1"
+              ></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Difficoltà 2</ion-label>
+              <ion-checkbox
+                (ionChange)="onCheckboxChange($event, 2)"
+                [checked]="difficoltaSelezionata === 2"
+              ></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Difficoltà 3</ion-label>
+              <ion-checkbox
+                (ionChange)="onCheckboxChange($event, 3)"
+                [checked]="difficoltaSelezionata === 3"
+              ></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-button>
+  </div>
+  <div class="prova">
+    <div
+      class="card"
+      *ngFor="let cache of listaCacheFiltrate"
+      (click)="ScegliCache(cache.id)"
+    >
+      <p class="text-title">{{cache.nome}}</p>
+      <ion-item class="descrizione" lines="none">
+        <p class="text-body">{{cache.descrizione}}</p>
+      </ion-item>
+      <p>Difficoltà: {{cache.difficolta}}</p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button class="aggiungi-cache" routerLink="creazione-cache"
+    >Aggiungi una Cache
+    <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+  </ion-button>
+</ion-footer>

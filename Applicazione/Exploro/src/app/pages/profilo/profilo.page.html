@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-menu-button slot="start" menu="menu-laterale"></ion-menu-button>
+    <ion-title>Profilo</ion-title>
+    <ion-icon
+      name="home"
+      slot="end"
+      class="torna-home"
+      routerLink="/homepage"
+    ></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none">
+    <ion-label style="float: left; font-size: 1.1em"
+      >{{geocacher.nome}} {{geocacher.cognome}}</ion-label
+    >
+    <ion-label style="float: right; text-align: right; font-size: 1.1em"
+      >LIV. {{geocacher.livello}}
+    </ion-label>
+  </ion-item>
+
+  <ion-item lines="none">
+    <p>0</p>
+    <ion-progress-bar
+      value="{{geocacher.puntiExp*0.01}}"
+      color="warning"
+    ></ion-progress-bar>
+    <p>100</p>
+  </ion-item>
+
+  <ion-item
+    style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px"
+    lines="none"
+  >
+    <ion-label class="dati-personali">Dati personali:</ion-label>
+  </ion-item>
+
+  <div style="margin-left: 10px; margin-right: 10px">
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Nome:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.nome}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Cognome:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.cognome}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Username:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.username}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Password:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.password}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Email:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.mail}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Cellulare:</ion-label>
+      <ion-label style="flex: 1">{{geocacher.cellulare}}</ion-label>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-align-items-center">
+      <ion-label style="flex: 0 0 42%">Data di nascita:</ion-label>
+      <ion-label style="flex: 1"
+        >{{ util.formatDate(geocacher.dataDiNascita) }}</ion-label
+      >
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button
+    class="button-orange"
+    routerLink="modifica-dati"
+    style="display: block; width: 100%"
+    >modifica i dati
+    <ion-icon style="margin-left: 5px" name="pencil"></ion-icon>
+  </ion-button>
+</ion-footer>

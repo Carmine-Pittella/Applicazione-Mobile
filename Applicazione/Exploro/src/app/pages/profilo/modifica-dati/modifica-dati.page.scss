@@ -1,0 +1,16 @@
+.formModificaDati {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+ion-card {
+  width: 100%;
+  box-shadow: 0 0 5px #ff7d1a;
+} // proprietà della card
+
+ion-label {
+  font-size: 1em;
+}

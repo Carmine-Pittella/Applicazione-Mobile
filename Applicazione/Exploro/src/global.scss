@@ -1,0 +1,81 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/** STILI AGGIUNTI **/
+ion-button.button-orange {
+  --ion-color-primary: #eaa932;
+}
+ion-button.button-standard {
+  --ion-color-primary: #329aea;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-title {
+  margin: auto;
+}
+
+ion-card {
+  width: 75%;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+ion-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(239, 105, 16, 0.5); // aggiunge l'ombra intorno
+}
+
+ion-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+} // sarebbe tutto il contenuto della pagina
+
+.torna-home {
+  height: 25px;
+  width: 25px;
+  margin-right: 15px;
+}
+.alert-wrapper.sc-ion-alert-md {
+  background-color: #eaa932;
+  border-radius: 15px;
+}
+.alert-checkbox-label.sc-ion-alert-md{
+  color: black;
+}

@@ -1,0 +1,18 @@
+.formLogin {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+
+ion-avatar {
+  width: 110px;
+  height: 110px;
+}
+
+.errore {
+  position: absolute;
+  bottom: 50px; /* controlla la distanza tra la card e la label */
+  font-size: 1.1em;
+}
