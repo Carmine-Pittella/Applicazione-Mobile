@@ -186,7 +186,6 @@ export class CreazioneCachePage implements OnInit, AfterViewInit {
 
   }
   scattaFoto1() {
-    console.log("scatta foto")
     this.scattaFoto().then(image => {
       this.selectedImage = image;
       if (this.isPlatformWeb()) {

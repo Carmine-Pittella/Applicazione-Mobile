@@ -34,7 +34,6 @@ export class ClassificaPage implements ViewWillEnter {
     }
     else {
       this.listaUtenti = [...this.geocacherSrv.getClassificaAmici(this.idUtente)]
-      console.log(this.listaUtenti)
     }
   }
 

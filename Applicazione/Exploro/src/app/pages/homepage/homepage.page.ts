@@ -240,7 +240,6 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy, ViewWillE
               })
               .then((response: any) => {
                 directionsRenderer.setDirections(response);
-                // console.log(response.routes[0].legs[0].distance); {text: '607 km', value: 606599} esempio di risposta
               })
               .catch((e: any) => window.alert("Directions request failed due to" + e));
           }
@@ -302,12 +301,10 @@ export class HomepagePage implements OnInit, AfterViewInit, OnDestroy, ViewWillE
         });
     }
     for (let f = 0; f < this.arrayDistanze.length; f++) {
-      console.log(this.arrayDistanze[f]);
     }
   }
   // Selezione Checkbox
   onCheckboxChange(event: any, valore: number) {
-    console.log("homepage")
     if (event.detail.checked) {
       this.difficoltaSelezionata = valore;
     } else {

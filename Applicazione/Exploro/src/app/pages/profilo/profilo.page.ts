@@ -17,7 +17,6 @@ export class ProfiloPage implements ViewWillEnter {
   constructor(private geocacherSrv: GeocacherService, private sessioneSrv: SessioneService) { }
 
   ionViewWillEnter(): void {
-    console.log("ciao")
     this.geocacher = this.geocacherSrv.findGeocacherById(this.sessioneSrv.returnIdByJson(localStorage.getItem("geocacher")))
   }
 }
